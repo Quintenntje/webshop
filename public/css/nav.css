@@ -7,6 +7,12 @@
     background-color: var(--secondary);
 }
 
+.nav__logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    overflow: hidden;
+}
 .header__items {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -14,6 +20,7 @@
     gap: 12px;
     padding: 8px 16px;
     height: 5rem;
+    width: 100%;
 }
 .header__items__center {
     justify-self: center;
