@@ -1,6 +1,9 @@
 @import "reset.css";
 @import "variables.css";
 @import "typography.css";
+@import "nav.css";
+@import "link.css";
+@import "button.css";
 
 .container {
     max-width: 1500px;
@@ -58,6 +61,15 @@ section {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
+}
+
+.bg-gradient {
+    background: linear-gradient(
+        0deg,
+        color-mix(in oklab, var(--primary) 25%, transparent) 0%,
+        transparent 60%
+    );
+    min-height: 100vh;
 }
 
 .mobile-only {

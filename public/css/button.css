@@ -1,0 +1,19 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    color: var(--foreground);
+    cursor: pointer;
+}
+
+.btn--transparent {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    color: var(--foreground);
+}
