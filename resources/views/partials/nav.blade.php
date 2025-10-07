@@ -1,7 +1,7 @@
 <header class="header">
   <div class="container header__items mobile-only">
     <div class="header__items__left">
-      <button class="btn btn--transparent header__items__left__button">
+      <button id="menu-open" aria-label="Menu" class="btn btn--transparent header__items__left__button">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
       </button>
       <a href="/search" class="link link--nav header__items__left__icon">
@@ -30,9 +30,21 @@
   </a>
     </div>
     <nav class="header__items__center">
-      <ul class="header__items__center__nav">
-        <li class="header__items__center__nav__item">
-          <a href="/" class="link link--nav header__items__center__nav__item__link">Home</a>
+      <ul class="nav__items">
+        <li class="nav__item">
+          <a href="/" class="link link--nav nav__item__link">Home</a>
+        </li>
+        <li class="nav__item">
+          <a href="/shop" class="link link--nav nav__item__link">Shop</a>
+        </li>
+        <li class="nav__item">
+          <a href="/men" class="link link--nav nav__item__link">Men</a>
+        </li>
+        <li class="nav__item">
+          <a href="/women" class="link link--nav nav__item__link">Women</a>
+        </li>
+        <li class="nav__item">
+          <a href="/sale" class="link link--nav nav__item__link">Sale</a>
         </li>
       </ul>
     </nav>
@@ -49,3 +61,19 @@
   </div>
 
 </header>
+
+<div id="menu-overlay" class="mobile-only mobile-menu__overlay" hidden></div>
+<nav id="mobile-menu" class="mobile-only mobile-menu" aria-hidden="true">
+  <div class="mobile-menu__header">
+    <button id="menu-close" aria-label="Close menu" class="btn btn--transparent mobile-menu__close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <ul class="mobile-menu__links">
+    <li><a class="link link--nav" href="/">Home</a></li>
+    <li><a class="link link--nav" href="/shop">Shop</a></li>
+    <li><a class="link link--nav" href="/men">Men</a></li>
+    <li><a class="link link--nav" href="/women">Women</a></li>
+    <li><a class="link link--nav" href="/sale">Sale</a></li>
+  </ul>
+</nav>

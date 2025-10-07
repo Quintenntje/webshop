@@ -19,6 +19,11 @@
     </head>
     <body>
         @include('partials.nav')
-        <h1>Hello World</h1>
+        <main>
+            <div class="container">
+                <h1>Hello World</h1>
+            </div>
+        </main>
     </body>
+    <script src="{{ asset('js/main.js') }}"></script>
 </html>
