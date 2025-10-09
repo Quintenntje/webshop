@@ -38,10 +38,14 @@
           <a href="/shop" class="link link--nav nav__item__link">Shop</a>
         </li>
         <li class="nav__item">
-          <a href="/men" class="link link--nav nav__item__link">Men</a>
+          <a href="/shoes/men" class="link link--nav nav__item__link">Men</a>
         </li>
         <li class="nav__item">
-          <a href="/women" class="link link--nav nav__item__link">Women</a>
+          <a href="/shoes/women" class="link link--nav nav__item__link">Women</a>
+        </li>
+       
+        <li class="nav__item">
+          <a href="/shoes/kids" class="link link--nav nav__item__link">Kids</a>
         </li>
         <li class="nav__item">
           <a href="/sale" class="link link--nav nav__item__link">Sale</a>

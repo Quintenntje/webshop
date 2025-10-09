@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/shoes', [ProductController::class, 'list']);
+Route::get('/shoes/{gender}', [ProductController::class, 'list']);

@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Gender;
 
 class ProductController extends Controller
 {
 
-    public function list()
+    public function list($gender)
     {
-        $products = Product::all();
+        $gender = Gender::where('slug', $gender)->first();
 
-        return view('products.list', compact('products'));
+        if (!$gender) {
+            return redirect("/");
+        }
+
+        $products = Product::where('gender_id', $gender->id)->get();
+
+        return view('products.list', compact('gender', 'products'));
     }
 }
