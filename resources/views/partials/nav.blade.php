@@ -38,14 +38,14 @@
           <a href="/shop" class="link link--nav nav__item__link">Shop</a>
         </li>
         <li class="nav__item">
-          <a href="/shoes/men" class="link link--nav nav__item__link">Men</a>
+          <a href="/shoes/men" class="link link--nav nav__item__link {{ request()->is('shoes/men') ? 'active' : '' }}">Men</a>
         </li>
         <li class="nav__item">
-          <a href="/shoes/women" class="link link--nav nav__item__link">Women</a>
+          <a href="/shoes/women" class="link link--nav nav__item__link {{ request()->is('shoes/women') ? 'active' : '' }}">Women</a>
         </li>
        
         <li class="nav__item">
-          <a href="/shoes/kids" class="link link--nav nav__item__link">Kids</a>
+          <a href="/shoes/kids" class="link link--nav nav__item__link {{ request()->is('shoes/kids') ? 'active' : '' }}">Kids</a>
         </li>
         <li class="nav__item">
           <a href="/sale" class="link link--nav nav__item__link">Sale</a>
@@ -76,8 +76,9 @@
   <ul class="mobile-menu__links">
     <li><a class="link link--nav" href="/">Home</a></li>
     <li><a class="link link--nav" href="/shop">Shop</a></li>
-    <li><a class="link link--nav" href="/men">Men</a></li>
-    <li><a class="link link--nav" href="/women">Women</a></li>
+    <li><a class="link link--nav {{ request()->is('shoes/men') ? 'active' : '' }}" href="/shoes/men">Men</a></li>
+    <li><a class="link link--nav {{ request()->is('shoes/women') ? 'active' : '' }}" href="/shoes/women">Women</a></li>
+    <li><a class="link link--nav {{ request()->is('shoes/kids') ? 'active' : '' }}" href="/shoes/kids">Kids</a></li>
     <li><a class="link link--nav" href="/sale">Sale</a></li>
   </ul>
 </nav>
