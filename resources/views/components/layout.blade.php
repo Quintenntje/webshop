@@ -20,9 +20,7 @@
     <body>
         @include('partials.nav')
         <main>
-            <div class="container">
-                <h1>Hello World</h1>
-            </div>
+           {{ $slot }}
         </main>
     </body>
     <script src="{{ asset('js/main.js') }}"></script>
