@@ -10,12 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('product_stock', function (Blueprint $table) {
+        Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('color_id')->constrained('product_colors');
             $table->foreignId('size_id')->constrained('product_sizes');
-            $table->tinyInteger('quantity');
+            $table->tinyInteger('stock');
             $table->timestamps();
         });
     }

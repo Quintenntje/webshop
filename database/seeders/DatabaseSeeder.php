@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             ProductSizesTableSeeder::class,
             ProductsTableSeeder::class,
             ProductImagesTableSeeder::class,
-            ProductStockTableSeeder::class,
+            ProductVariantTableSeeder::class,
             CustomersTableSeeder::class,
             WishlistTableSeeder::class,
         ]);

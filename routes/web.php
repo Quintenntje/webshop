@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('/shoes/{gender}', [ProductController::class, 'list']);
+Route::get("/shoes/{gender}/{product}", [ProductController::class, 'detail']);
