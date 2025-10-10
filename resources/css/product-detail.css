@@ -102,7 +102,7 @@
 }
 
 .product-detail__container {
-    @media (min-width: 1024px) {
+    @media (min-width: 900px) {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: var(--spacing-xl);

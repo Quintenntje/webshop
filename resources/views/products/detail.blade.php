@@ -34,7 +34,8 @@
          </div>
        </div>
 
-       <div class="product-detail__content pc-only">
+       <div class="product-detail__content">
+        <div class="product-detail__content-pc pc-only">
         <h1 class="product-detail__title">
           {{ $product->name }}
         </h1>
@@ -46,7 +47,7 @@
         <p class="product-detail__price">
           €{{ $product->price }}
         </p>
-      
+        </div>
 
        <div class="product-colors">
         <h2 class="product-colors__title">Colors</h2>
