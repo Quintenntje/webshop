@@ -1,4 +1,10 @@
 @import "tailwindcss";
+@import "./reset.css";
+@import "./variables.css";
+@import "./typography.css";
+@import "./nav.css";
+@import "./link.css";
+@import "./button.css";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -9,4 +15,73 @@
     --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
+}
+
+.container {
+    max-width: 1500px;
+    margin-inline: auto;
+    padding: 0 1rem;
+    width: 100%;
+
+    @media (max-width: 1500px) {
+        max-width: 1200px;
+    }
+
+    @media (max-width: 1200px) {
+        max-width: 1000px;
+    }
+
+    @media (max-width: 1000px) {
+        max-width: 800px;
+    }
+}
+
+.container--md {
+    max-width: 1000px;
+}
+
+.container--sm {
+    max-width: 700px;
+}
+
+.container--sm {
+    max-width: 768px;
+}
+
+main {
+    margin-top: 6rem;
+    margin-bottom: 1rem;
+}
+
+section {
+    min-height: 100vh;
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.mobile-only {
+    @media (min-width: 900px) {
+        display: none;
+    }
+}
+.pc-only {
+    @media (max-width: 900px) {
+        display: none;
+    }
 }
