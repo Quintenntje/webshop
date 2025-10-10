@@ -1,10 +1,14 @@
-@import "tailwindcss";
+/* custom imports */
 @import "./reset.css";
 @import "./variables.css";
 @import "./typography.css";
 @import "./nav.css";
 @import "./link.css";
 @import "./button.css";
+@import "./hero.css";
+
+/* tailwind import  */
+@import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -12,9 +16,11 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+    --font-sans: "General Sans", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
+
+    --font-hero: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
 }
 
 .container {
@@ -49,12 +55,11 @@
 }
 
 main {
-    margin-top: 6rem;
     margin-bottom: 1rem;
 }
 
 section {
-    min-height: 100vh;
+    min-height: 80svh;
 }
 
 .center-content {

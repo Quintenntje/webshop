@@ -10,6 +10,16 @@
     cursor: pointer;
 }
 
+.btn--primary {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 0.5rem;
+}
+
 .btn--transparent {
     background-color: transparent;
     border: none;

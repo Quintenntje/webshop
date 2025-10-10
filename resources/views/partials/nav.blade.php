@@ -63,8 +63,8 @@
 
 </header>
 
-<div id="menu-overlay" class="mobile-only mobile-menu__overlay" hidden></div>
-<nav id="mobile-menu" class="mobile-only mobile-menu" aria-hidden="true">
+<div id="menu-overlay" class="mobile-only mobile-menu__overlay mobile-only" hidden></div>
+<nav id="mobile-menu" class="mobile-only mobile-menu mobile-only" aria-hidden="true">
   <div class="mobile-menu__header">
     <button id="menu-close" aria-label="Close menu" class="btn btn--transparent mobile-menu__close">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
