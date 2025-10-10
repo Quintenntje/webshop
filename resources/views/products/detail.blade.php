@@ -22,7 +22,6 @@
              alt="{{ $product->name }}"
            >
          </div>
- 
          <div class="product-detail__secondary-images">
            @foreach ($productImages as $image)
              <img 
@@ -31,6 +30,23 @@
              >
            @endforeach
          </div>
+       </div>
+
+       <div class="product-colors">
+        <h2 class="product-colors__title">Colors</h2>
+        <div class="product-colors__list">
+          @foreach ($productVariants as $variant)
+            <div class="product-colors__item product-colors__item--{{ $variant->color->name }}">{{ $variant->color->name }}</div>
+          @endforeach
+        </div>
+       </div>
+
+       <div class="product-sizes">
+        <h2 class="product-sizes__title">Sizes</h2>
+        <div class="product-sizes__list">
+          @foreach ($productVariants as $variant)
+            <div class="product-sizes__item">{{ $variant->size->name }}</div>
+          @endforeach
        </div>
      </section>
    </div>
