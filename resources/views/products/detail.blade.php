@@ -1,7 +1,7 @@
 <x-layout>
    <div class="container">
      <section class="product-detail">
-       <div class="product-detail__content">
+       <div class="product-detail__content mobile-only">
          <h1 class="product-detail__title">
            {{ $product->name }}
          </h1>
@@ -14,6 +14,8 @@
            €{{ $product->price }}
          </p>
        </div>
+
+       <div class="product-detail__container">
  
        <div class="product-detail__images">
          <div class="product-detail__primary-image">
@@ -31,6 +33,20 @@
            @endforeach
          </div>
        </div>
+
+       <div class="product-detail__content pc-only">
+        <h1 class="product-detail__title">
+          {{ $product->name }}
+        </h1>
+
+        <p class="product-detail__gender">
+          {{ $product->gender->name }} shoes
+        </p>
+
+        <p class="product-detail__price">
+          €{{ $product->price }}
+        </p>
+      
 
        <div class="product-colors">
         <h2 class="product-colors__title">Colors</h2>
@@ -59,6 +75,8 @@
         <div class="product-details__list">
           <p>{{ $product->description }}</p>
         </div>
+      </div>
+    </div>
        </div>
      </section>
    </div>

@@ -92,7 +92,19 @@
     align-items: center;
     width: 100%;
 
+    @media (max-width: 350px) {
+        flex-direction: column;
+    }
+
     button {
         width: 100%;
+    }
+}
+
+.product-detail__container {
+    @media (min-width: 1024px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-xl);
     }
 }
