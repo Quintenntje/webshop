@@ -83,3 +83,16 @@
 .product-colors__item--Black {
     background-color: black !important;
 }
+
+.product-add-to-cart {
+    margin-block: var(--spacing-xl);
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    button {
+        width: 100%;
+    }
+}

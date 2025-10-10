@@ -48,6 +48,18 @@
             <div class="product-sizes__item">{{ $variant->size->name }}</div>
           @endforeach
        </div>
+       </div>
+       
+       <div class="product-add-to-cart">
+        <x-button color="primary" size="md">Add to cart</x-button>
+        <x-button color="secondary" size="md">Add to wishlist</x-button>
+       </div>
+       <div class="product-details">
+        <h2 class="product-details__title">Details</h2>
+        <div class="product-details__list">
+          <p>{{ $product->description }}</p>
+        </div>
+       </div>
      </section>
    </div>
  </x-layout>
