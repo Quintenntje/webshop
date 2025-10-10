@@ -44,4 +44,10 @@
         font-size: var(--font-size-lg);
         color: var(--background);
     }
+
+    @media (min-width: 1024px) {
+        .hero__description {
+            font-size: var(--font-size-xl);
+        }
+    }
 }
