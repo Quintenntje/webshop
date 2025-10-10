@@ -8,6 +8,7 @@
 @import "./hero.css";
 @import "./products.css";
 @import "./product-card.css";
+@import "./product-detail.css";
 
 /* tailwind import  */
 @import "tailwindcss";

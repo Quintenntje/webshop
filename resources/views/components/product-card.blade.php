@@ -14,5 +14,5 @@
         </div>
         <p class="product-card__price">€{{ $product->price }}</p>
     </div>
-    <x-link href="/products/{{ $product->id }}" color="full" size=""><span class="sr-only">View product</span></x-link>
+    <x-link href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}" color="full" size=""><span class="sr-only">View product</span></x-link>
 </article>
