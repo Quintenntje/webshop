@@ -3,12 +3,9 @@
     <h1> {{ $gender->name }} Shoes</h1>
     <p>{{ $products->count() }} results</p>
 
+    <section class="products">
     @foreach ($products as $product)
-        <h2>{{ $product->name }}</h2>
-        <p>{{ $product->price }}</p>
+            <x-product-card :product="$product" />
         @endforeach
-    </div>
-
-    
-   
+    </section>
 </x-layout>

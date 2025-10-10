@@ -6,6 +6,8 @@
 @import "./link.css";
 @import "./button.css";
 @import "./hero.css";
+@import "./products.css";
+@import "./product-card.css";
 
 /* tailwind import  */
 @import "tailwindcss";
@@ -60,6 +62,7 @@ main {
 
 section {
     min-height: 80svh;
+    margin-top: 5rem;
 }
 
 .center-content {

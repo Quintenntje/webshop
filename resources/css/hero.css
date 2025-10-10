@@ -1,5 +1,10 @@
 .hero {
     position: relative;
+    background-image: url("../../public/images/hero-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 0;
 }
 
 .hero::after {

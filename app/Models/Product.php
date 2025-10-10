@@ -16,9 +16,14 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
-    
+
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function primaryImage()
+    {
+        return $this->hasOne(ProductImage::class)->where('is_primary', true);
     }
 }
