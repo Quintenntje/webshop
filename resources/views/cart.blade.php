@@ -11,7 +11,7 @@
                     </div>
                         <div class="cart-item__content">
                         <h3 class="cart-item__title">{{ $product->name }}</h3>
-                        <p class="cart-item__price">€{{ $product->price }}</p>
+                        <p class="cart-item__price">€{{ $product->price * $cart[$product->id] }}</p>
                         <form action="{{ route('cart.update') }}" method="POST" class="cart-item__quantity-container">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
