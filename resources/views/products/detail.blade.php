@@ -52,8 +52,8 @@
        <div class="product-colors">
         <h2 class="product-colors__title">Colors</h2>
         <div class="product-colors__list">
-          @foreach ($productVariants as $variant)
-            <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $variant->color_id }}" class=" product-colors__item product-colors__item--{{ $variant->color->name }} {{ $variant->color_id == $color_id ? 'product-colors__item--active' : '' }}  ">{{ $variant->color->name }}</a>
+          @foreach ($allAvailableColors as $color)
+            <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color->id }}" class=" product-colors__item product-colors__item--{{ $color->name }} {{ $color->id == $color_id ? 'product-colors__item--active' : '' }}   ">{{ $color->name }}</a>
           @endforeach
         </div>
        </div>
@@ -61,8 +61,8 @@
        <div class="product-sizes">
         <h2 class="product-sizes__title">Sizes</h2>
         <div class="product-sizes__list">
-          @foreach ($productVariants as $variant)
-            <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $variant->color_id }}&size_id={{ $variant->size_id }}" class="product-sizes__item {{ $variant->size_id == $size_id ? 'product-sizes__item--active' : '' }}">{{ $variant->size->name }}</a>
+          @foreach ($allAvailableSizes as $size)
+            <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color_id	 }}&size_id={{ $size->id }}" class="product-sizes__item {{ $size->id == $size_id ? 'product-sizes__item--active' : '' }}">{{ $size->name }}</a>
           @endforeach
        </div>
        </div>

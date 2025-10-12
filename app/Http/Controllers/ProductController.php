@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Gender;
 use App\Models\ProductImage;
 use App\Models\ProductVariant;
+use App\Models\ProductColor;
+use App\Models\ProductSize;
 
 class ProductController extends Controller
 {
@@ -32,13 +34,24 @@ class ProductController extends Controller
         $gender = Gender::where('slug', $gender)->first();
         $product = Product::where('id', $product)->first();
         $productImages = ProductImage::where('product_id', $product->id)->get();
-        $productVariants = ProductVariant::where('product_id', $product->id)->get()->where('color_id', $color_id);
+        $productVariants = ProductVariant::where('product_id', $product->id)->get();
+
+        $productVariants = ProductVariant::where('product_id', $product->id)->get();
+        $colorIds = $productVariants->pluck('color_id')->unique();
+        $allAvailableColors = ProductColor::whereIn('id', $colorIds)->get();
+
+        $colorIdNotInStock = $productVariants->where('stock', 0)->pluck('color_id')->unique();
+
+        $sizeIds = $productVariants->where('color_id', $color_id)->where('stock', '>', 0)->pluck('size_id')->unique();
+        $allAvailableSizes = ProductSize::whereIn('id', $sizeIds)->get();
+
+        $sizeIdNotInStock = $productVariants->where('stock', 0)->pluck('size_id')->unique();
 
 
         if (!$product) {
             return redirect("/");
         }
 
-        return view('products.detail', compact('gender', 'product', 'productImages', 'productVariants', 'color_id', 'size_id'));
+        return view('products.detail', compact('gender', 'product', 'productImages', 'productVariants', 'allAvailableColors', 'allAvailableSizes', 'colorIdNotInStock', 'sizeIdNotInStock', 'color_id', 'size_id'));
     }
 }
