@@ -68,8 +68,17 @@
        </div>
        
        <div class="product-add-to-cart">
-        <x-button color="primary" size="md">Add to cart</x-button>
-        <x-button color="secondary" size="md">Add to wishlist</x-button>
+        <form action="{{ route('cart.add') }}" method="POST">
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <input type="hidden" name="quantity" value="1">
+            <x-button type="submit" color="primary" size="md">Add to cart</x-button>
+        </form>
+        <form  method="POST">
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <x-button type="submit" color="secondary" size="md">Add to wishlist</x-button>
+        </form>
        </div>
        <div class="product-details">
         <h2 class="product-details__title">Details</h2>

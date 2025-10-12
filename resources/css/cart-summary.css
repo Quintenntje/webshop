@@ -6,7 +6,7 @@
     @media (min-width: 768px) {
         border: 1px solid var(--border);
         border-radius: var(--radius-md);
-        padding: var(--spacing-md);
+        padding: var(--spacing-2xl);
     }
 
     .cart-summary__title {
@@ -14,7 +14,7 @@
         font-weight: var(--font-weight-bold);
 
         @media (min-width: 768px) {
-            font-size: var(--font-size-3xl);
+            font-size: var(--font-size-2xl);
         }
     }
 

@@ -1,0 +1,13 @@
+.cart__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    padding-top: var(--spacing-xl);
+}
+
+.cart-container {
+    @media (min-width: 768px) {
+        display: grid;
+        grid-template-columns: 1fr 450px;
+        gap: var(--spacing-xl);
+    }
+}
