@@ -50,3 +50,27 @@
     padding: 0;
     color: var(--foreground);
 }
+
+.btn--icon {
+    align-items: start !important;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    &:hover {
+        background-color: var(--secondary);
+        color: var(--secondary-foreground);
+    }
+}
+
+.btn--icon-danger {
+    align-items: start !important;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    &:hover {
+        background-color: var(--destructive);
+        color: var(--destructive-foreground);
+    }
+}
