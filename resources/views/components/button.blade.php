@@ -2,6 +2,7 @@
     'type' => 'button',
     'color' => 'primary',
     'size' => 'md',
+    'name' => null,
 ])
 
 @php
@@ -16,6 +17,6 @@ $classes = match($color) {
 };
 @endphp
 
-<button type="{{ $type }}" {{ $attributes->merge(['class' => "$classes"]) }}>
+<button name="{{ $name }}" type="{{ $type }}" {{ $attributes->merge(['class' => "$classes"]) }}>
     {{ $slot }}
 </button>

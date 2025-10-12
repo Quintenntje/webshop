@@ -12,11 +12,14 @@
                         <div class="cart-item__content">
                         <h3 class="cart-item__title">{{ $product->name }}</h3>
                         <p class="cart-item__price">€{{ $product->price }}</p>
-                        <div class="cart-item__quantity-container">
-                            <x-button color="transparent" size="xs" class="cart-item__quantity-button">-</x-button>
+                        <form action="{{ route('cart.update') }}" method="POST" class="cart-item__quantity-container">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="quantity" value="{{ $cart[$product->id] }}">
+                            <x-button type="submit" name="updateQuantity" value="decrement" color="transparent" size="xs" class="cart-item__quantity-button">-</x-button>
                             <p class="cart-item__quantity">{{ $cart[$product->id] }}</p>
-                            <x-button color="transparent" size="xs" class="cart-item__quantity-button">+</x-button> 
-                        </div>
+                            <x-button type="submit" name="updateQuantity" value="increment" color="transparent" size="xs" class="cart-item__quantity-button">+</x-button> 
+                        </form>
                     </div>
                 </li> 
                 @endforeach
@@ -26,12 +29,12 @@
                 <div class="cart-summary__items">
                     <div class="cart-summary__item">
                         <p class="cart-summary__item-title">Subtotal</p>
-                        <p class="cart-summary__item-price">€100</p>
+                        <p class="cart-summary__item-price">€{{ $total }}</p>
                     </div>
                 </div>
                 <div class="cart-summary__total">
                     <p class="cart-summary__total-title">Total</p>
-                    <p class="cart-summary__total-price">€100</p>
+                    <p class="cart-summary__total-price">€{{ $total }}</p>
                 </div>
                 <x-button color="primary" size="md">Checkout</x-button>
             </div>
