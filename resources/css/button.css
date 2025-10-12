@@ -28,6 +28,11 @@
     padding: 0;
 }
 
+.btn--xs {
+    padding: var(--spacing-2xs);
+    font-size: var(--font-size-xs);
+}
+
 .btn--sm {
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: var(--font-size-sm);
@@ -64,13 +69,13 @@
 }
 
 .btn--icon-danger {
-    align-items: start !important;
+    justify-content: start !important;
+    padding: 0;
     background-color: transparent;
     border: none;
     outline: none;
 
     &:hover {
-        background-color: var(--destructive);
-        color: var(--destructive-foreground);
+        color: var(--destructive);
     }
 }

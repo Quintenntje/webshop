@@ -2,7 +2,6 @@
     'type' => 'button',
     'color' => 'primary',
     'size' => 'md',
-    'icon' => false,
 ])
 
 @php
@@ -12,6 +11,7 @@ $classes = match($color) {
     'danger' => 'btn btn--danger btn--'.$size,
     'icon' => 'btn btn--icon btn--'.$size,
     'icon-danger' => 'btn btn--icon-danger btn--'.$size,
+    'transparent' => 'btn btn--transparent btn--'.$size,
     default => 'btn btn--primary btn--'.$size,
 };
 @endphp

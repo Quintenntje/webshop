@@ -9,6 +9,8 @@
 @import "./products.css";
 @import "./product-card.css";
 @import "./product-detail.css";
+@import "./cart-item.css";
+@import "./cart-summary.css";
 
 /* tailwind import  */
 @import "tailwindcss";
