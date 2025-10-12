@@ -24,20 +24,21 @@ class ProductController extends Controller
         return view('products.list', compact('gender', 'products'));
     }
 
-    public function detail($gender, $product)
+    public function detail($gender, $product, Request $request)
     {
+        $color_id = $request->query('color_id') ?? 1;
+        $size_id = $request->query('size_id');
+
         $gender = Gender::where('slug', $gender)->first();
         $product = Product::where('id', $product)->first();
         $productImages = ProductImage::where('product_id', $product->id)->get();
-        $productVariants = ProductVariant::where('product_id', $product->id)
-            ->where('color_id', 1)
-            ->get();
+        $productVariants = ProductVariant::where('product_id', $product->id)->get()->where('color_id', $color_id);
 
 
         if (!$product) {
             return redirect("/");
         }
 
-        return view('products.detail', compact('gender', 'product', 'productImages', 'productVariants'));
+        return view('products.detail', compact('gender', 'product', 'productImages', 'productVariants', 'color_id', 'size_id'));
     }
 }

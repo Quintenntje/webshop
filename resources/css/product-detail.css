@@ -70,6 +70,12 @@
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-md);
     background-color: var(--secondary);
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        outline: 1px solid var(--primary);
+    }
 }
 
 .product-colors__item {
@@ -78,6 +84,17 @@
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-md);
     background-color: var(--secondary);
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        outline: 1px solid var(--primary);
+    }
+}
+
+.product-sizes__item--active,
+.product-colors__item--active {
+    outline: 1px solid var(--primary);
 }
 
 .product-colors__item--Black {
