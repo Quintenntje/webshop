@@ -31,8 +31,9 @@
             <div class="footer__column">
                 <h3 class="footer__column__title footer__column__title--join-the-club">Join the club</h3>
                 <p class="footer__column__description">Get product updates and exclusive offers.</p>
-                <form action="/" class="footer__column__form">
-                    <input type="email" placeholder="Your email" class="footer__column__input">
+                <form action="{{ route('newsletter.store') }}" method="POST" class="footer__column__form">
+                    @csrf
+                    <input type="email" name="email" required placeholder="Your email" class="footer__column__input">
                     <x-button type="submit" color="secondary" size="sm" class="footer__column__button margin-top-sm">Subscribe</x-button>
                 </form>
             </div>
