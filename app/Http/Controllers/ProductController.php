@@ -47,11 +47,13 @@ class ProductController extends Controller
 
         $sizeIdNotInStock = $productVariants->where('stock', 0)->pluck('size_id')->unique();
 
+        $productVariant = ProductVariant::where('color_id', $color_id)->where('size_id', $size_id)->where('product_id', $product->id)->first();
+
 
         if (!$product) {
             return redirect("/");
         }
 
-        return view('products.detail', compact('gender', 'product', 'productImages', 'productVariants', 'allAvailableColors', 'allAvailableSizes', 'colorIdNotInStock', 'sizeIdNotInStock', 'color_id', 'size_id'));
+        return view('products.detail', compact('gender', 'product', 'productImages', 'productVariants', 'productVariant', 'allAvailableColors', 'allAvailableSizes', 'colorIdNotInStock', 'sizeIdNotInStock', 'color_id', 'size_id'));
     }
 }

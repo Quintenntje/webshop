@@ -11,3 +11,9 @@
         gap: var(--spacing-xl);
     }
 }
+
+.cart-items__empty {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+}
