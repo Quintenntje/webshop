@@ -12,6 +12,7 @@
 @import "./cart.css";
 @import "./cart-item.css";
 @import "./cart-summary.css";
+@import "./footer.css";
 
 /* tailwind import  */
 @import "tailwindcss";
