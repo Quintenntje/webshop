@@ -16,6 +16,8 @@ Route::get("/shoes/{gender}/{product}", [ProductController::class, 'detail']);
 // auth
 Route::get('/login', [AuthController::class, 'viewLogin'])->name('login');
 Route::get('/register', [AuthController::class, 'viewRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+
 
 // cart
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');

@@ -43,3 +43,8 @@
 .auth__register__text {
     color: var(--muted-foreground);
 }
+
+.auth__error {
+    color: var(--destructive);
+    font-size: var(--font-size-xs);
+}
