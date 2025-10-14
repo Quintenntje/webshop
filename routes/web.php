@@ -21,3 +21,4 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 
 // newsletter
 Route::post('/newsletter', [NewsLetterController::class, 'store'])->name('newsletter.store');
+Route::get('/newsletter/unsubscribe/{email}', [NewsLetterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');

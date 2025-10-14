@@ -10,6 +10,5 @@ class NewsLetter extends Model
 
     protected $fillable = [
         'email',
-        'signup',
     ];
 }
