@@ -1,7 +1,7 @@
 .footer {
     background-color: var(--foreground);
     color: var(--background);
-    padding-block: var(--spacing-md);
+    padding-block: var(--spacing-xl);
 }
 
 .footer__container {
@@ -64,7 +64,7 @@
 
 @media (min-width: 768px) {
     .footer__content {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .footer__column__form {
