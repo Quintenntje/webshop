@@ -1,0 +1,18 @@
+.input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-4xl);
+    border: none;
+    outline: none;
+    background-color: var(--input);
+    color: var(--foreground);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+}
+
+.input--transparent {
+    background-color: transparent;
+    border: 1px solid var(--border);
+  
+}

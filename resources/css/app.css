@@ -13,6 +13,8 @@
 @import "./cart-item.css";
 @import "./cart-summary.css";
 @import "./footer.css";
+@import "./input.css";
+@import "./auth.css";
 
 /* tailwind import  */
 @import "tailwindcss";
@@ -54,11 +56,11 @@
 }
 
 .container--sm {
-    max-width: 700px;
+    max-width: 768px;
 }
 
-.container--sm {
-    max-width: 768px;
+.container--xs {
+    max-width: 500px;
 }
 
 main {

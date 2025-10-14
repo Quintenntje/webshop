@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsLetterController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('index');
@@ -11,6 +12,9 @@ Route::get('/', function () {
 
 Route::get('/shoes/{gender}', [ProductController::class, 'list']);
 Route::get("/shoes/{gender}/{product}", [ProductController::class, 'detail']);
+
+// auth
+Route::get('/login', [AuthController::class, 'viewLogin'])->name('login');
 
 // cart
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');

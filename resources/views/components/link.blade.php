@@ -12,6 +12,7 @@ $classes = match($color) {
     'danger' => 'link link--danger link--'.$size,
     'success' => 'link link--success link--'.$size,
     'full' => 'link link--full link--'.$size,
+    'transparent' => 'link link--transparent link--'.$size,
     default => 'link link--primary link--'.$size,
 };
 @endphp
