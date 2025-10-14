@@ -18,6 +18,10 @@ Route::get('/login', [AuthController::class, 'viewLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'viewRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// account
+Route::get('/account', [AuthController::class, 'viewAccount'])->middleware('auth');
 
 
 // cart

@@ -53,4 +53,15 @@ class AuthController extends Controller
             'error' => 'Invalid credentials',
         ]);
     }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
+    public function viewAccount(){
+        $user = Auth::user();
+      
+        return view('account.index', compact('user'));
+    }
 }
