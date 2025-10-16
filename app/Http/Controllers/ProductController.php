@@ -15,9 +15,13 @@ class ProductController extends Controller
 
     public function list()
     {
-        $products = Product::paginate(12);
 
-        return view('products.list', compact('products'));
+        return view(
+            'products.list',
+            [
+                'products' => Product::simplePaginate(20),
+            ]
+        );
     }
 
     public function listByGender($gender)

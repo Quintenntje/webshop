@@ -20,7 +20,12 @@ class WishlistController extends Controller
 
     public function add(Request $request)
     {
+        $request->validate([
+            'product_variant_id' => 'required|exists:product_variants,id',
+        ]);
+
         $product_variant_id = $request->input('product_variant_id');
+
         $user = Auth::user();
         $wishlist = Wishlist::where('customer_id', $user->id)->where('product_variant_id', $product_variant_id)->first();
         if ($wishlist) {
