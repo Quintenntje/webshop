@@ -24,7 +24,7 @@ class WishlistController extends Controller
         $user = Auth::user();
         $wishlist = Wishlist::where('customer_id', $user->id)->where('product_variant_id', $product_variant_id)->first();
         if ($wishlist) {
-            $wishlist->delete();
+            return redirect()->back();
         } else {
             Wishlist::create(['customer_id' => $user->id, 'product_variant_id' => $product_variant_id]);
         }
