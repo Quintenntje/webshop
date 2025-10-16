@@ -67,6 +67,7 @@
     --radius-md: 0.5rem;
     --radius-lg: 1rem;
     --radius-xl: 2rem;
+    --radius-round: 100%;
 }
 
 .dark {
