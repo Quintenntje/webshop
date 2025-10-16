@@ -17,6 +17,7 @@
 @import "./auth.css";
 @import "./wishlist.css";
 @import "./search.css";
+@import "./pagination.css";
 
 /* tailwind import  */
 @import "tailwindcss";

@@ -19,7 +19,7 @@ class ProductController extends Controller
         return view(
             'products.list',
             [
-                'products' => Product::simplePaginate(20),
+                'products' => Product::paginate(10),
             ]
         );
     }
@@ -34,7 +34,10 @@ class ProductController extends Controller
 
         $products = Product::where('gender_id', $gender->id)->get();
 
-        return view('products.list', compact('gender', 'products'));
+        return view('products.list', [
+            'gender' => $gender,
+            'products' => $products->paginate(10),
+        ]);
     }
 
     public function detail($gender, $product, Request $request)

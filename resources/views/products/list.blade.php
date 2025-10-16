@@ -9,4 +9,7 @@
             <x-product-card :product="$product" />
         @endforeach
     </section>
+
+        {{ $products->links() }}    
+    </section>
 </x-layout>
