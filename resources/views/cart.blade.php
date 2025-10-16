@@ -43,7 +43,7 @@
                     <p class="cart-summary__total-price">€{{ $total }}</p>
                 </div>
                 @if ($products->count() > 0)
-                <x-button color="primary" size="md">Checkout</x-button>
+                <x-Link href="/checkout" color="primary" size="md">Checkout</x-Link>
                 @else
                 <x-link href="/" color="primary" size="md">Add products to cart</x-link>
                 @endif

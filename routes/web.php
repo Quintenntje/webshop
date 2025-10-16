@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/', function () {
     return view('index');
@@ -37,6 +38,12 @@ Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 
+//checkout
+Route::prefix('checkout')->group(function () {
+    Route::get('/shipping', [CheckoutController::class, 'shipping'])->name('checkout.shipping');
+    Route::post('/shipping', [CheckoutController::class, 'shippingStore']);
+
+});
 // wishlist
 Route::get('/wishlist', [WishlistController::class, 'show'])->middleware('auth');
 Route::post('/wishlist/add', [WishlistController::class, 'add'])->middleware('auth')->name('wishlist.add');

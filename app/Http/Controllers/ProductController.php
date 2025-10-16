@@ -32,11 +32,11 @@ class ProductController extends Controller
             return redirect("/");
         }
 
-        $products = Product::where('gender_id', $gender->id)->get();
+        $products = Product::where('gender_id', $gender->id)->paginate(10);
 
         return view('products.list', [
             'gender' => $gender,
-            'products' => $products->paginate(10),
+            'products' => $products,
         ]);
     }
 

@@ -18,6 +18,9 @@
 @import "./wishlist.css";
 @import "./search.css";
 @import "./pagination.css";
+@import "./title.css";
+@import "./checkout.css";
+@import "./formGroup.css";
 
 /* tailwind import  */
 @import "tailwindcss";

@@ -1,0 +1,10 @@
+.form__group {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+
+}
+
+.form__group:last-child {
+    margin-bottom: 0;
+}

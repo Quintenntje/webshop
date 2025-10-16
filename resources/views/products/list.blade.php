@@ -1,6 +1,6 @@
 <x-layout>
     <section class="container">
-        <h1>{{ $gender->name ?? 'All' }} Shoes</h1>
+        <h1 class="page-title">{{ $gender->name ?? 'All' }} Shoes</h1>
 
         <p>{{ $products->count() }} results</p>
 
@@ -10,6 +10,6 @@
         @endforeach
     </section>
 
-        {{ $products->links() }}    
+        {{ $products->links() }}
     </section>
 </x-layout>
