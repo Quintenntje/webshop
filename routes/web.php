@@ -11,7 +11,8 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/shoes/{gender}', [ProductController::class, 'list']);
+Route::get("/shop", [ProductController::class, 'list']);
+Route::get('/shoes/{gender}', [ProductController::class, 'listByGender']);
 Route::get("/shoes/{gender}/{product}", [ProductController::class, 'detail']);
 
 // search

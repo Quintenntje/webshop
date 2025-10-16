@@ -13,7 +13,14 @@ use App\Models\ProductSize;
 class ProductController extends Controller
 {
 
-    public function list($gender)
+    public function list()
+    {
+        $products = Product::paginate(12);
+
+        return view('products.list', compact('products'));
+    }
+
+    public function listByGender($gender)
     {
         $gender = Gender::where('slug', $gender)->first();
 
