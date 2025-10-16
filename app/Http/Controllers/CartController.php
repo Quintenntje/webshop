@@ -8,9 +8,9 @@ use App\Models\ProductImage;
 
 class CartController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $cart = session()->get('cart', []);
+        $cart = json_decode($request->cookie('cart', '[]'), true);
 
         $productIds = array_keys($cart);
         $products = ProductVariant::whereIn('id', $productIds)->get();
@@ -29,56 +29,55 @@ class CartController extends Controller
 
     public function add(Request $request)
     {
-
         $request->validate([
             'product_variant_id' => 'required|exists:product_variants,id',
         ]);
 
         $product_variant_id = $request->input('product_variant_id');
-        $quantity = $request->input('quantity', 1);
+        $quantity = (int) $request->input('quantity', 1);
 
+        $cart = json_decode($request->cookie('cart', '[]'), true);
 
-        $cart = session()->get('cart', []);
-        if (isset($cart[$product_variant_id])) {
-            $cart[$product_variant_id] += $quantity;
-        } else {
-            $cart[$product_variant_id] = $quantity;
-        }
-        session()->put('cart', $cart);
+        $cart[$product_variant_id] = ($cart[$product_variant_id] ?? 0) + $quantity;
 
-        return redirect()->back()->with('success', 'Product added to cart!');
+        return redirect()
+            ->back()
+            ->with('success', 'Product added to cart!')
+            ->cookie('cart', json_encode($cart), 60 * 60 * 24 * 30);
     }
 
     public function update(Request $request)
     {
         $product_variant_id = $request->input('product_variant_id');
-        $quantity = $request->input('quantity');
-        $cart = session()->get('cart', []);
+        $quantity = (int) $request->input('quantity', 0);
         $updateQuantity = $request->input('updateQuantity');
+
+        $cart = json_decode($request->cookie('cart', '[]'), true);
 
         switch ($updateQuantity) {
             case 'increment':
-                $cart[$product_variant_id] = $quantity + 1;
-                session()->put('cart', $cart);
+                $cart[$product_variant_id] = ($cart[$product_variant_id] ?? 0) + 1;
                 break;
+
             case 'decrement':
-                if ($quantity <= 1) {
+                if (($cart[$product_variant_id] ?? 0) <= 1) {
                     unset($cart[$product_variant_id]);
                 } else {
                     $cart[$product_variant_id] = $quantity - 1;
                 }
-                session()->put('cart', $cart);
                 break;
+
             default:
                 if ($quantity <= 0) {
                     unset($cart[$product_variant_id]);
                 } else {
                     $cart[$product_variant_id] = $quantity;
                 }
-                session()->put('cart', $cart);
                 break;
         }
 
-        return redirect()->back();
+        return redirect()
+            ->back()
+            ->cookie('cart', json_encode($cart), 60 * 60 * 24 * 30);
     }
 }
