@@ -1,0 +1,22 @@
+.search__title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    padding-block: var(--spacing-md);
+
+    @media (min-width: 768px) {
+        font-size: var(--font-size-3xl);
+    }
+}
+
+.search__form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    max-width: 500px;
+    margin-inline: auto;
+}
+
+.search__no-results{
+    
+}

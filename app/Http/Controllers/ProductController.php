@@ -56,4 +56,11 @@ class ProductController extends Controller
 
         return view('products.detail', compact('gender', 'product', 'productImages', 'productVariants', 'productVariant', 'allAvailableColors', 'allAvailableSizes', 'colorIdNotInStock', 'sizeIdNotInStock', 'color_id', 'size_id'));
     }
+
+    public function search(Request $request)
+    {
+        $searchQuery = $request->input('search');
+        $products = Product::where('name', 'like', '%' . $searchQuery . '%')->get();
+        return view('search', compact('products'));
+    }
 }

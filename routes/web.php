@@ -14,6 +14,10 @@ Route::get('/', function () {
 Route::get('/shoes/{gender}', [ProductController::class, 'list']);
 Route::get("/shoes/{gender}/{product}", [ProductController::class, 'detail']);
 
+// search
+
+Route::get('/search', [ProductController::class, 'search'])->name('search');
+
 // auth
 Route::get('/login', [AuthController::class, 'viewLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
