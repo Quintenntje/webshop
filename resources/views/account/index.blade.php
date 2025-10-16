@@ -8,5 +8,5 @@
         <p class="auth__subtitle center-content">{{ $user->role_id }}</p>
         <p class="auth__subtitle center-content">{{ $user->created_at }}</p>
         <p class="auth__subtitle center-content">{{ $user->updated_at }}</p>
-    v</section>
+    </section>
 </x-layout>
