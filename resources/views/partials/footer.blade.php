@@ -6,8 +6,11 @@
                 <p class="footer__column__description">CoolKicks is a premium sneaker store that offers a wide range of high-quality sneakers for men, women, and kids.</p>
             </div>
             <div class="footer__column">
-                <h3 class="footer__column__title">Shop</h3>
+                <h3 class="footer__column__title">Shoes</h3>
                 <ul class="footer__column__list">
+                    <li class="footer__column__item">
+                        <a href="/shop" class="footer__column__link">All</a>
+                    </li>
                     <li class="footer__column__item">
                         <a href="/shoes/men" class="footer__column__link">Men</a>
                     </li>

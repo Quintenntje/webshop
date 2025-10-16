@@ -34,7 +34,6 @@ class CartController extends Controller
             'product_variant_id' => 'required|exists:product_variants,id',
         ]);
 
-
         $product_variant_id = $request->input('product_variant_id');
         $quantity = $request->input('quantity', 1);
 

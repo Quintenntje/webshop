@@ -19,7 +19,7 @@
  
        <div class="product-detail__images">
          <div class="product-detail__primary-image">
-           <img 
+           <img ,
              src="{{ $product->primaryImage->filename }}" 
              alt="{{ $product->name }}"
            >
@@ -65,6 +65,10 @@
             <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color_id	 }}&size_id={{ $size->id }}" class="product-sizes__item {{ $size->id == $size_id ? 'product-sizes__item--active' : '' }}">{{ $size->name }}</a>
           @endforeach
        </div>
+
+       @error('product_variant_id')
+        <p class="auth__error">{{ $message }}</p>
+       @enderror
        </div>
        
        <div class="product-add-to-cart">
