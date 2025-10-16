@@ -15,6 +15,7 @@
 @import "./footer.css";
 @import "./input.css";
 @import "./auth.css";
+@import "./wishlist.css";
 
 /* tailwind import  */
 @import "tailwindcss";

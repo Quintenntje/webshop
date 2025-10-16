@@ -74,10 +74,10 @@
             <input type="hidden" name="quantity" value="1">
             <x-button type="submit" color="primary" size="md">Add to cart</x-button>
         </form>
-        <form  method="POST">
+        <form action="{{ route('wishlist.add') }}" method="POST">
             @csrf
             <input type="hidden" name="product_variant_id" value="{{ $productVariant->id ?? 0 }}">
-            <x-button type="submit" color="secondary" size="md">Add to wishlist</x-button>
+            <x-button type="submit" name="add-to-wishlist" value="add-to-wishlist" color="secondary" size="md">Add to wishlist</x-button>
         </form>
        </div>
        <div class="product-details">

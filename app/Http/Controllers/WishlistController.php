@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
+use App\Models\ProductVariant;
+
+class WishlistController extends Controller
+{
+    public function show()
+    {
+        $user = Auth::user();
+        $wishlist = Wishlist::where('customer_id', $user->id)->get();
+        $productIds = $wishlist->pluck('product_variant_id');
+        $products = ProductVariant::whereIn('id', $productIds)->get();
+        return view('wishlist', compact('wishlist', 'products'));
+    }
+
+    public function add(Request $request)
+    {
+        $product_variant_id = $request->input('product_variant_id');
+        $user = Auth::user();
+        $wishlist = Wishlist::where('customer_id', $user->id)->where('product_variant_id', $product_variant_id)->first();
+        if ($wishlist) {
+            $wishlist->delete();
+        } else {
+            Wishlist::create(['customer_id' => $user->id, 'product_variant_id' => $product_variant_id]);
+        }
+        return redirect()->back();
+    }
+    public function remove(Request $request)
+    {
+        $product_variant_id = $request->input('product_variant_id');
+        $user = Auth::user();
+        $wishlist = Wishlist::where('customer_id', $user->id)->where('product_variant_id', $product_variant_id)->first();
+        $wishlist->delete();
+        return redirect()->back();
+    }
+}
