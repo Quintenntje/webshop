@@ -21,6 +21,7 @@
 @import "./title.css";
 @import "./checkout.css";
 @import "./formGroup.css";
+@import "./radio-input.css";
 
 /* tailwind import  */
 @import "tailwindcss";

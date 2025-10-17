@@ -18,7 +18,7 @@
                 <div class="form__group">
                 <x-input color="transparent" type="email" name="email" placeholder="Email" required />
             </div>
-            <div class="form__group">
+             <div class="form__group">
                 <x-input color="transparent" type="tel" name="phone" placeholder="Phone" required />
             </div>
             <div class="form__group">

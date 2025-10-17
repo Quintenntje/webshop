@@ -41,3 +41,9 @@
     margin-bottom: var(--spacing-md);
     font-size: var(--font-size-2xl);
 }
+.checkout-steps__step-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    font-size: var(--font-size-sm);
+}

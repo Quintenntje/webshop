@@ -14,6 +14,8 @@ class CheckoutController extends Controller
         $cart = json_decode($request->cookie('cart', '[]'), true);
         $productIds = array_keys($cart);
         $products = ProductVariant::whereIn('id', $productIds)->get();
+
+
         return view('checkout.shipping', compact('products', 'cart'));
     }
     public function shippingStore(Request $request)
@@ -31,27 +33,45 @@ class CheckoutController extends Controller
 
         if (Auth::check()) {
             $customer = Auth::user();
-            $address = Address::create([
-                'customer_id' => $customer->id,
-                'address' => $request->address,
-                'city' => $request->city,
-                'postal_code' => $request->postal_code,
-                'country' => $request->country,
-            ]);
-            $address->save();
-            session(['checkout.shipping' => $address->toArray()]);
+
+            $address = Address::where('customer_id', $customer->id)->first();
+            if ($address) {
+                $address->update([
+                    'address' => $request->address,
+                    'city' => $request->city,
+                    'postal_code' => $request->postal_code,
+                    'country' => $request->country,
+                ]);
+            } else {
+                $address = Address::create([
+                    'customer_id' => $customer->id,
+                    'address' => $request->address,
+                    'city' => $request->city,
+                    'postal_code' => $request->postal_code,
+                    'country' => $request->country,
+                ]);
+
+            }
+            session(['checkout.shipping' => $validated]);
         } else {
             session(['checkout.shipping' => $validated]);
         }
         return redirect()->route('checkout.payment.show');
     }
 
-    public function paymentShow()
+    public function paymentShow(Request $request)
     {
-        if(session('checkout.shipping')){
+
+        $cart = json_decode($request->cookie('cart', '[]'), true);
+        $productIds = array_keys($cart);
+        $products = ProductVariant::whereIn('id', $productIds)->get();
+
+        if (!session('checkout.shipping')) {
             return redirect()->route('checkout.shipping');
         }
+        $shippingInfo = session('checkout.shipping');
 
-        return view('checkout.payment');
+
+        return view('checkout.payment', compact('shippingInfo', 'products', 'cart'));
     }
 }
