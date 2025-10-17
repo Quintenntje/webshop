@@ -18,7 +18,7 @@ class CheckoutController extends Controller
     }
     public function shippingStore(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email',
@@ -39,6 +39,19 @@ class CheckoutController extends Controller
                 'country' => $request->country,
             ]);
             $address->save();
+            session(['checkout.shipping' => $address->toArray()]);
+        } else {
+            session(['checkout.shipping' => $validated]);
         }
+        return redirect()->route('checkout.payment.show');
+    }
+
+    public function paymentShow()
+    {
+        if(session('checkout.shipping')){
+            return redirect()->route('checkout.shipping');
+        }
+
+        return view('checkout.payment');
     }
 }

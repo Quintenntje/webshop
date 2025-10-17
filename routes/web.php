@@ -42,7 +42,7 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 Route::prefix('checkout')->group(function () {
     Route::get('/shipping', [CheckoutController::class, 'shipping'])->name('checkout.shipping');
     Route::post('/shipping', [CheckoutController::class, 'shippingStore'])->name('checkout.shipping.store');
-
+    Route::get('/payment', [CheckoutController::class, 'paymentShow'])->name('checkout.payment.show');
 });
 // wishlist
 Route::get('/wishlist', [WishlistController::class, 'show'])->middleware('auth');
