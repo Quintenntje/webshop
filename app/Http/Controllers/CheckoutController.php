@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
+use App\Models\Address;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -13,5 +15,30 @@ class CheckoutController extends Controller
         $productIds = array_keys($cart);
         $products = ProductVariant::whereIn('id', $productIds)->get();
         return view('checkout.shipping', compact('products', 'cart'));
+    }
+    public function shippingStore(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'postal_code' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+        ]);
+
+        if (Auth::check()) {
+            $customer = Auth::user();
+            $address = Address::create([
+                'customer_id' => $customer->id,
+                'address' => $request->address,
+                'city' => $request->city,
+                'postal_code' => $request->postal_code,
+                'country' => $request->country,
+            ]);
+            $address->save();
+        }
     }
 }

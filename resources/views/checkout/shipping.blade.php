@@ -9,7 +9,7 @@
     <div class="checkout-steps">
         <div class="checkout-steps__step checkout-steps__step--active">
             <h2 class="checkout-steps__step-title checkout-steps__step-title--active ">Shipping Information</h2>
-            <form action="#" method="POST">
+            <form action="{{ route('checkout.shipping.store') }}" method="POST">
                 @csrf
                 <div class="form__group">
                 <x-input color="transparent" type="text" name="first_name" placeholder="First name" required />
@@ -19,11 +19,12 @@
                 <x-input color="transparent" type="email" name="email" placeholder="Email" required />
             </div>
             <div class="form__group">
-                <x-input color="transparent" type="text" name="address" placeholder="Address" required />
-            </div>
-            <div class="form__group">
                 <x-input color="transparent" type="tel" name="phone" placeholder="Phone" required />
             </div>
+            <div class="form__group">
+                <x-input color="transparent" type="text" name="address" placeholder="Address" required />
+            </div>
+           
             <div class="form__group">
                 <x-input color="transparent" type="text" name="city" placeholder="City" required />
                 <x-input color="transparent" type="number" name="postal_code" placeholder="Postal code" required />

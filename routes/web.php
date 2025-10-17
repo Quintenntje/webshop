@@ -41,7 +41,7 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 //checkout
 Route::prefix('checkout')->group(function () {
     Route::get('/shipping', [CheckoutController::class, 'shipping'])->name('checkout.shipping');
-    Route::post('/shipping', [CheckoutController::class, 'shippingStore']);
+    Route::post('/shipping', [CheckoutController::class, 'shippingStore'])->name('checkout.shipping.store');
 
 });
 // wishlist

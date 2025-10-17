@@ -22,9 +22,9 @@
                 @csrf
                 <input type="hidden" name="product_variant_id" value="{{ $product->id }}">
                 <input type="hidden" name="quantity" value="{{ $cart[$product->id] }}">
-                <x-button type="submit" name="updateQuantity" value="decrement" color="transparent" size="xs" class="cart-item__quantity-button">-</x-button>
+            
                 <p class="cart-item__quantity">{{ $cart[$product->id] }}</p>
-                <x-button type="submit" name="updateQuantity" value="increment" color="transparent" size="xs" class="cart-item__quantity-button">+</x-button> 
+               
             </form>
         </div>
     </li> 
