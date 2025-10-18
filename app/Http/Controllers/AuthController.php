@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Address;
 class AuthController extends Controller
 {
     public function viewLogin()
@@ -19,14 +19,15 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:customers',
             'password' => 'required|string|min:8|confirmed',
         ]);
-        
+
         Customer::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -38,14 +39,15 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registration successful');
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|string|min:8',
         ]);
-        
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->intended('/');
         }
 
@@ -54,14 +56,18 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('login');
     }
 
-    public function viewAccount(){
+    public function viewAccount()
+    {
         $user = Auth::user();
-      
-        return view('account.index', compact('user'));
+        $addresses = Address::where('customer_id', $user->id)->get();
+
+
+        return view('account.index', compact('user', 'addresses'));
     }
 }

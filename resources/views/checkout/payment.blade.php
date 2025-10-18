@@ -42,16 +42,16 @@
   
               <div>
                 <h3>Select your payment method</h3>
-                <div class="form__group">
+                <div class="form__group radio-input-group">
                    <x-radio-input name="payment_method" id="credit_card" value="credit_card" label="Credit Card" />
                 </div>
-                <div class="form__group">
+                <div class="form__group radio-input-group">
                     <x-radio-input name="payment_method" id="debit_card" value="debit_card" label="Debit Card" />
                 </div>
-                <div class="form__group">
+                <div class="form__group radio-input-group">
                     <x-radio-input name="payment_method" id="paypal" value="paypal" label="PayPal" />
                 </div>
-                <div class="form__group">
+                <div class="form__group radio-input-group">
                     <x-radio-input name="payment_method" id="bank_transfer" value="bank_transfer" label="Bank Transfer" />
                 </div>
               </div>
