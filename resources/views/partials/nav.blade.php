@@ -35,7 +35,7 @@
     <nav class="header__items__center">
       <ul class="nav__items">
         <li class="nav__item">
-          <a href="/shop" class="link link--nav nav__item__link">Shop</a>
+          <a href="/shop" class="link link--nav nav__item__link {{ request()->is('shop') ? 'active' : '' }} ">Shop</a>
         </li>
         <li class="nav__item">
           <a href="/shoes/men" class="link link--nav nav__item__link {{ request()->is('shoes/men') ? 'active' : '' }}">Men</a>
@@ -77,7 +77,7 @@
     </button>
   </div>
   <ul class="mobile-menu__links">
-    <li><a class="link link--nav" href="/shop">Shop</a></li>
+    <li><a class="link link--nav {{ request()->is('shop') ? 'active' : '' }}" href="/shop">Shop</a></li>
     <li><a class="link link--nav {{ request()->is('shoes/men') ? 'active' : '' }}" href="/shoes/men">Men</a></li>
     <li><a class="link link--nav {{ request()->is('shoes/women') ? 'active' : '' }}" href="/shoes/women">Women</a></li>
     <li><a class="link link--nav {{ request()->is('shoes/kids') ? 'active' : '' }}" href="/shoes/kids">Kids</a></li>
