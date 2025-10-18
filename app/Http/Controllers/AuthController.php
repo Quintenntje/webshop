@@ -7,6 +7,7 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Address;
+use App\Models\Order;
 class AuthController extends Controller
 {
     public function viewLogin()
@@ -65,9 +66,18 @@ class AuthController extends Controller
     public function viewAccount()
     {
         $user = Auth::user();
+        $orders = Order::where('customer_id', $user->id)
+            ->orderBy('ordered_at', 'desc')
+            ->get();
+
+        return view('account.index', compact('user', 'orders'));
+    }
+
+    public function viewAddresses()
+    {
+        $user = Auth::user();
         $addresses = Address::where('customer_id', $user->id)->get();
 
-
-        return view('account.index', compact('user', 'addresses'));
+        return view('account.addresses', compact('user', 'addresses'));
     }
 }
