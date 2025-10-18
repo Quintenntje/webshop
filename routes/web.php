@@ -7,9 +7,12 @@ use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CheckoutController;
+use App\Models\Gender;
+
 
 Route::get('/', function () {
-    return view('index');
+    $genders = Gender::all();
+    return view('index', compact('genders'));
 });
 
 Route::get("/shop", [ProductController::class, 'list']);
