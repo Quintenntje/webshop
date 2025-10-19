@@ -3,7 +3,7 @@
 		<h1 class="auth__title center-content">Create account</h1>
 		<p class="auth__subtitle center-content">Join CoolKicks to track orders and get member perks.</p>
 
-		<form class="auth__form" action="{{ route('register') }}" method="POST">
+		<form class="auth__form" action="{{ route('register.submit') }}" method="POST">
 			@csrf
 			<x-input color="transparent" type="text" name="first_name" placeholder="First name" required />
 			@error('first_name')

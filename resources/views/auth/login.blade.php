@@ -3,7 +3,7 @@
 		<h1 class="auth__title center-content">Login</h1>
 		<p class="auth__subtitle center-content">Welcome back! Please sign in to continue.</p>
 
-		<form class="auth__form" action="{{ route('login') }}" method="POST">
+		<form class="auth__form" action="{{ route('login.submit') }}" method="POST">
             @csrf
 			<x-input color="transparent" type="email" name="email" placeholder="Email" required />
 			@error('email')
