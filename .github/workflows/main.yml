@@ -18,4 +18,6 @@ jobs:
           exclude: |
             **/.git*
             **/.git*/**
+            **/.ddev/**
+            **/.vscode/**
             **/node_modules/**
