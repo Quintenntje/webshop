@@ -48,10 +48,10 @@ class ProductController extends Controller
         if (!$brand) {
             return redirect("/");
         }
-        
-        $products = Product::where('brand_id', $brand->id)->get();
 
-     
+        $products = Product::where('brand_id', $brand->id)->paginate(10);
+
+
         return view('products.list', compact('brand', 'products'));
     }
 

@@ -9,4 +9,16 @@
             @endforeach
         </div>
     </section>
+
+    <section class="brand-section">
+        <div class="container">
+            <h2 class="brand-section__title">Shop by Brand</h2>
+            <p class="brand-section__subtitle">Discover your favorite brands and explore their latest collections</p>
+            <div class="brand-cards">
+                @foreach($brands as $brand)
+                    <x-brand-card :brand="$brand" />
+                @endforeach
+            </div>
+        </div>
+    </section>
 </x-layout>

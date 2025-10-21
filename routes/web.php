@@ -12,7 +12,8 @@ use App\Models\Gender;
 
 Route::get('/', function () {
     $genders = Gender::all();
-    return view('index', compact('genders'));
+    $brands = \App\Models\Brand::all();
+    return view('index', compact('genders', 'brands'));
 });
 
 Route::get("/shop", [ProductController::class, 'list']);
