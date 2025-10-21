@@ -45,6 +45,21 @@
                 </div>
         </div>
         @endif
+        <div class="filter-container__item">
+            <h3 class="filter-container__title">Sort by</h3>
+                <div class="select-wrapper">
+                    <select name="sort" id="sort" class="select" onchange="this.form.submit()">
+                        <option value="" {{ request('sort') == null ? 'selected' : '' }}>Sort by</option>
+                        <option value="price-asc" {{ request('sort') == 'price-asc' ? 'selected' : '' }}>Price: Low to High</option>
+                        <option value="price-desc" {{ request('sort') == 'price-desc' ? 'selected' : '' }}>Price: High to Low</option>
+                        <option value="name-asc" {{ request('sort') == 'name-asc' ? 'selected' : '' }}>Name: A to Z</option>
+                        <option value="name-desc" {{ request('sort') == 'name-desc' ? 'selected' : '' }}>Name: Z to A</option>
+                    </select>
+                    <svg class="select-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </div>
+        </div>
     </form>
     <section class="products">
     @foreach ($products as $product)

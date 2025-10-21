@@ -14,7 +14,6 @@ use Artesaos\SEOTools\Facades\SEOTools;
 
 class ProductController extends Controller
 {
-
     public function list(Request $request)
     {
         SEOTools::setTitle('Shop');
@@ -36,6 +35,10 @@ class ProductController extends Controller
         if ($gender) {
             $query->where('gender_id', $gender->id);
         }
+
+
+        $this->applySort($query, $request);
+
         $products = $query->paginate(10);
 
         return view('products.list', [
@@ -48,7 +51,6 @@ class ProductController extends Controller
 
     public function listByGender($gender, Request $request)
     {
-
         $gender = Gender::where('slug', $gender)->first();
 
         if (!$gender) {
@@ -64,6 +66,9 @@ class ProductController extends Controller
         if ($brand) {
             $query->where('brand_id', $brand->id);
         }
+
+        $this->applySort($query, $request);
+        
         $products = $query->paginate(10);
 
         SEOTools::setTitle('Shop ' . $gender->name . ' products');
@@ -98,6 +103,8 @@ class ProductController extends Controller
         if ($brand) {
             $query->where('brand_id', $brand->id);
         }
+
+        $this->applySort($query, $request);
         $products = $query->paginate(10);
 
         SEOTools::setTitle('Shop ' . $brand->name . ' products');
@@ -151,6 +158,26 @@ class ProductController extends Controller
         $searchQuery = $request->input('search');
         $products = Product::where('name', 'like', '%' . $searchQuery . '%')->get();
         return view('search', compact('products'));
+    }
+
+    private function applySort($query, Request $request)
+    {
+        if ($request->query('sort')) {
+            switch ($request->query('sort')) {
+                case 'price-asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price-desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'name-asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'name-desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+            }
+        }
     }
 
 
