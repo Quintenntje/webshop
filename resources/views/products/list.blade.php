@@ -7,7 +7,8 @@
     <div class="filter-container">
         <div class="filter-container__item">
             <h3 class="filter-container__title">Filter by Brand</h3>
-            <form  method="GET">
+            <form method="GET">
+                @csrf
                 <div class="select-wrapper">
                     <select name="brand" id="brand" class="select" onchange="this.form.submit()">
                         <option value="">All Brands</option>
@@ -28,6 +29,10 @@
     @foreach ($products as $product)
             <x-product-card :product="$product" />
         @endforeach
+
+        @if ($products->count() == 0)
+            <p class="products__empty">No products found</p>
+        @endif
     </section>
 
         {{ $products->links() }}
