@@ -8,11 +8,19 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CheckoutController;
 use App\Models\Gender;
+use App\Models\Brand;
+use Spatie\Sitemap\SitemapGenerator;
 
+Route::get('/sitemap.xml', function () {
+    SitemapGenerator::create(config('app.url'))
+        ->writeToFile(public_path('sitemap.xml'));
+
+    return response()->file(public_path('sitemap.xml'));
+});
 
 Route::get('/', function () {
     $genders = Gender::all();
-    $brands = \App\Models\Brand::all();
+    $brands = Brand::all();
     return view('index', compact('genders', 'brands'));
 });
 
