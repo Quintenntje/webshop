@@ -5,10 +5,10 @@
         <p>{{ $products->count() }} results</p>
 
     <div class="filter-container">
+       @if (!str_contains(request()->path(), 'brand'))
         <div class="filter-container__item">
             <h3 class="filter-container__title">Filter by Brand</h3>
             <form method="GET">
-                @csrf
                 <div class="select-wrapper">
                     <select name="brand" id="brand" class="select" onchange="this.form.submit()">
                         <option value="">All Brands</option>
@@ -24,6 +24,7 @@
                 </div>
             </form>
         </div>
+        @endif
     </div>
     <section class="products">
     @foreach ($products as $product)
