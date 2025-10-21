@@ -10,12 +10,20 @@ use App\Models\ProductVariant;
 use App\Models\ProductColor;
 use App\Models\ProductSize;
 use App\Models\Brand;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class ProductController extends Controller
 {
 
     public function list(Request $request)
     {
+
+        SEOTools::setTitle('Shop');
+        SEOTools::setDescription('Shop for all products');
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription('Shop for all products');
+
         $brandSlug = $request->query('brand');
 
         $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
@@ -28,10 +36,12 @@ class ProductController extends Controller
             'products' => $products,
             'brands' => Brand::all(),
         ]);
+
     }
 
     public function listByGender($gender, Request $request)
     {
+
         $gender = Gender::where('slug', $gender)->first();
 
         if (!$gender) {
@@ -48,6 +58,13 @@ class ProductController extends Controller
                 ->where('brand_id', $brand->id)
                 ->paginate(10)
             : Product::where('gender_id', $gender->id)->paginate(10);
+
+
+        SEOTools::setTitle('Shop ' . $gender->name . ' products');
+        SEOTools::setDescription('Shop for all ' . $gender->name . ' products');
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription('Shop for all ' . $gender->name . ' products');
 
         return view('products.list', [
             'gender' => $gender,
@@ -66,6 +83,12 @@ class ProductController extends Controller
         }
 
         $products = Product::where('brand_id', $brand->id)->paginate(10);
+
+        SEOTools::setTitle('Shop ' . $brand->name . ' products');
+        SEOTools::setDescription('Shop for all ' . $brand->name . ' products');
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription('Shop for all ' . $brand->name . ' products');
 
         return view('products.list', compact('brand', 'products', 'brands'));
     }
@@ -97,6 +120,12 @@ class ProductController extends Controller
         if (!$product) {
             return redirect("/");
         }
+
+        SEOTools::setTitle($product->name);
+        SEOTools::setDescription($product->description);
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription($product->description);
 
         return view('products.detail', compact('gender', 'product', 'productImages', 'productVariants', 'productVariant', 'allAvailableColors', 'allAvailableSizes', 'colorIdNotInStock', 'sizeIdNotInStock', 'color_id', 'size_id'));
     }
