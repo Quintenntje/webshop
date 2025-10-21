@@ -40,7 +40,6 @@ Route::get('/register', [AuthController::class, 'viewRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
 // account
 Route::get('/account', [AuthController::class, 'viewAccount'])->middleware('auth')->name('account');
 Route::get('/account/addresses', [AuthController::class, 'viewAddresses'])->middleware('auth')->name('account.addresses');
