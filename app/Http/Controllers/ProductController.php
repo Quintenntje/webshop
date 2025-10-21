@@ -17,7 +17,6 @@ class ProductController extends Controller
 
     public function list(Request $request)
     {
-
         SEOTools::setTitle('Shop');
         SEOTools::setDescription('Shop for all products');
         SEOTools::opengraph()->setUrl(url()->current());
@@ -25,16 +24,24 @@ class ProductController extends Controller
         SEOTools::opengraph()->setDescription('Shop for all products');
 
         $brandSlug = $request->query('brand');
+        $genderSlug = $request->query('gender');
 
         $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
+        $gender = $genderSlug ? Gender::where('slug', $genderSlug)->first() : null;
 
-        $products = $brandSlug
-            ? Product::where('brand_id', $brand->id)->paginate(10)
-            : Product::paginate(10);
+        $query = Product::query();
+        if ($brand) {
+            $query->where('brand_id', $brand->id);
+        }
+        if ($gender) {
+            $query->where('gender_id', $gender->id);
+        }
+        $products = $query->paginate(10);
 
         return view('products.list', [
             'products' => $products,
             'brands' => Brand::all(),
+            'genders' => Gender::all(),
         ]);
 
     }
@@ -53,12 +60,11 @@ class ProductController extends Controller
 
         $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
 
-        $products = $brandSlug
-            ? Product::where('gender_id', $gender->id)
-                ->where('brand_id', $brand->id)
-                ->paginate(10)
-            : Product::where('gender_id', $gender->id)->paginate(10);
-
+        $query = Product::query();
+        if ($brand) {
+            $query->where('brand_id', $brand->id);
+        }
+        $products = $query->paginate(10);
 
         SEOTools::setTitle('Shop ' . $gender->name . ' products');
         SEOTools::setDescription('Shop for all ' . $gender->name . ' products');
@@ -73,16 +79,26 @@ class ProductController extends Controller
         ]);
     }
 
-    public function listByBrand($brand)
+    public function listByBrand($brand, Request $request)
     {
         $brand = Brand::where('slug', $brand)->first();
         $brands = Brand::all();
+        $genders = Gender::all();
 
         if (!$brand) {
             return redirect("/");
         }
+        $genderSlug = $request->query('gender');
+        $gender = $genderSlug ? Gender::where('slug', $genderSlug)->first() : null;
 
-        $products = Product::where('brand_id', $brand->id)->paginate(10);
+        $query = Product::query();
+        if ($gender) {
+            $query->where('gender_id', $gender->id);
+        }
+        if ($brand) {
+            $query->where('brand_id', $brand->id);
+        }
+        $products = $query->paginate(10);
 
         SEOTools::setTitle('Shop ' . $brand->name . ' products');
         SEOTools::setDescription('Shop for all ' . $brand->name . ' products');
@@ -90,7 +106,7 @@ class ProductController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription('Shop for all ' . $brand->name . ' products');
 
-        return view('products.list', compact('brand', 'products', 'brands'));
+        return view('products.list', compact('brand', 'products', 'brands', 'genders'));
     }
 
     public function detail($gender, $product, Request $request)
