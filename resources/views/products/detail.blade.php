@@ -42,6 +42,7 @@
 
         <p class="product-detail__gender">
           {{ $product->gender->name }} shoes
+          {{ $product->brand->name }}
         </p>
 
         <p class="product-detail__price">

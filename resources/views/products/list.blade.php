@@ -1,6 +1,6 @@
 <x-layout>
     <section class="container">
-        <h1 class="page-title">{{ $gender->name ?? 'All' }} Shoes</h1>
+        <h1 class="page-title">{{ $gender->name ?? $brand->name ?? 'All' }} Shoes</h1>
 
         <p>{{ $products->count() }} results</p>
 

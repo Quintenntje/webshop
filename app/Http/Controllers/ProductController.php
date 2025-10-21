@@ -9,6 +9,7 @@ use App\Models\ProductImage;
 use App\Models\ProductVariant;
 use App\Models\ProductColor;
 use App\Models\ProductSize;
+use App\Models\Brand;
 
 class ProductController extends Controller
 {
@@ -38,6 +39,20 @@ class ProductController extends Controller
             'gender' => $gender,
             'products' => $products,
         ]);
+    }
+
+    public function listByBrand($brand)
+    {
+        $brand = Brand::where('slug', $brand)->first();
+
+        if (!$brand) {
+            return redirect("/");
+        }
+        
+        $products = Product::where('brand_id', $brand->id)->get();
+
+     
+        return view('products.list', compact('brand', 'products'));
     }
 
     public function detail($gender, $product, Request $request)
@@ -77,4 +92,6 @@ class ProductController extends Controller
         $products = Product::where('name', 'like', '%' . $searchQuery . '%')->get();
         return view('search', compact('products'));
     }
+
+
 }
