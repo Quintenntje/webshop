@@ -14,18 +14,23 @@ use App\Models\Brand;
 class ProductController extends Controller
 {
 
-    public function list()
+    public function list(Request $request)
     {
+        $brandSlug = $request->query('brand');
 
-        return view(
-            'products.list',
-            [
-                'products' => Product::paginate(10),
-            ]
-        );
+        $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
+
+        $products = $brandSlug
+            ? Product::where('brand_id', $brand->id)->paginate(10)
+            : Product::paginate(10);
+
+        return view('products.list', [
+            'products' => $products,
+            'brands' => Brand::all(),
+        ]);
     }
 
-    public function listByGender($gender)
+    public function listByGender($gender, Request $request)
     {
         $gender = Gender::where('slug', $gender)->first();
 
@@ -33,17 +38,28 @@ class ProductController extends Controller
             return redirect("/");
         }
 
-        $products = Product::where('gender_id', $gender->id)->paginate(10);
+        $brands = Brand::all();
+        $brandSlug = $request->query('brand');
+
+        $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
+
+        $products = $brandSlug
+            ? Product::where('gender_id', $gender->id)
+                ->where('brand_id', $brand->id)
+                ->paginate(10)
+            : Product::where('gender_id', $gender->id)->paginate(10);
 
         return view('products.list', [
             'gender' => $gender,
             'products' => $products,
+            'brands' => $brands,
         ]);
     }
 
     public function listByBrand($brand)
     {
         $brand = Brand::where('slug', $brand)->first();
+        $brands = Brand::all();
 
         if (!$brand) {
             return redirect("/");
@@ -51,8 +67,7 @@ class ProductController extends Controller
 
         $products = Product::where('brand_id', $brand->id)->paginate(10);
 
-
-        return view('products.list', compact('brand', 'products'));
+        return view('products.list', compact('brand', 'products', 'brands'));
     }
 
     public function detail($gender, $product, Request $request)

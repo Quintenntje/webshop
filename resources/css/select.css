@@ -1,0 +1,75 @@
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    padding-right: var(--spacing-3xl);
+    font-family: var(--font);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    color: var(--foreground);
+    background-color: var(--background);
+    border: 1px solid var(--input);
+    border-radius: var(--radius-md);
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.select:hover {
+    border-color: var(--muted-foreground);
+}
+
+.select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px oklch(from var(--primary) l c h / 0.1);
+}
+
+.select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--muted);
+}
+
+.select option {
+    padding: var(--spacing-sm);
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+.select option:disabled {
+    color: var(--muted-foreground);
+}
+
+.select-icon {
+    position: absolute;
+    right: var(--spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--muted-foreground);
+    transition: transform 0.2s ease;
+}
+
+.select:focus + .select-icon {
+    color: var(--primary);
+}
+
+.select--sm {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    padding-right: var(--spacing-xl);
+    font-size: var(--font-size-sm);
+}
+
+.select--lg {
+    padding: var(--spacing-md) var(--spacing-lg);
+    padding-right: var(--spacing-4xl);
+    font-size: var(--font-size-lg);
+}
