@@ -48,3 +48,8 @@
     color: var(--destructive);
     font-size: var(--font-size-xs);
 }
+
+.auth__success {
+    color: var(--success);
+    font-size: var(--font-size-xs);
+}

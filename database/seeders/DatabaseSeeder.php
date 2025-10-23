@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             ProductImagesTableSeeder::class,
             ProductVariantTableSeeder::class,
             CustomersTableSeeder::class,
+            DiscountCodesTableSeeder::class,
 
         ]);
     }

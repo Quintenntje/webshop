@@ -29,7 +29,7 @@
 }
 
 .btn--xs {
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: var(--spacing-xs);
     font-size: var(--font-size-sm);
 }
 

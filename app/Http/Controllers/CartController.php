@@ -5,33 +5,60 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use App\Models\ProductImage;
+use App\Models\DiscountCode;
+use App\Support\NumberHelper;
 
 class CartController extends Controller
 {
     public function show(Request $request)
     {
         $cart = json_decode($request->cookie('cart', '[]'), true);
+        $discountCode = $request->cookie('discount_code');
+
+        if ($discountCode) {
+            $discountCode = DiscountCode::where('code', $discountCode)->first();
+            if (!$discountCode || !$discountCode->active || $discountCode->expires_at < now()) {
+                return redirect()
+                    ->back()
+                    ->cookie('discount_code', null, 60 * 60 * 24 * 30)
+                    ->with('error', 'Discount code expired or invalid!');
+            }
+
+            if ($discountCode) {
+                if ($discountCode->type === 'percentage') {
+                    $total = NumberHelper::toFixed($this->getTotal($request) * (1 - $discountCode->value / 100), 2);
+
+                } else {
+                    $total = NumberHelper::toFixed($this->getTotal($request) - $discountCode->value, 2);
+                }
+            }
+        } else {
+            $total = $this->getTotal($request);
+        }
 
         $productIds = array_keys($cart);
         $products = ProductVariant::whereIn('id', $productIds)->get();
 
-
-        $total = 0;
         foreach ($products as $productVariant) {
-            $total += $productVariant->product->price * $cart[$productVariant->id];
             $primaryImage = ProductImage::where('product_id', $productVariant->product_id)->first();
 
             $productVariant->primaryImage = $primaryImage;
         }
 
-        return view('cart', compact('cart', 'products', 'total'));
+        return view('cart', compact('cart', 'products', 'total', 'discountCode'));
     }
 
     public function add(Request $request)
     {
+
         $request->validate([
             'product_variant_id' => 'required|exists:product_variants,id',
+        ], [
+            'product_variant_id.required' => 'Please select a color and size',
+            'product_variant_id.exists' => 'Please select a color and size',
         ]);
+        
+
 
         $product_variant_id = $request->input('product_variant_id');
         $quantity = (int) $request->input('quantity', 1);
@@ -79,5 +106,44 @@ class CartController extends Controller
         return redirect()
             ->back()
             ->cookie('cart', json_encode($cart), 60 * 60 * 24 * 30);
+    }
+
+
+    public function applyDiscount(Request $request)
+    {
+        $request->validate([
+            'discount_code' => 'required|exists:discount_codes,code',
+        ]);
+
+        $discountCode = DiscountCode::where('code', $request->input('discount_code'))->first();
+        if (!$discountCode || !$discountCode->active || $discountCode->expires_at < now()) {
+            return redirect()
+                ->back()
+                ->with('error', 'Invalid discount code!');
+        }
+        if ($discountCode->type === 'percentage') {
+            $total = $this->getTotal($request);
+            $newPrice = $total * (1 - $discountCode->value / 100);
+        } else {
+            $total = $this->getTotal($request);
+            $newPrice = $total - $discountCode->value;
+        }
+        return redirect()
+            ->back()
+            ->cookie('total', $newPrice, 60 * 60 * 24 * 30)
+            ->cookie('discount_code', $discountCode->code, 60 * 60 * 24 * 30)
+            ->with('success', 'Discount code applied!');
+
+    }
+
+    private function getTotal(Request $request)
+    {
+        $cart = json_decode($request->cookie('cart', '[]'), true);
+        $total = 0;
+        foreach ($cart as $productVariantId => $quantity) {
+            $productVariant = ProductVariant::find($productVariantId);
+            $total += $productVariant->product->price * $quantity;
+        }
+        return $total;
     }
 }

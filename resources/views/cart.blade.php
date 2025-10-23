@@ -33,11 +33,20 @@
             <div class="cart-summary">
                 @if ($products->count() > 0)
                 <h2 class="cart-summary__title">Discount</h2>
-                <form class="discount-form" action="" method="POST">
-              
+                <form class="discount-form" action="{{ route('cart.apply-discount') }}" method="POST">
                     @csrf
                     <x-input color="transparent" size="sm" type="text" name="discount_code" placeholder="Enter discount code" />
+                    @error('discount_code')
+                    <p class="auth__error">{{ $message }}</p>
+                    @enderror
+                    @session('error')
+                    <p class="auth__error">{{ session('error') }}</p>
+                    @endSession
                     <x-button type="submit" name="apply-discount" value="apply-discount" color="primary" size="sm">Apply Discount</x-button>
+
+                    @if ($discountCode)
+                    <p class="auth__success">Aplied discount code: {{ $discountCode->code }}</p>
+                    @endif
               
                 </form>
                 @endif

@@ -60,6 +60,7 @@ Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/apply-discount', [CartController::class, 'applyDiscount'])->name('cart.apply-discount');
 
 //checkout
 Route::prefix('checkout')->group(function () {

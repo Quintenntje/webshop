@@ -18,7 +18,7 @@
     text-align: center;
 }
 
-.discount-form input, button {
+.discount-form input, .discount-form button {
     margin-bottom: 0.5rem;
     width: 100%;
 }

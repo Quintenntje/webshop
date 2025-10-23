@@ -62,12 +62,16 @@ class ProductController extends Controller
         $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
 
         $query = Product::query();
+
         if ($brand) {
             $query->where('brand_id', $brand->id);
         }
+        if ($gender) {
+            $query->where('gender_id', $gender->id);
+        }
 
         $this->applySort($query, $request);
-        
+
         $products = $query->paginate(10);
 
         SEOTools::setTitle('Shop ' . $gender->name . ' products');

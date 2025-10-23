@@ -22,6 +22,9 @@ class WishlistController extends Controller
     {
         $request->validate([
             'product_variant_id' => 'required|exists:product_variants,id',
+        ], [
+            'product_variant_id.required' => 'Please select a color and size',
+            'product_variant_id.exists' => 'Please select a color and size',
         ]);
 
         $product_variant_id = $request->input('product_variant_id');
