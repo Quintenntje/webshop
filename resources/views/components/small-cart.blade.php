@@ -1,8 +1,9 @@
 @props([
     'products' => null,
     'cart' => null,
+    'total' => null,
 ])
-
+<div>
 <ul class="cart-items">
     @if ($products->count() > 0)
     @else
@@ -18,11 +19,11 @@
             <p class="cart-item__price">€{{ $product->product->price * $cart[$product->id] }}</p>
             <p class="cart-item__color">Color: {{ $product->color->name }}</p>
             <p class="cart-item__size">Size: {{ $product->size->name }}</p>
-          
                 <p>quantity: {{ $cart[$product->id] }}</p>
-               
-        
         </div>
     </li> 
     @endforeach
 </ul>
+total: €{{ $total }}
+
+</div>

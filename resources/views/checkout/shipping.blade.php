@@ -39,7 +39,7 @@
     </div>
     </div>
     <div class="checkout-container__right">
-        <x-small-cart :products="$products" :cart="$cart" />
+        <x-small-cart :products="$products" :cart="$cart" :total="$total" />
     </div>
     </div>
 </section>

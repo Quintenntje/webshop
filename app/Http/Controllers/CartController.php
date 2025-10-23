@@ -15,6 +15,8 @@ class CartController extends Controller
         $cart = json_decode($request->cookie('cart', '[]'), true);
         $discountCode = $request->cookie('discount_code');
 
+       
+
         if ($discountCode) {
             $discountCode = DiscountCode::where('code', $discountCode)->first();
             if (!$discountCode || !$discountCode->active || $discountCode->expires_at < now()) {

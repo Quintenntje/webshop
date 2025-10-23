@@ -60,7 +60,7 @@
         </div>
   
         <div class="checkout-container__right">
-          <x-small-cart :products="$products" :cart="$cart" />
+          <x-small-cart :products="$products" :cart="$cart" :subtotal="$subtotal" :discount-code="$discountCode" :discount-amount="$discountAmount" :total="$total" />
         </div>
       </div>
     </section>

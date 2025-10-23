@@ -1,5 +1,5 @@
 .form__group {
-    display: inline-flex;
+    display: flex;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }
