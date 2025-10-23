@@ -53,8 +53,16 @@
                 <h2 class="cart-summary__title">Summary</h2>
                 <div class="cart-summary__items">
                     <div class="cart-summary__item">
+                        <div class="cart-summary__item-content">
                         <p class="cart-summary__item-title">Subtotal</p>
-                        <p class="cart-summary__item-price">€{{ $total }}</p>
+                        <p class="cart-summary__item-price">€{{ $total + $discountCode->value }}</p>
+                    </div>
+                    <div class="cart-summary__item-content">
+                        @if ($discountCode)
+                            <p class="cart-summary__item-title">Discount</p> 
+                            <p class="cart-summary__item-price">€{{ $discountCode->value }}</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
                 <div class="cart-summary__total">
