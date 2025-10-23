@@ -36,7 +36,6 @@ class ProductController extends Controller
             $query->where('gender_id', $gender->id);
         }
 
-
         $this->applySort($query, $request);
 
         $products = $query->paginate(10);

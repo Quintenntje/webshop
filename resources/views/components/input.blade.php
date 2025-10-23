@@ -4,15 +4,16 @@
     'placeholder' => null,
     'required' => false,
     'color' => 'primary',
+    'size' => null,
 ])
 
 @php
 $classes = match($color) {
-    'primary' => 'input input--primary',
-    'secondary' => 'input input--secondary',
-    'transparent' => 'input input--transparent',
-    'danger' => 'input input--danger',
-    default => 'input input--primary',
+    'primary' => 'input input--primary' . " input--$size",
+    'secondary' => 'input input--secondary' . " input--$size",
+    'transparent' => 'input input--transparent' ." input--$size",
+    'danger' => 'input input--danger' . " input--$size",
+    default => 'input input--primary' . " input--$size" ,
 };
 @endphp
 
@@ -25,5 +26,5 @@ $classes = match($color) {
     </div>
 
     @else
-    <input type="{{ $type }}" name="{{ $name }}" placeholder="{{ $placeholder }}" {{ $required ? 'required' : '' }} {{ $attributes->merge(['class' => "$classes"]) }}>
+    <input type="{{ $type }}" name="{{ $name }}" placeholder="{{ $placeholder }}" {{ $required ? 'required' : '' }} {{ $attributes->merge(['class' => "$classes" ]) }}>
     @endif

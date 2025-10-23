@@ -10,6 +10,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Models\Gender;
 use App\Models\Brand;
 use Spatie\Sitemap\SitemapGenerator;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 Route::get('/sitemap.xml', function () {
     SitemapGenerator::create(config('app.url'))
@@ -21,6 +22,15 @@ Route::get('/sitemap.xml', function () {
 Route::get('/', function () {
     $genders = Gender::all();
     $brands = Brand::all();
+
+
+    SEOTools::setTitle('Home');
+    SEOTools::setDescription('Shop for shoes in all brands and genders based on your preferences');
+    SEOTools::opengraph()->setUrl(url()->current());
+    SEOTools::opengraph()->setType('website');
+    SEOTools::opengraph()->setDescription('Shop for shoes in all brands and genders based on your preferences');
+
+
     return view('index', compact('genders', 'brands'));
 });
 

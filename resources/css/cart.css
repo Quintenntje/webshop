@@ -17,3 +17,8 @@
     font-weight: var(--font-weight-bold);
     text-align: center;
 }
+
+.discount-form input, button {
+    margin-bottom: 0.5rem;
+    width: 100%;
+}

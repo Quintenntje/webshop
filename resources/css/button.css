@@ -29,8 +29,8 @@
 }
 
 .btn--xs {
-    padding: var(--spacing-2xs)c;
-    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
 }
 
 .btn--sm {

@@ -31,6 +31,16 @@
                 @endforeach
             </ul>
             <div class="cart-summary">
+                @if ($products->count() > 0)
+                <h2 class="cart-summary__title">Discount</h2>
+                <form class="discount-form" action="" method="POST">
+              
+                    @csrf
+                    <x-input color="transparent" size="sm" type="text" name="discount_code" placeholder="Enter discount code" />
+                    <x-button type="submit" name="apply-discount" value="apply-discount" color="primary" size="sm">Apply Discount</x-button>
+              
+                </form>
+                @endif
                 <h2 class="cart-summary__title">Summary</h2>
                 <div class="cart-summary__items">
                     <div class="cart-summary__item">
