@@ -39,6 +39,7 @@ class CartController extends Controller
         $productIds = array_keys($cart);
         $products = ProductVariant::whereIn('id', $productIds)->get();
 
+
         foreach ($products as $productVariant) {
             $primaryImage = ProductImage::where('product_id', $productVariant->product_id)->first();
 
@@ -57,7 +58,7 @@ class CartController extends Controller
             'product_variant_id.required' => 'Please select a color and size',
             'product_variant_id.exists' => 'Please select a color and size',
         ]);
-        
+
 
 
         $product_variant_id = $request->input('product_variant_id');
