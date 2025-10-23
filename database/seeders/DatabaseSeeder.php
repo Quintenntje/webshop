@@ -32,28 +32,22 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-                // optional demo user
-                if (!DB::table('users')->where('email', 'test@example.com')->exists()) {
-                    User::factory()->create([
-                        'name' => 'Test User',
-                        'email' => 'test@example.com',
-                        'password' => Hash::make('password'),
-                        'role_id' => 1,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                }
-        
-                // admin account for Filament
-                if (!DB::table('users')->where('email', 'admin@admin.com')->exists()) {
-                    User::factory()->create([
-                        'name' => 'Admin',
-                        'email' => 'admin@admin.com',
-                        'password' => Hash::make('admin'),
-                        'role_id' => 2,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                }
+        // Resolve role IDs by name (no hardcoded IDs)
+        $adminRoleId = DB::table('roles')->where('name', 'admin')->value('id');
+        if (!$adminRoleId) {
+            $adminRoleId = DB::table('roles')->insertGetId(['name' => 'admin']);
+        }
+
+        // admin account for Filament
+        if (!DB::table('users')->where('email', 'admin@admin.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('admin'),
+                'role_id' => $adminRoleId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }
