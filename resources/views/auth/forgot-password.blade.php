@@ -3,7 +3,10 @@
 		<h1 class="auth__title center-content">Forgot password</h1>
 		<p class="auth__subtitle center-content">Enter your email to receive reset instructions.</p>
 
-		<form class="auth__form" action="" method="POST">
+        @if(session('success'))
+            <p class="auth__success">{{ session('success') }}</p>
+        @else
+		<form class="auth__form" action="{{ route('forgot-password.submit') }}" method="POST">
 			@csrf
 			<x-input color="transparent" type="email" name="email" placeholder="Email" required />
 			@error('email')
@@ -16,6 +19,7 @@
 				<x-link href="{{ route('login') }}" color="transparent" size="md">Back to login</x-link>
 			</div>
 		</form>
+        @endif
 	</section>
 </x-layout>
 

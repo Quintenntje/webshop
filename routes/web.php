@@ -53,6 +53,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // password reset
 Route::get('/forgot-password', [PasswordController::class, 'viewForgotPassword'])->name('forgot-password');
+Route::post('/forgot-password', [PasswordController::class, 'submitForgotPassword'])->name('forgot-password.submit');
 
 
 // account
