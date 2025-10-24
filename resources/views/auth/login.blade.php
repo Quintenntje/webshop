@@ -10,7 +10,7 @@
 				<p class="auth__error">{{ $message }}</p>
 			@enderror
 			<div class="auth__forgot-password">
-			<x-link color="transparent" href="" size="md">Forgot password?</x-link>
+			<x-link color="transparent" href="{{ route('forgot-password') }}" size="md">Forgot password?</x-link>
 			<x-input color="transparent" type="password" name="password" placeholder="Password" required />
 		</div>
 			@error('password')

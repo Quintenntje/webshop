@@ -7,6 +7,7 @@ use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PasswordController;
 use App\Models\Gender;
 use App\Models\Brand;
 use Spatie\Sitemap\SitemapGenerator;
@@ -49,6 +50,10 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::get('/register', [AuthController::class, 'viewRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// password reset
+Route::get('/forgot-password', [PasswordController::class, 'viewForgotPassword'])->name('forgot-password');
+
 
 // account
 Route::get('/account', [AuthController::class, 'viewAccount'])->middleware('auth')->name('account');
