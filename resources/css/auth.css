@@ -49,6 +49,10 @@
     font-size: var(--font-size-xs);
 }
 
+.auth__success {
+    color: var(--success);
+    font-size: var(--font-size-sm);
+}
 
 .auth__forgot-password {
     display: flex;

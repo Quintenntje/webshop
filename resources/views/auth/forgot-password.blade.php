@@ -5,7 +5,11 @@
 
         @if(session('success'))
             <p class="auth__success">{{ session('success') }}</p>
+       
         @else
+		@if(session('error'))
+		<p class="auth__error">{{ session('error') }}</p>
+	@endif
 		<form class="auth__form" action="{{ route('forgot-password.submit') }}" method="POST">
 			@csrf
 			<x-input color="transparent" type="email" name="email" placeholder="Email" required />
