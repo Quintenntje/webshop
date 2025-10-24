@@ -28,17 +28,7 @@ class ProductController extends Controller
         $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
         $gender = $genderSlug ? Gender::where('slug', $genderSlug)->first() : null;
 
-        $query = Product::query();
-        if ($brand) {
-            $query->where('brand_id', $brand->id);
-        }
-        if ($gender) {
-            $query->where('gender_id', $gender->id);
-        }
-
-        $this->applySort($query, $request);
-
-        $products = $query->paginate(10);
+        $products = $this->buildProductQuery($request, $gender, $brand)->paginate(10);
 
         return view('products.list', [
             'products' => $products,
@@ -61,18 +51,8 @@ class ProductController extends Controller
 
         $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
 
-        $query = Product::query();
-
-        if ($brand) {
-            $query->where('brand_id', $brand->id);
-        }
-        if ($gender) {
-            $query->where('gender_id', $gender->id);
-        }
-
-        $this->applySort($query, $request);
-
-        $products = $query->paginate(10);
+    
+        $products = $this->buildProductQuery($request, $gender, $brand)->paginate(10);
 
         SEOTools::setTitle('Shop ' . $gender->name . ' products');
         SEOTools::setDescription('Shop for all ' . $gender->name . ' products');
@@ -99,16 +79,7 @@ class ProductController extends Controller
         $genderSlug = $request->query('gender');
         $gender = $genderSlug ? Gender::where('slug', $genderSlug)->first() : null;
 
-        $query = Product::query();
-        if ($gender) {
-            $query->where('gender_id', $gender->id);
-        }
-        if ($brand) {
-            $query->where('brand_id', $brand->id);
-        }
-
-        $this->applySort($query, $request);
-        $products = $query->paginate(10);
+        $products = $this->buildProductQuery($request, $gender, $brand)->paginate(10);
 
         SEOTools::setTitle('Shop ' . $brand->name . ' products');
         SEOTools::setDescription('Shop for all ' . $brand->name . ' products');
@@ -183,5 +154,20 @@ class ProductController extends Controller
         }
     }
 
+    private function buildProductQuery(Request $request, $gender = null, $brand = null)
+    {
+    $query = Product::query();
 
+        if ($gender) {
+            $query->where('gender_id', $gender->id);
+        }
+
+        if ($brand) {
+            $query->where('brand_id', $brand->id);
+        }
+
+        $this->applySort($query, $request);
+
+        return $query;
+    }
 }
