@@ -48,3 +48,13 @@
     color: var(--destructive);
     font-size: var(--font-size-xs);
 }
+
+
+.auth__forgot-password {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: var(--spacing-2xs);
+    width: 100%;
+}

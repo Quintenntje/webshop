@@ -60,4 +60,8 @@
     outline: none;
     padding: 0;
     color: var(--foreground);
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
