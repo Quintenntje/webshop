@@ -55,7 +55,6 @@ class Product extends Model implements Sitemapable
         $discount = $this->activeDiscount;
         return $discount !== null && $discount->isValid();
     }
-
     public function toSitemapTag(): Url|string|array
     {
         if (!$this->gender || !$this->brand) {

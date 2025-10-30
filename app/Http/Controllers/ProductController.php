@@ -148,16 +148,8 @@ class ProductController extends Controller
         $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
         $gender = $genderSlug ? Gender::where('slug', $genderSlug)->first() : null;
 
-        $query = Product::query()
-            ->with(['activeDiscount', 'gender', 'brand', 'primaryImage'])
-            ->whereHas('activeDiscount', function ($q) {
-                $q->where('active', true)
-                    ->where(function ($query) {
-                        $query->whereNull('start_date')
-                            ->orWhere('start_date', '<=', now());
-                    })
-                    ->where('expire_date', '>=', now());
-            });
+        $query = Product::query()->whereHas('activeDiscount');
+           
 
         if ($gender) {
             $query->where('gender_id', $gender->id);
