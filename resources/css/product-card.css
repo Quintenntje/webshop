@@ -51,5 +51,28 @@
         color: var(--card-foreground);
         font-size: var(--font-size-base);
         font-weight: var(--font-weight-semibold);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .product-card__price--original {
+        color: var(--accent-foreground);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-regular);
+        text-decoration: line-through;
+        opacity: 0.7;
+    }
+
+    .product-card__price--discounted {
+        color: var(--primary);
+        font-size: var(--font-size-base);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .product-card__price--regular {
+        color: var(--card-foreground);
+        font-size: var(--font-size-base);
+        font-weight: var(--font-weight-semibold);
     }
 }

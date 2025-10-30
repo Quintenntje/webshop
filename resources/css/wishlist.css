@@ -77,3 +77,31 @@
 .wishlist-card__content {
     margin-block: var(--spacing-sm);
 }
+
+.wishlist-card__price {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+}
+
+.wishlist-card__price--original {
+    color: var(--accent-foreground);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.wishlist-card__price--discounted {
+    color: var(--primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+}
+
+.wishlist-card__price--regular {
+    color: var(--card-foreground);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+}

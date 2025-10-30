@@ -9,7 +9,7 @@
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
         @endforeach
 
-        @if (str_contains(request()->path(), 'shop') || str_contains(request()->path(), 'brand'))
+        @if (str_contains(request()->path(), 'shop') || str_contains(request()->path(), 'brand') || str_contains(request()->path(), 'sale'))
         <div class="filter-container__item">
             <h3 class="filter-container__title">Filter by Gender</h3>
                 <div class="select-wrapper">

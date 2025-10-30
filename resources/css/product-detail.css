@@ -15,6 +15,28 @@
     .product-detail__price {
         font-size: var(--font-size-lg);
         font-weight: var(--font-weight-bold);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .product-detail__price--original {
+        color: var(--accent-foreground);
+        font-size: var(--font-size-base);
+        font-weight: var(--font-weight-regular);
+        text-decoration: line-through;
+        opacity: 0.7;
+    }
+
+    .product-detail__price--discounted {
+        color: var(--primary);
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .product-detail__price--regular {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-bold);
     }
 }
 

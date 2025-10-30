@@ -134,6 +134,50 @@ class ProductController extends Controller
         return view('search', compact('products'));
     }
 
+    public function sales(Request $request)
+    {
+        SEOTools::setTitle('Sales - Special Offers');
+        SEOTools::setDescription('Shop discounted products and special offers');
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription('Shop discounted products and special offers');
+
+        $brandSlug = $request->query('brand');
+        $genderSlug = $request->query('gender');
+
+        $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
+        $gender = $genderSlug ? Gender::where('slug', $genderSlug)->first() : null;
+
+        $query = Product::query()
+            ->with(['activeDiscount', 'gender', 'brand', 'primaryImage'])
+            ->whereHas('activeDiscount', function ($q) {
+                $q->where('active', true)
+                    ->where(function ($query) {
+                        $query->whereNull('start_date')
+                            ->orWhere('start_date', '<=', now());
+                    })
+                    ->where('expire_date', '>=', now());
+            });
+
+        if ($gender) {
+            $query->where('gender_id', $gender->id);
+        }
+
+        if ($brand) {
+            $query->where('brand_id', $brand->id);
+        }
+
+        $this->applySort($query, $request);
+
+        $products = $query->paginate(10);
+
+        return view('products.list', [
+            'products' => $products,
+            'brands' => Brand::all(),
+            'genders' => Gender::all(),
+        ]);
+    }
+
     private function applySort($query, Request $request)
     {
         if ($request->query('sort')) {

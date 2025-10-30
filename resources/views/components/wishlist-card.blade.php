@@ -15,7 +15,14 @@
     </div>
     <div class="wishlist-card__content">
         <h3 class="wishlist-card__title">{{ $product->product->name }}</h3>
-        <p class="wishlist-card__price">€{{ $product->product->price }}</p>
+        <div class="wishlist-card__price">
+            @if($product->product->hasActiveDiscount())
+                <span class="wishlist-card__price--original">€{{ number_format($product->product->price, 2) }}</span>
+                <span class="wishlist-card__price--discounted">€{{ number_format($product->product->final_price, 2) }}</span>
+            @else
+                <span class="wishlist-card__price--regular">€{{ number_format($product->product->price, 2) }}</span>
+            @endif
+        </div>
     </div>
     <form action="{{ route('cart.add') }}" method="POST">
         @csrf

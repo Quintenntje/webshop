@@ -10,9 +10,14 @@
            {{ $product->gender->name }} shoes
          </p>
  
-         <p class="product-detail__price">
-           €{{ $product->price }}
-         </p>
+         <div class="product-detail__price">
+            @if($product->hasActiveDiscount())
+                <span class="product-detail__price--original">€{{ number_format($product->price, 2) }}</span>
+                <span class="product-detail__price--discounted">€{{ number_format($product->final_price, 2) }}</span>
+            @else
+                <span class="product-detail__price--regular">€{{ number_format($product->price, 2) }}</span>
+            @endif
+         </div>
        </div>
 
        <div class="product-detail__container">
@@ -45,9 +50,14 @@
           {{ $product->brand->name }}
         </p>
 
-        <p class="product-detail__price">
-          €{{ $product->price }}
-        </p>
+        <div class="product-detail__price">
+            @if($product->hasActiveDiscount())
+                <span class="product-detail__price--original">€{{ number_format($product->price, 2) }}</span>
+                <span class="product-detail__price--discounted">€{{ number_format($product->final_price, 2) }}</span>
+            @else
+                <span class="product-detail__price--regular">€{{ number_format($product->price, 2) }}</span>
+            @endif
+        </div>
         </div>
 
        <div class="product-colors">
