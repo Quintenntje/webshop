@@ -56,7 +56,7 @@
                         <div class="cart-summary__item-content">
                         <p class="cart-summary__item-title">Subtotal</p>
                         @if ($discountCode)
-                            <p class="cart-summary__item-price">€{{ $total + $discountCode->value }}</p>
+                            <p class="cart-summary__item-price">€{{ $originalTotal }}</p>
                         @else
                             <p class="cart-summary__item-price">€{{ $total }}</p>
                         @endif
@@ -64,7 +64,7 @@
                     <div class="cart-summary__item-content">
                         @if ($discountCode)
                             <p class="cart-summary__item-title">Discount</p> 
-                            <p class="cart-summary__item-price">€{{ $discountCode->value }}</p>
+                            <p class="cart-summary__item-price">€{{ $originalTotal - $total }}</p>
                             @endif
                         </div>
                     </div>

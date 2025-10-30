@@ -15,11 +15,9 @@ class CartController extends Controller
         $cart = json_decode($request->cookie('cart', '[]'), true);
         $discountCode = $request->cookie('discount_code');
 
-       
-
         if ($discountCode) {
             $discountCode = DiscountCode::where('code', $discountCode)->first();
-            if (!$discountCode || !$discountCode->active || $discountCode->expires_at < now()) {
+            if (!$discountCode->isValid()) {
                 return redirect()
                     ->back()
                     ->cookie('discount_code', null, 60 * 60 * 24 * 30)
@@ -27,12 +25,7 @@ class CartController extends Controller
             }
 
             if ($discountCode) {
-                if ($discountCode->type === 'percentage') {
-                    $total = NumberHelper::toFixed($this->getTotal($request) * (1 - $discountCode->value / 100), 2);
-
-                } else {
-                    $total = NumberHelper::toFixed($this->getTotal($request) - $discountCode->value, 2);
-                }
+                $total = $discountCode->calculateDiscountedPrice($this->getTotal($request));
             }
         } else {
             $total = $this->getTotal($request);
@@ -41,6 +34,8 @@ class CartController extends Controller
         $productIds = array_keys($cart);
         $products = ProductVariant::whereIn('id', $productIds)->get();
 
+        $originalTotal = $this->getTotal($request);
+
 
         foreach ($products as $productVariant) {
             $primaryImage = ProductImage::where('product_id', $productVariant->product_id)->first();
@@ -48,7 +43,7 @@ class CartController extends Controller
             $productVariant->primaryImage = $primaryImage;
         }
 
-        return view('cart', compact('cart', 'products', 'total', 'discountCode'));
+        return view('cart', compact('cart', 'products', 'total', 'discountCode', 'originalTotal'));
     }
 
     public function add(Request $request)
@@ -60,8 +55,6 @@ class CartController extends Controller
             'product_variant_id.required' => 'Please select a color and size',
             'product_variant_id.exists' => 'Please select a color and size',
         ]);
-
-
 
         $product_variant_id = $request->input('product_variant_id');
         $quantity = (int) $request->input('quantity', 1);
@@ -124,13 +117,9 @@ class CartController extends Controller
                 ->back()
                 ->with('error', 'Invalid discount code!');
         }
-        if ($discountCode->type === 'percentage') {
-            $total = $this->getTotal($request);
-            $newPrice = $total * (1 - $discountCode->value / 100);
-        } else {
-            $total = $this->getTotal($request);
-            $newPrice = $total - $discountCode->value;
-        }
+       
+        $newPrice = $discountCode->calculateDiscountedPrice($this->getTotal($request));
+
         return redirect()
             ->back()
             ->cookie('total', $newPrice, 60 * 60 * 24 * 30)
