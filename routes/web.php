@@ -39,6 +39,7 @@ Route::get("/shop", [ProductController::class, 'list']);
 Route::get('/shoes/{gender}', [ProductController::class, 'listByGender']);
 Route::get("/shoes/{gender}/{product}", [ProductController::class, 'detail']);
 Route::get("/brand/{brand}", [ProductController::class, 'listByBrand']);
+Route::get("/sale", [ProductController::class, 'sales'])->name('sale');
 
 // search
 

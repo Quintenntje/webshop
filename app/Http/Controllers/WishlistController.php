@@ -14,7 +14,7 @@ class WishlistController extends Controller
         $user = Auth::user();
         $wishlist = Wishlist::where('customer_id', $user->id)->get();
         $productIds = $wishlist->pluck('product_variant_id');
-        $products = ProductVariant::whereIn('id', $productIds)->get();
+        $products = ProductVariant::with(['product.activeDiscount', 'product.primaryImage'])->whereIn('id', $productIds)->get();
         return view('wishlist', compact('wishlist', 'products'));
     }
 

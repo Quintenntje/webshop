@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\Hash;
 
 class PasswordController extends Controller
 {
+
     public function viewForgotPassword()
     {
         return view('auth.forgot-password');
     }
+
     public function viewResetPassword(Request $request)
     {
      
