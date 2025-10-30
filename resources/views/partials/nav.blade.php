@@ -48,7 +48,7 @@
           <a href="/shoes/kids" class="link link--nav nav__item__link {{ request()->is('shoes/kids') ? 'active' : '' }}">Kids</a>
         </li>
         <li class="nav__item">
-          <a href="/sale" class="link link--nav nav__item__link">Sale</a>
+          <a href="/sale" class="link link--nav nav__item__link {{ request()->is('sale') ? 'active' : '' }}">Sale</a>
         </li>
       </ul>
     </nav>
@@ -81,6 +81,6 @@
     <li><a class="link link--nav {{ request()->is('shoes/men') ? 'active' : '' }}" href="/shoes/men">Men</a></li>
     <li><a class="link link--nav {{ request()->is('shoes/women') ? 'active' : '' }}" href="/shoes/women">Women</a></li>
     <li><a class="link link--nav {{ request()->is('shoes/kids') ? 'active' : '' }}" href="/shoes/kids">Kids</a></li>
-    <li><a class="link link--nav" href="/sale">Sale</a></li>
+    <li><a class="link link--nav {{ request()->is('sale') ? 'active' : '' }}" href="/sale">Sale</a></li>
   </ul>
 </nav>
