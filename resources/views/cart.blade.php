@@ -15,7 +15,14 @@
                     </div>
                         <div class="cart-item__content">
                         <h3 class="cart-item__title">{{ $product->product->name }}</h3>
-                        <p class="cart-item__price">€{{ $product->product->price * $cart[$product->id] }}</p>
+                        <div class="cart-item__price">
+                            @if($product->product->hasActiveDiscount())
+                                <span class="cart-item__price--original">€{{ number_format($product->product->price, 2)  * $cart[$product->id] }}</span>
+                                <span class="cart-item__price--discounted">€{{ number_format($product->product->final_price, 2) * $cart[$product->id]  }}</span>
+                            @else
+                                <span class="cart-item__price--regular">€{{ number_format($product->product->price, 2) * $cart[$product->id] }}</span>
+                            @endif
+                        </div>
                         <p class="cart-item__color">Color: {{ $product->color->name }}</p>
                         <p class="cart-item__size">Size: {{ $product->size->name }}</p>
                         <form action="{{ route('cart.update') }}" method="POST" class="cart-item__quantity-container">
@@ -56,22 +63,22 @@
                         <div class="cart-summary__item-content">
                         <p class="cart-summary__item-title">Subtotal</p>
                         @if ($discountCode)
-                            <p class="cart-summary__item-price">€{{ $originalTotal }}</p>
+                            <p class="cart-summary__item-price">€{{ number_format($originalTotal, 2) }}</p>
                         @else
-                            <p class="cart-summary__item-price">€{{ $total }}</p>
+                            <p class="cart-summary__item-price">€{{ number_format($total, 2) }}</p>
                         @endif
                     </div>
                     <div class="cart-summary__item-content">
                         @if ($discountCode)
                             <p class="cart-summary__item-title">Discount</p> 
-                            <p class="cart-summary__item-price">€{{ $originalTotal - $total }}</p>
+                                <p class="cart-summary__item-price">€ {{ number_format($originalTotal - $total, 2) }}</p>
                             @endif
                         </div>
                     </div>
                 </div>
                 <div class="cart-summary__total">
                     <p class="cart-summary__total-title">Total</p>
-                    <p class="cart-summary__total-price">€{{ $total }}</p>
+                    <p class="cart-summary__total-price">€{{ number_format($total, 2) }}</p>
                 </div>
                 @if ($products->count() > 0)
                 <x-Link href="/checkout/shipping" color="primary" size="md">Checkout</x-Link>

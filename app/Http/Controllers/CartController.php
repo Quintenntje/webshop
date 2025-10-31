@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use App\Models\ProductImage;
 use App\Models\DiscountCode;
-use App\Support\NumberHelper;
+
 
 class CartController extends Controller
 {
@@ -42,7 +42,7 @@ class CartController extends Controller
 
             $productVariant->primaryImage = $primaryImage;
         }
-
+    
         return view('cart', compact('cart', 'products', 'total', 'discountCode', 'originalTotal'));
     }
 
