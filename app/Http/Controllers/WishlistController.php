@@ -36,7 +36,7 @@ class WishlistController extends Controller
         } else {
             Wishlist::create(['customer_id' => $user->id, 'product_variant_id' => $product_variant_id]);
         }
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Product added to wishlist!');
     }
     public function remove(Request $request)
     {

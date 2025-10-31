@@ -85,7 +85,12 @@
         <p class="auth__error">{{ $message }}</p>
        @enderror
        </div>
-       
+
+       @if(session('success'))
+        <div class="product-add-to-cart">
+            <p class="auth__success">{{ session('success') }}</p>
+        </div>
+       @endif
        <div class="product-add-to-cart">
         <form action="{{ route('cart.add') }}" method="POST">
             @csrf
