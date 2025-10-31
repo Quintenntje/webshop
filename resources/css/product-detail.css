@@ -93,10 +93,23 @@
     border-radius: var(--radius-md);
     background-color: var(--secondary);
     cursor: pointer;
+    transition: all 0.2s ease;
 
     &:hover,
     &:focus {
         outline: 1px solid var(--primary);
+    }
+
+    &.product-sizes__item--out-of-stock {
+        opacity: 0.5;
+        background-color: var(--muted);
+        cursor: not-allowed;
+        text-decoration: line-through;
+
+        &:hover,
+        &:focus {
+            outline: 1px solid var(--muted-foreground);
+        }
     }
 }
 

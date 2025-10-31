@@ -39,6 +39,43 @@ class Product extends Model implements Sitemapable
         return $this->hasOne(ProductDiscount::class)->where('active', true)->where('expire_date', '>=', now());
     }
 
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    public function getAvailableColors()
+    {
+        return ProductColor::whereIn('id', $this->variants->pluck('color_id')->unique())->get();
+    }
+
+    public function getAvailableSizesForColor($colorId)
+    {
+        return ProductSize::whereIn(
+            'id',
+            $this->variants->where('color_id', $colorId)->pluck('size_id')->unique()
+        )->get();
+    }
+
+    public function getVariantByColorAndSize($colorId, $sizeId)
+    {
+        return $this->variants()
+            ->where('color_id', $colorId)
+            ->where('size_id', $sizeId)
+            ->first();
+    }
+
+    public function isSizeInStockForColor($colorId, $sizeId)
+    {
+        $variant = $this->getVariantByColorAndSize($colorId, $sizeId);
+        return $variant && $variant->inStock();
+    }
+
     public function getFinalPriceAttribute(): float
     {
         $discount = $this->activeDiscount;

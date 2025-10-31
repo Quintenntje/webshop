@@ -29,14 +29,14 @@
              alt="{{ $product->name }}"
            >
          </div>
-         <div class="product-detail__secondary-images">
-           @foreach ($productImages as $image)
-             <img 
-               src="{{ $image->filename }}" 
-               alt="{{ $product->name }}"
-             >
-           @endforeach
-         </div>
+        <div class="product-detail__secondary-images">
+          @foreach ($product->images as $image)
+            <img 
+              src="{{ $image->filename }}" 
+              alt="{{ $product->name }}"
+            >
+          @endforeach
+        </div>
        </div>
 
        <div class="product-detail__content">
@@ -73,7 +73,11 @@
         <h2 class="product-sizes__title">Sizes</h2>
         <div class="product-sizes__list">
           @foreach ($allAvailableSizes as $size)
-            <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color_id	 }}&size_id={{ $size->id }}" class="product-sizes__item {{ $size->id == $size_id ? 'product-sizes__item--active' : '' }}">{{ $size->name }}</a>
+            <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color_id }}&size_id={{ $size->id }}" 
+               class="product-sizes__item {{ $size->isActive ? 'product-sizes__item--active' : '' }} {{ !$size->isInStock ? 'product-sizes__item--out-of-stock' : '' }}"
+               @if(!$size->isInStock) title="Out of stock" @endif>
+              {{ $size->name }}
+            </a>
           @endforeach
        </div>
 
