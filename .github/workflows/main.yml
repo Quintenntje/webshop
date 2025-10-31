@@ -21,3 +21,9 @@ jobs:
             **/.ddev/**
             **/.vscode/**
             **/node_modules/**
+
+      - name: Update and build project
+        run: |
+          composer install
+          npm install
+          npm run build
