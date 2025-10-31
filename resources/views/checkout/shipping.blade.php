@@ -12,19 +12,18 @@
             <form action="{{ route('checkout.shipping.store') }}" method="POST">
                 @csrf
                 <div class="form__group">
-                <x-input color="transparent" type="text" name="first_name" placeholder="First name" required />
-                <x-input color="transparent" type="text" name="last_name" placeholder="Last name" required />
+                <x-input color="transparent" type="text" name="first_name" placeholder="First name" required value="{{ $customer->first_name ?? '' }}" />
+                <x-input color="transparent" type="text" name="last_name" placeholder="Last name" required value="{{ $customer->last_name ?? '' }}" />
                 </div>
                 <div class="form__group">
-                <x-input color="transparent" type="email" name="email" placeholder="Email" required />
+                <x-input color="transparent" type="email" name="email" placeholder="Email" required value="{{ $customer->email ?? '' }}" />
             </div>
              <div class="form__group">
-                <x-input color="transparent" type="tel" name="phone" placeholder="Phone" required />
+                <x-input color="transparent" type="tel" name="phone" placeholder="Phone" required value="{{ $customer->phone_number ?? '' }}" />
             </div>
             <div class="form__group">
                 <x-input color="transparent" type="text" name="address" placeholder="Address" required />
             </div>
-           
             <div class="form__group">
                 <x-input color="transparent" type="text" name="city" placeholder="City" required />
                 <x-input color="transparent" type="number" name="postal_code" placeholder="Postal code" required />

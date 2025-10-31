@@ -20,17 +20,14 @@ class CheckoutController extends Controller
         $totalProductsPrices = $this->getTotal($request);
 
         if ($discount) {
-            if ($discount->type === 'percentage') {
-                $total = $totalProductsPrices * (1 - $discount->value / 100);
-            } else {
-                $total = $totalProductsPrices - $discount->value;
-            }
+            $total = $discount->calculateDiscountedPrice($totalProductsPrices);
         } else {
             $total = $totalProductsPrices;
         }
 
+        $customer = Auth::User();
 
-        return view('checkout.shipping', compact('products', 'cart', 'discount', 'total'));
+        return view('checkout.shipping', compact('products', 'cart', 'discount', 'total', 'customer'));
     }
     public function shippingStore(Request $request)
     {
@@ -88,13 +85,9 @@ class CheckoutController extends Controller
         $shippingInfo = session('checkout.shipping');
 
         $totalProductsPrices = $this->getTotal($request);
-        
+
         if ($discount) {
-            if ($discount->type === 'percentage') {
-                $total = $totalProductsPrices * (1 - $discount->value / 100);
-            } else {
-                $total = $totalProductsPrices - $discount->value;
-            }
+            $total = $discount->calculateDiscountedPrice($totalProductsPrices);
         } else {
             $total = $totalProductsPrices;
         }
