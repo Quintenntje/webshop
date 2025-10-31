@@ -22,12 +22,22 @@ jobs:
             **/.vscode/**
             **/node_modules/**
 
-      - name: Update and build project
+      - name: 🔨 Update and build project
         run: |
           composer install
           npm install
           npm run build
 
-      - name: Give permissions to the web server    
+      - name: 🔒 Give permissions to the web server    
         run: |
-         chmod -R 775 
+         chmod -R 775 storage
+         chmod -R 775 bootstrap/cache
+         chmod -R 775 public
+         chmod -R 775 app
+         chmod -R 775 config
+         chmod -R 775 database
+         chmod -R 775 resources
+         chmod -R 775 routes
+         chmod -R 775 tests
+         chmod -R 775 vendor
+         chmod -R 775 .env
