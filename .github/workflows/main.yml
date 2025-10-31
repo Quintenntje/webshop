@@ -40,4 +40,3 @@ jobs:
          chmod -R 775 routes
          chmod -R 775 tests
          chmod -R 775 vendor
-         chmod -R 775 .env
