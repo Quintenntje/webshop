@@ -65,7 +65,6 @@
     gap: var(--spacing-lg);
     font-size: var(--font-size-xl);
     font-family: var(--font-hero);
-    font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--foreground);
