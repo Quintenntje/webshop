@@ -27,3 +27,7 @@ jobs:
           composer install
           npm install
           npm run build
+
+      - name: Give permissions to the web server    
+        run: |
+         chmod -R 775 ./www/webshop-Quintenntje/
