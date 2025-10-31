@@ -16,7 +16,7 @@ class DiscountCode extends Model
 
     public function isValid(): bool
     {
-        return $this->active && $this->expires_at && $this->expires_at > now();
+        return $this->active && $this->expires_at && $this->expires_at >= now();
     }
 
     public function calculateDiscountedPrice(float $originalPrice): float

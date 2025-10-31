@@ -112,7 +112,7 @@ class CartController extends Controller
         ]);
 
         $discountCode = DiscountCode::where('code', $request->input('discount_code'))->first();
-        if (!$discountCode || !$discountCode->active || $discountCode->expires_at < now()) {
+        if (!$discountCode->isValid()) {
             return redirect()
                 ->back()
                 ->with('error', 'Invalid discount code!');
@@ -134,7 +134,11 @@ class CartController extends Controller
         $total = 0;
         foreach ($cart as $productVariantId => $quantity) {
             $productVariant = ProductVariant::find($productVariantId);
-            $total += $productVariant->product->price * $quantity;
+            if ($productVariant->product->hasActiveDiscount()) {
+                $total += $productVariant->product->final_price * $quantity;
+            } else {
+                $total += $productVariant->product->price * $quantity;
+            }
         }
         return $total;
     }

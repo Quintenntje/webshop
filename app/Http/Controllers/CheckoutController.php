@@ -101,7 +101,12 @@ class CheckoutController extends Controller
         $total = 0;
         foreach ($cart as $productVariantId => $quantity) {
             $productVariant = ProductVariant::find($productVariantId);
-            $total += $productVariant->product->price * $quantity;
+
+            if ($productVariant->product->hasActiveDiscount()) {
+                $total += $productVariant->product->final_price * $quantity;
+            } else {
+                $total += $productVariant->product->price * $quantity;
+            }
         }
         return $total;
     }
