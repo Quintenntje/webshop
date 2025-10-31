@@ -30,4 +30,4 @@ jobs:
 
       - name: Give permissions to the web server    
         run: |
-         chmod -R 775 ./www/webshop-Quintenntje/
+         chmod -R 775 
