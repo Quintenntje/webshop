@@ -9,4 +9,5 @@ return [
     'all' => 'All',
     'new' => 'New',
     'shoes' => 'Shoes',
+    'shop_now' => 'Shop Now',
 ];

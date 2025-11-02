@@ -9,4 +9,5 @@ return [
     'all' => 'Tous',
     'new' => 'Nouveau',
     'shoes' => 'Chaussures',
+    'shop_now' => 'Acheter Maintenant',
 ];
