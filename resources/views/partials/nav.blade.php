@@ -4,24 +4,24 @@
       <button id="menu-open" aria-label="Menu" class="btn btn--transparent header__items__left__button">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
       </button>
-      <a href="/search" class="link link--nav header__items__left__icon">
+      <a href="/{{ app()->getLocale() }}/search" class="link link--nav header__items__left__icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
       </a>
-      <a href="account" class="link link--nav header__items__left__icon">
+      <a href="/{{ app()->getLocale() }}/account" class="link link--nav header__items__left__icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </a>
     </div>
     <div class="header__items__center">
-        <a href="/" class="link link--nav header__items__center__logo">
+        <a href="/{{ app()->getLocale() }}" class="link link--nav header__items__center__logo">
             <img class="nav__logo" src="{{ asset('images/logo/coolKickslogo.png') }}" alt="Logo" >
         </a>
     </div>
     <div class="header__items__right">
       <x-language-switcher />
-      <a href="/wishlist" class="link link--nav header__items__left__icon">
+      <a href="/{{ app()->getLocale() }}/wishlist" class="link link--nav header__items__left__icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon lucide-heart"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>
       </a>
-        <a href="/cart" class="link link--nav nav__items__right__button">
+        <a href="/{{ app()->getLocale() }}/cart" class="link link--nav nav__items__right__button">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handbag-icon lucide-handbag"><path d="M2.048 18.566A2 2 0 0 0 4 21h16a2 2 0 0 0 1.952-2.434l-2-9A2 2 0 0 0 18 8H6a2 2 0 0 0-1.952 1.566z"/><path d="M8 11V6a4 4 0 0 1 8 0v5"/></svg>
         </a>
   </div>
@@ -29,7 +29,7 @@
 <div class="container header__items pc-only">
 
   <div class="header__items__left">
-    <a href="/" class="link link--nav header__items__center__logo">
+    <a href="/{{ app()->getLocale() }}" class="link link--nav header__items__center__logo">
       <img class="nav__logo" src="{{ asset('images/logo/coolKickslogo.png') }}" alt="Logo" >
   </a>
     </div>
@@ -55,16 +55,16 @@
     </nav>
   <div class="header__items__right">
     <x-language-switcher />
-    <a href="/search" class="link link--nav header__items__left__icon">
+    <a href="/{{ app()->getLocale() }}/search" class="link link--nav header__items__left__icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
     </a>
-    <a href="/account" class="link link--nav header__items__left__icon">
+    <a href="/{{ app()->getLocale() }}/account" class="link link--nav header__items__left__icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     </a>
-    <a href="/wishlist" class="link link--nav header__items__left__icon">
+    <a href="/{{ app()->getLocale() }}/wishlist" class="link link--nav header__items__left__icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon lucide-heart"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>
     </a>
-    <a href="/cart" class="link link--nav nav__items__right__button">
+    <a href="/{{ app()->getLocale() }}/cart" class="link link--nav nav__items__right__button">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handbag-icon lucide-handbag"><path d="M2.048 18.566A2 2 0 0 0 4 21h16a2 2 0 0 0 1.952-2.434l-2-9A2 2 0 0 0 18 8H6a2 2 0 0 0-1.952 1.566z"/><path d="M8 11V6a4 4 0 0 1 8 0v5"/></svg>
     </a>
   </div>
