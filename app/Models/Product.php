@@ -5,9 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sitemap\Contracts\Sitemapable;
 use Spatie\Sitemap\Tags\Url;
+use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements Sitemapable
 {
+    use HasTranslations;
+
+    protected $fillable = ['name', 'description', 'price', 'gender_id', 'brand_id', 'category_id'];
+
+    public $translatable = [ 'description'];
 
     public function gender()
     {

@@ -43,7 +43,7 @@ class ProductsTableSeeder extends Seeder
             DB::table('products')->insert([
                 'name' => $product['name'],
                 'price' => $product['price'],
-                'description' => $product['description'],
+                'description' => json_encode($product['description']),
                 'gender_id' => $genderIds->random(),
                 'brand_id' => $brandIds->random(),
                 'category_id' => $categoryIds->random(),
