@@ -10,4 +10,5 @@ return [
     'new' => 'Nieuw',
     'shoes' => 'Schoenen',
     'shop_now' => 'Shop Nu',
+    'view_product' => 'Product Bekijken',
 ];

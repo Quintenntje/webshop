@@ -1,8 +1,8 @@
 <x-layout>
     <section class="container">
-        <h1 class="page-title">{{ $gender->name ?? $brand->name ?? 'All' }} Shoes</h1>
+        <h1 class="page-title">{{ $gender->name ?? $brand->name ?? __('list.all') }} {{ __('list.shoes') }}</h1>
 
-        <p>{{ $products->count() }} results</p>
+        <p>{{ $products->count() }} {{ __('list.results') }}</p>
 
     <form method="GET" class="filter-container">
         @foreach(request()->except('gender', 'brand') as $key => $value)
@@ -11,10 +11,10 @@
 
         @if (str_contains(request()->path(), 'shop') || str_contains(request()->path(), 'brand') || str_contains(request()->path(), 'sale'))
         <div class="filter-container__item">
-            <h3 class="filter-container__title">Filter by Gender</h3>
+            <h3 class="filter-container__title">{{ __('list.filter_by_gender') }}</h3>
                 <div class="select-wrapper">
                     <select name="gender" id="gender" class="select" onchange="this.form.submit()">
-                        <option value="">All Genders</option>
+                        <option value="">{{ __('list.all_genders') }}</option>
                         @foreach($genders as $genderOption)
                             <option value="{{ $genderOption->slug }}" {{ request('gender') == $genderOption->slug ? 'selected' : '' }}>
                                 {{ $genderOption->name }}
@@ -29,10 +29,10 @@
         @endif
        @if (!str_contains(request()->path(), 'brand'))
         <div class="filter-container__item">
-            <h3 class="filter-container__title">Filter by Brand</h3>
+            <h3 class="filter-container__title">{{ __('list.filter_by_brand') }}</h3>
                 <div class="select-wrapper">
                     <select name="brand" id="brand" class="select" onchange="this.form.submit()">
-                        <option value="">All Brands</option>
+                        <option value="">{{ __('list.all_brands') }}</option>
                         @foreach($brands as $brandOption)
                             <option value="{{ $brandOption->slug }}" {{ request('brand') == $brandOption->slug ? 'selected' : '' }}>
                                 {{ $brandOption->name }}
@@ -46,14 +46,14 @@
         </div>
         @endif
         <div class="filter-container__item">
-            <h3 class="filter-container__title">Sort by</h3>
+            <h3 class="filter-container__title">{{ __('list.sort_by') }}</h3>
                 <div class="select-wrapper">
                     <select name="sort" id="sort" class="select" onchange="this.form.submit()">
-                        <option value="" {{ request('sort') == null ? 'selected' : '' }}>Sort by</option>
-                        <option value="price-asc" {{ request('sort') == 'price-asc' ? 'selected' : '' }}>Price: Low to High</option>
-                        <option value="price-desc" {{ request('sort') == 'price-desc' ? 'selected' : '' }}>Price: High to Low</option>
-                        <option value="name-asc" {{ request('sort') == 'name-asc' ? 'selected' : '' }}>Name: A to Z</option>
-                        <option value="name-desc" {{ request('sort') == 'name-desc' ? 'selected' : '' }}>Name: Z to A</option>
+                        <option value="" {{ request('sort') == null ? 'selected' : '' }}>{{ __('list.sort_by') }}</option>
+                        <option value="price-asc" {{ request('sort') == 'price-asc' ? 'selected' : '' }}>{{ __('list.price_low_to_high') }}</option>
+                        <option value="price-desc" {{ request('sort') == 'price-desc' ? 'selected' : '' }}>{{ __('list.price_high_to_low') }}</option>
+                        <option value="name-asc" {{ request('sort') == 'name-asc' ? 'selected' : '' }}>{{ __('list.name_a_to_z') }}</option>
+                        <option value="name-desc" {{ request('sort') == 'name-desc' ? 'selected' : '' }}>{{ __('list.name_z_to_a') }}</option>
                     </select>
                     <svg class="select-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m6 9 6 6 6-6"/>
@@ -67,7 +67,7 @@
         @endforeach
 
         @if ($products->count() == 0)
-            <p class="products__empty">No products found</p>
+            <p class="products__empty">{{ __('list.no_products_found') }}</p>
         @endif
     </section>
 

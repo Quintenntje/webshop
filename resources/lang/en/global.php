@@ -10,4 +10,5 @@ return [
     'new' => 'New',
     'shoes' => 'Shoes',
     'shop_now' => 'Shop Now',
+    'view_product' => 'View Product',
 ];
