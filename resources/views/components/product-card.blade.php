@@ -21,5 +21,5 @@
             @endif
         </div>
     </div>
-    <x-link href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}" color="full" size=""><span class="sr-only">{{ __('global.view_product') }}</span></x-link>
+    <x-link href="/{{ app()->getLocale() }}/shoes/{{ $product->gender->slug }}/{{ $product->id }}" color="full" size=""><span class="sr-only">{{ __('global.view_product') }}</span></x-link>
 </article>

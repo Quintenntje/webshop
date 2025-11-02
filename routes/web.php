@@ -74,6 +74,7 @@ $routes = function () {
         Route::post('/shipping', [CheckoutController::class, 'shippingStore'])->name('checkout.shipping.store');
         Route::get('/payment', [CheckoutController::class, 'paymentShow'])->name('checkout.payment.show');
     });
+    
     // wishlist
     Route::get('/wishlist', [WishlistController::class, 'show'])->middleware('auth');
     Route::post('/wishlist/add', [WishlistController::class, 'add'])->middleware('auth')->name('wishlist.add');
