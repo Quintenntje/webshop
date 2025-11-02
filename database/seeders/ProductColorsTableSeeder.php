@@ -12,13 +12,45 @@ class ProductColorsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('product_colors')->insert([
-            ['name' => 'Black'],
-            ['name' => 'White'],
-            ['name' => 'Red'],
-            ['name' => 'Blue'],
-            ['name' => 'Green'],
-        ]);
+        $colors = [
+            [
+                'name' => json_encode([
+                    'en' => 'Black',
+                    'nl' => 'Zwart',
+                    'fr' => 'Noir',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'White',
+                    'nl' => 'Wit',
+                    'fr' => 'Blanc',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Red',
+                    'nl' => 'Rood',
+                    'fr' => 'Rouge',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Blue',
+                    'nl' => 'Blauw',
+                    'fr' => 'Bleu',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Green',
+                    'nl' => 'Groen',
+                    'fr' => 'Vert',
+                ]),
+            ],
+        ];
+
+        DB::table('product_colors')->insert($colors);
     }
 }
 

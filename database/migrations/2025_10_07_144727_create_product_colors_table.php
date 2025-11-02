@@ -15,7 +15,7 @@ return new class extends Migration
 
         Schema::create('product_colors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->json('name');
         });
 
         Schema::enableForeignKeyConstraints();

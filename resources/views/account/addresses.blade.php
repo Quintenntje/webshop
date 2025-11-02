@@ -3,22 +3,22 @@
         <div class="account">
             <div class="account__header">
                 <div class="account__user-info">
-                    <h1 class="account__title">My Account</h1>
+                    <h1 class="account__title">{{ __('account.my_account') }}</h1>
                     <p class="account__subtitle">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
                     <p class="account__email">{{ Auth::user()->email }}</p>
                 </div>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <x-button type="submit" color="primary" size="md">Logout</x-button>
+                    <x-button type="submit" color="primary" size="md">{{ __('account.logout') }}</x-button>
                 </form>
             </div>
 
             <div class="account__tabs">
                 <a href="{{ route('account') }}" class="account__tab">
-                    Orders
+                    {{ __('account.orders') }}
                 </a>
                 <a href="{{ route('account.addresses') }}" class="account__tab account__tab--active">
-                    Addresses
+                    {{ __('account.addresses') }}
                 </a>
             </div>
 
@@ -49,9 +49,9 @@
                                 <circle cx="12" cy="10" r="3"></circle>
                             </svg>
                         </div>
-                        <h2 class="empty-state__title">No addresses saved yet.</h2>
-                        <p class="empty-state__description">Add a shipping address when you place your first order.</p>
-                        <x-link href="/" color="primary" size="md">Continue shopping</x-link>
+                        <h2 class="empty-state__title">{{ __('account.no_addresses_title') }}</h2>
+                        <p class="empty-state__description">{{ __('account.no_addresses_description') }}</p>
+                        <x-link href="/" color="primary" size="md">{{ __('account.continue_shopping') }}</x-link>
                     </div>
                 @endif
             </div>
