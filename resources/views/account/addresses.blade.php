@@ -14,10 +14,10 @@
             </div>
 
             <div class="account__tabs">
-                <a href="{{ route('account') }}" class="account__tab">
+                <a href="/{{ app()->getLocale() }}/account" class="account__tab">
                     {{ __('account.orders') }}
                 </a>
-                <a href="{{ route('account.addresses') }}" class="account__tab account__tab--active">
+                <a href="/{{ app()->getLocale() }}/account/addresses" class="account__tab account__tab--active">
                     {{ __('account.addresses') }}
                 </a>
             </div>
