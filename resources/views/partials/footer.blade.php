@@ -3,7 +3,7 @@
         <div class="footer__content">
             <div class="footer__column">
                 <h3 class="footer__column__title footer__column__title--company">CoolKicks</h3>
-                <p class="footer__column__description">CoolKicks is a premium sneaker store that offers a wide range of high-quality sneakers for men, women, and kids.</p>
+                <p class="footer__column__description">{{ __('footer.company_description') }}</p>
             </div>
             <div class="footer__column">
                 <h3 class="footer__column__title">{{ __('global.shoes') }}</h3>
@@ -23,26 +23,26 @@
                 </ul>
             </div>
             <div class="footer__column">
-                <h3 class="footer__column__title">Customer support</h3>
+                <h3 class="footer__column__title">{{ __('footer.customer_support') }}</h3>
                 <ul class="footer__column__list">
                     <li class="footer__column__item">
-                        <a href="/" class="footer__column__link">Privacy Policy</a>
+                        <a href="/" class="footer__column__link">{{ __('footer.privacy_policy') }}</a>
                     </li>
                     <li class="footer__column__item">
-                        <a href="/" class="footer__column__link">Contact</a>
+                        <a href="/" class="footer__column__link">{{ __('footer.contact') }}</a>
                     </li>
                     <li class="footer__column__item">
-                        <a href="/" class="footer__column__link">Terms of Service</a>
+                        <a href="/" class="footer__column__link">{{ __('footer.terms_of_service') }}</a>
                     </li>
                 </ul>
             </div>
             <div class="footer__column">
-                <h3 class="footer__column__title footer__column__title--join-the-club">Join the club</h3>
-                <p class="footer__column__description">Get product updates and exclusive offers.</p>
+                <h3 class="footer__column__title footer__column__title--join-the-club">{{ __('footer.join_the_club') }}</h3>
+                <p class="footer__column__description">{{ __('footer.newsletter_description') }}</p>
                 <form action="{{ route('newsletter.store') }}" method="POST" class="footer__column__form">
                     @csrf
-                    <input type="email" name="email" required placeholder="Your email" class="footer__column__input">
-                    <x-button type="submit" color="secondary" size="sm" class="footer__column__button margin-top-sm">Subscribe</x-button>
+                    <input type="email" name="email" required placeholder="{{ __('footer.email_placeholder') }}" class="footer__column__input">
+                    <x-button type="submit" color="secondary" size="sm" class="footer__column__button margin-top-sm">{{ __('footer.subscribe') }}</x-button>
                 </form>
             </div>
         </div>
