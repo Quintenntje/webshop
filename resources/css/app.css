@@ -29,6 +29,7 @@
 @import "./account.css";
 @import "./filter.css";
 @import "./language-switcher.css";
+@import "./error.css";
 /* tailwind import  */
 @import "tailwindcss";
 

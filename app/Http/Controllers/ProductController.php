@@ -39,7 +39,7 @@ class ProductController extends Controller
         $gender = Gender::where('slug', $gender)->first();
 
         if (!$gender) {
-            return redirect("/");
+            return redirect("/not_found");
         }
 
         $brands = Brand::all();
@@ -70,7 +70,7 @@ class ProductController extends Controller
         $genders = Gender::all();
 
         if (!$brand) {
-            return redirect("/");
+            return redirect("/not_found");
         }
         $genderSlug = $request->query('gender');
         $gender = $genderSlug ? Gender::where('slug', $genderSlug)->first() : null;
@@ -94,7 +94,7 @@ class ProductController extends Controller
             ->first();
 
         if (!$product || !$gender) {
-            return redirect("/");
+            return redirect("/not_found");
         }
 
         $color_id = $request->query('color_id') ?? $product->variants->first()->color_id ?? 1;
