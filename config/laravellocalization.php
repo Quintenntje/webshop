@@ -46,4 +46,9 @@ return [
      *  The separator of the locale in the URL
      */
     'urlSeparator' => '/',
+
+    /*
+     *  Set the locale of the application.
+     */
+    'locale' => 'en',
 ];
