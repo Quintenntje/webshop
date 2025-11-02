@@ -1,9 +1,9 @@
 <x-layout>
     <section class="container search__container">
-        <h1 class="search__title center-content">Search for your favorite shoes</h1>
+        <h1 class="search__title center-content">{{ __('search.search_title') }}</h1>
         <form class="search__form" action="{{ route('search') }}" method="GET">
-            <x-input type="text" name="search" placeholder="Search for a product" />
-            <x-button type="submit" color="primary" size="md">Search</x-button>
+            <x-input type="text" name="search" placeholder="{{ __('search.search_placeholder') }}" />
+            <x-button type="submit" color="primary" size="md">{{ __('search.search') }}</x-button>
         </form>
 
         @if ($products->count() > 0)
@@ -14,7 +14,7 @@
             </section>
                 @else
                 <section class="search__no-results">    
-                    <p class="search__no-results center-content">No results found</p>
+                    <p class="search__no-results center-content">{{ __('search.no_results_found') }}</p>
                 </section>
                 @endif
     </section>

@@ -7,7 +7,7 @@
 <ul class="cart-items">
     @if ($products->count() > 0)
     @else
-    <p class="cart-items__empty">No products in cart</p>
+    <p class="cart-items__empty">{{ __('cart.no_products_in_cart') }}</p>
     @endif
     @foreach ($products as $product)
     <li class="cart-item">
@@ -24,13 +24,13 @@
             <span class="cart-item__price--regular">€{{ number_format($product->product->price, 2) * $cart[$product->id] }}</span>
         @endif
         </div>
-            <p class="cart-item__color">Color: {{ $product->color->name }}</p>
-            <p class="cart-item__size">Size: {{ $product->size->name }}</p>
-                <p>quantity: {{ $cart[$product->id] }}</p>
+            <p class="cart-item__color">{{ __('cart.color') }}: {{ $product->color->name }}</p>
+            <p class="cart-item__size">{{ __('cart.size') }}: {{ $product->size->name }}</p>
+                <p>{{ __('cart.quantity') }}: {{ $cart[$product->id] }}</p>
         </div>
     </li> 
     @endforeach
 </ul>
-total: €{{ number_format($total, 2) }}
+{{ __('cart.total') }}: €{{ number_format($total, 2) }}
 
 </div>

@@ -7,7 +7,7 @@
          </h1>
  
          <p class="product-detail__gender">
-           {{ $product->gender->name }} shoes
+           {{ $product->gender->name }} {{ __('product.shoes') }}
          </p>
  
          <div class="product-detail__price">
@@ -46,7 +46,7 @@
         </h1>
 
         <p class="product-detail__gender">
-          {{ $product->gender->name }} shoes
+          {{ $product->gender->name }} {{ __('product.shoes') }}
           {{ $product->brand->name }}
         </p>
 
@@ -61,7 +61,7 @@
         </div>
 
        <div class="product-colors">
-        <h2 class="product-colors__title">Colors</h2>
+        <h2 class="product-colors__title">{{ __('product.colors') }}</h2>
         <div class="product-colors__list">
           @foreach ($allAvailableColors as $color)
             <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color->id }}" class=" product-colors__item product-colors__item--{{ $color->name }} {{ $color->id == $color_id ? 'product-colors__item--active' : '' }}   ">{{ $color->name }}</a>
@@ -70,12 +70,12 @@
        </div>
 
        <div class="product-sizes">
-        <h2 class="product-sizes__title">Sizes</h2>
+        <h2 class="product-sizes__title">{{ __('product.sizes') }}</h2>
         <div class="product-sizes__list">
           @foreach ($allAvailableSizes as $size)
             <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color_id }}&size_id={{ $size->id }}" 
                class="product-sizes__item {{ $size->isActive ? 'product-sizes__item--active' : '' }} {{ !$size->isInStock ? 'product-sizes__item--out-of-stock' : '' }}"
-               @if(!$size->isInStock) title="Out of stock" @endif>
+               @if(!$size->isInStock) title="{{ __('product.out_of_stock') }}" @endif>
               {{ $size->name }}
             </a>
           @endforeach
@@ -96,16 +96,16 @@
             @csrf
             <input type="hidden" name="product_variant_id" value="{{ $productVariant->id ?? 0 }}">
             <input type="hidden" name="quantity" value="1">
-            <x-button type="submit" color="primary" size="md">Add to cart</x-button>
+            <x-button type="submit" color="primary" size="md">{{ __('product.add_to_cart') }}</x-button>
         </form>
         <form action="{{ route('wishlist.add') }}" method="POST">
             @csrf
             <input type="hidden" name="product_variant_id" value="{{ $productVariant->id ?? 0 }}">
-            <x-button type="submit" name="add-to-wishlist" value="add-to-wishlist" color="secondary" size="md">Add to wishlist</x-button>
+            <x-button type="submit" name="add-to-wishlist" value="add-to-wishlist" color="secondary" size="md">{{ __('product.add_to_wishlist') }}</x-button>
         </form>
        </div>
        <div class="product-details">
-        <h2 class="product-details__title">Details</h2>
+        <h2 class="product-details__title">{{ __('product.details') }}</h2>
         <div class="product-details__list">
           <p>{{ $product->description }}</p>
         </div>

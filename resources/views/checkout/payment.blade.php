@@ -1,58 +1,58 @@
 <x-layout>
     <section class="container">
-      <h1 class="center-content page-title">Checkout</h1>
+      <h1 class="center-content page-title">{{ __('checkout.checkout') }}</h1>
   
       <div class="checkout-container">
         <div class="checkout-container__left">
           <div class="checkout-steps">
             <div class="checkout-steps__step">
-              <h2 class="checkout-steps__step-title">Shipping Information</h2>
+              <h2 class="checkout-steps__step-title">{{ __('checkout.shipping_information') }}</h2>
   
               <div class="checkout-steps__step-row">
                 <p>
-                  <strong>Name:</strong>
+                  <strong>{{ __('checkout.name') }}:</strong>
                   {{ $shippingInfo['first_name'] }} {{ $shippingInfo['last_name'] }}
                 </p>
               </div>
   
               <div class="checkout-steps__step-row">
-                <p><strong>Email:</strong> {{ $shippingInfo['email'] }}</p>
-                <p><strong>Phone:</strong> {{ $shippingInfo['phone'] }}</p>
+                <p><strong>{{ __('checkout.email') }}:</strong> {{ $shippingInfo['email'] }}</p>
+                <p><strong>{{ __('checkout.phone') }}:</strong> {{ $shippingInfo['phone'] }}</p>
               </div>
   
               <div class="checkout-steps__step-row">
-                <p><strong>Address:</strong> {{ $shippingInfo['address'] }}</p>
+                <p><strong>{{ __('checkout.address') }}:</strong> {{ $shippingInfo['address'] }}</p>
               </div>
   
               <div class="checkout-steps__step-row">
-                <p><strong>City:</strong> {{ $shippingInfo['city'] }}</p>
-                <p><strong>Postal Code:</strong> {{ $shippingInfo['postal_code'] }}</p>
-                <p><strong>Country:</strong> {{ $shippingInfo['country'] }}</p>
+                <p><strong>{{ __('checkout.city') }}:</strong> {{ $shippingInfo['city'] }}</p>
+                <p><strong>{{ __('checkout.postal_code') }}:</strong> {{ $shippingInfo['postal_code'] }}</p>
+                <p><strong>{{ __('checkout.country') }}:</strong> {{ $shippingInfo['country'] }}</p>
               </div>
   
               <x-link href="{{ route('checkout.shipping') }}" color="primary" size="sm">
-                Edit shipping information
+                {{ __('checkout.edit_shipping_information') }}
               </x-link>
             </div>
   
             <div class="checkout-steps__step checkout-steps__step--active">
               <h2 class="checkout-steps__step-title checkout-steps__step-title--active">
-                Payment Method
+                {{ __('checkout.payment_method') }}
               </h2>
   
               <div>
-                <h3>Select your payment method</h3>
+                <h3>{{ __('checkout.select_payment_method') }}</h3>
                 <div class="form__group radio-input-group">
-                   <x-radio-input name="payment_method" id="credit_card" value="credit_card" label="Credit Card" />
+                   <x-radio-input name="payment_method" id="credit_card" value="credit_card" label="{{ __('checkout.credit_card') }}" />
                 </div>
                 <div class="form__group radio-input-group">
-                    <x-radio-input name="payment_method" id="debit_card" value="debit_card" label="Debit Card" />
+                    <x-radio-input name="payment_method" id="debit_card" value="debit_card" label="{{ __('checkout.debit_card') }}" />
                 </div>
                 <div class="form__group radio-input-group">
-                    <x-radio-input name="payment_method" id="paypal" value="paypal" label="PayPal" />
+                    <x-radio-input name="payment_method" id="paypal" value="paypal" label="{{ __('checkout.paypal') }}" />
                 </div>
                 <div class="form__group radio-input-group">
-                    <x-radio-input name="payment_method" id="bank_transfer" value="bank_transfer" label="Bank Transfer" />
+                    <x-radio-input name="payment_method" id="bank_transfer" value="bank_transfer" label="{{ __('checkout.bank_transfer') }}" />
                 </div>
               </div>
             </div>

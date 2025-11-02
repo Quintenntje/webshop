@@ -1,5 +1,5 @@
 @props([
-    'href' => '#',
+    'href' => '/{{ app()->getLocale() }}',
     'color' => 'primary',
     'size' => 'md',
 ])
@@ -15,8 +15,11 @@ $classes = match($color) {
     'transparent' => 'link link--transparent link--'.$size,
     default => 'link link--primary link--'.$size,
 };
-@endphp
 
+@endphp
+@php
+    $href = '/'.app()->getLocale().$href;
+@endphp
 <a href="{{ $href }}" {{ $attributes->merge(['class' => "$classes"]) }}>
     {{ $slot }}
 </a>
