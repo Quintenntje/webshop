@@ -16,5 +16,18 @@ return [
     'confirm_password' => 'Bevestig wachtwoord',
     'create_account_button' => 'Account aanmaken',
     'already_have_account' => 'Heb je al een account?',
+
+    // Forgot password
+    'forgot_password_title' => 'Wachtwoord vergeten',
+    'forgot_password_subtitle' => 'Voer je e-mailadres in om resetinstructies te ontvangen.',
+    'send_reset_link' => 'Verstuur resetlink',
+    'remembered_password' => 'Wachtwoord onthouden?',
+    'back_to_login' => 'Terug naar inloggen',
+
+    // Reset password
+    'reset_password_title' => 'Wachtwoord resetten',
+    'reset_password_subtitle' => 'Kies een nieuw wachtwoord voor je account.',
+    'new_password' => 'Nieuw wachtwoord',
+    'reset_password_button' => 'Wachtwoord resetten',
 ];
 

@@ -11,7 +11,7 @@ return [
     'invalid_discount_code' => 'Ongeldige kortingscode!',
     'discount_code_applied' => 'Kortingscode toegepast!',
     'select_color_and_size' => 'Selecteer een kleur en maat',
-    'enter_discount_code' => 'Geef een kortingscode op',
+    'enter_discount_code' => 'Geef een kortingscodew op',
 
     // Wishlist messages
     'product_added_to_wishlist' => 'Product toegevoegd aan verlanglijst!',
@@ -20,6 +20,8 @@ return [
     'invalid_reset_token' => 'Ongeldige of verlopen reset-token, vraag een nieuwe resetlink aan',
     'reset_link_sent' => 'Resetlink verzonden naar je e-mail',
     'password_reset_successful' => 'Wachtwoord succesvol gereset',
+    'invalid_email' => 'Het ingevoerde email bestaat niet.',
+    'enter_email' => 'Voer je e-mailadres in',
 
     // Newsletter messages
     'newsletter_subscribed' => 'Nieuwsbriefabonnement succesvol aangemaakt',

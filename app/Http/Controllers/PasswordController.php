@@ -19,7 +19,7 @@ class PasswordController extends Controller
 
     public function viewResetPassword(Request $request)
     {
-     
+
         $token = $request->query('token');
         $passwordReset = PasswordReset::where('code', $token)->first();
 
@@ -37,6 +37,10 @@ class PasswordController extends Controller
     {
         $request->validate([
             'email' => 'required|email|exists:customers,email',
+        ], [
+            'email.required' => 'messages.enter_email',
+            'email.email' => 'messages.invalid_email',
+            'email.exists' => 'messages.invalid_email',
         ]);
 
         $customer = Customer::where('email', $request->email)->first();
@@ -61,7 +65,7 @@ class PasswordController extends Controller
         ]);
 
         $passwordReset = PasswordReset::where('code', $request->token)->first();
-    
+
         $customer = Customer::where('id', $passwordReset->customer_id)->first();
 
         if (!$customer) {
@@ -70,7 +74,7 @@ class PasswordController extends Controller
 
         $customer->password = Hash::make($request->password);
         $customer->save();
-    
+
         $passwordReset->delete();
         return redirect()->route('login')->with('success', 'messages.password_reset_successful');
     }

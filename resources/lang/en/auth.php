@@ -16,5 +16,18 @@ return [
     'confirm_password' => 'Confirm password',
     'create_account_button' => 'Create account',
     'already_have_account' => 'Already have an account?',
+
+    // Forgot password
+    'forgot_password_title' => 'Forgot password',
+    'forgot_password_subtitle' => 'Enter your email to receive reset instructions.',
+    'send_reset_link' => 'Send reset link',
+    'remembered_password' => 'Remembered your password?',
+    'back_to_login' => 'Back to login',
+
+    // Reset password
+    'reset_password_title' => 'Reset password',
+    'reset_password_subtitle' => 'Choose a new password for your account.',
+    'new_password' => 'New password',
+    'reset_password_button' => 'Reset password',
 ];
 

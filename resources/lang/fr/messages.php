@@ -20,6 +20,8 @@ return [
     'invalid_reset_token' => 'Jeton de réinitialisation invalide ou expiré, veuillez demander un nouveau lien de réinitialisation',
     'reset_link_sent' => 'Lien de réinitialisation envoyé à votre e-mail',
     'password_reset_successful' => 'Mot de passe réinitialisé avec succès',
+    'invalid_email' => 'L\'adresse e-mail que vous avez saisie n\'existe pas.',
+    'enter_email' => 'Veuillez entrer votre adresse e-mail',
 
     // Newsletter messages
     'newsletter_subscribed' => 'Abonnement à la newsletter créé avec succès',

@@ -16,10 +16,13 @@ return [
     // Wishlist messages
     'product_added_to_wishlist' => 'Product added to wishlist!',
 
+    
     // Password reset messages
     'invalid_reset_token' => 'Invalid or expired reset token please request a new reset link',
     'reset_link_sent' => 'Reset link sent to your email',
     'password_reset_successful' => 'Password reset successfully',
+    'invalid_email' => 'The selected email is invalid.',
+    'enter_email' => 'Please enter your email address',
 
     // Newsletter messages
     'newsletter_subscribed' => 'Newsletter subscription created successfully',
