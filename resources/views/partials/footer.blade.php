@@ -6,19 +6,19 @@
                 <p class="footer__column__description">CoolKicks is a premium sneaker store that offers a wide range of high-quality sneakers for men, women, and kids.</p>
             </div>
             <div class="footer__column">
-                <h3 class="footer__column__title">Shoes</h3>
+                <h3 class="footer__column__title">{{ __('global.shoes') }}</h3>
                 <ul class="footer__column__list">
                     <li class="footer__column__item">
-                        <a href="/shop" class="footer__column__link">All</a>
+                        <a href="/{{ app()->getLocale() }}/shop" class="footer__column__link">{{ __('global.all') }}</a>
                     </li>
                     <li class="footer__column__item">
-                        <a href="/shoes/men" class="footer__column__link">Men</a>
+                        <a href="/{{ app()->getLocale() }}/shoes/men" class="footer__column__link">{{ __('global.men') }}</a>
                     </li>
                     <li class="footer__column__item">
-                        <a href="/shoes/women" class="footer__column__link">Women</a>
+                        <a href="/{{ app()->getLocale() }}/shoes/women" class="footer__column__link">{{ __('global.women') }}</a>
                     </li>
                     <li class="footer__column__item">
-                        <a href="/shoes/kids" class="footer__column__link">Kids</a>
+                        <a href="/{{ app()->getLocale() }}/shoes/kids" class="footer__column__link">{{ __('global.kids') }}</a>
                     </li>
                 </ul>
             </div>

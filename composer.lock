@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68d1026002a682df71d38234e1d1d1ee",
+    "content-hash": "611f9cfa6d9ee505fb989edea4aa6ac1",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2106,6 +2106,64 @@
                 "source": "https://github.com/kirschbaum-development/eloquent-power-joins/tree/4.2.8"
             },
             "time": "2025-08-14T18:43:05+00:00"
+        },
+        {
+            "name": "lara-zeus/spatie-translatable",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lara-zeus/spatie-translatable.git",
+                "reference": "beef575188bf899a83c0ab8eab26be890611ce97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lara-zeus/spatie-translatable/zipball/beef575188bf899a83c0ab8eab26be890611ce97",
+                "reference": "beef575188bf899a83c0ab8eab26be890611ce97",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "filament/filament": "^4.0",
+                "php": "^8.1",
+                "spatie/laravel-translatable": "^6.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.4",
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^10.2",
+                "phpstan/extension-installer": "^1.4",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaraZeus\\SpatieTranslatable\\SpatieTranslatableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaraZeus\\SpatieTranslatable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Filament support for `spatie/laravel-translatable`.",
+            "homepage": "https://github.com/lara-zeus/spatie-translatable",
+            "support": {
+                "issues": "https://github.com/lara-zeus/spatie-translatable/issues",
+                "source": "https://github.com/lara-zeus/spatie-translatable"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/atmonshi",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-10-17T09:30:19+00:00"
         },
         {
             "name": "laravel/framework",

@@ -17,6 +17,7 @@
         </a>
     </div>
     <div class="header__items__right">
+      <x-language-switcher />
       <a href="/wishlist" class="link link--nav header__items__left__icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon lucide-heart"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>
       </a>
@@ -35,24 +36,25 @@
     <nav class="header__items__center">
       <ul class="nav__items">
         <li class="nav__item">
-          <a href="/shop" class="link link--nav nav__item__link {{ request()->is('shop') ? 'active' : '' }} ">Shop</a>
+          <a href="/{{ app()->getLocale() }}/shop" class="link link--nav nav__item__link {{ request()->is('shop') ? 'active' : '' }} ">{{ __('global.shop') }}</a>
         </li>
         <li class="nav__item">
-          <a href="/shoes/men" class="link link--nav nav__item__link {{ request()->is('shoes/men') ? 'active' : '' }}">Men</a>
+          <a href="/{{ app()->getLocale() }}/shoes/men" class="link link--nav nav__item__link {{ request()->is('shoes/men') ? 'active' : '' }}">{{ __('global.men') }}</a>
         </li>
         <li class="nav__item">
-          <a href="/shoes/women" class="link link--nav nav__item__link {{ request()->is('shoes/women') ? 'active' : '' }}">Women</a>
+          <a href="/{{ app()->getLocale() }}/shoes/women" class="link link--nav nav__item__link {{ request()->is('shoes/women') ? 'active' : '' }}">{{ __('global.women') }}</a>
         </li>
        
         <li class="nav__item">
-          <a href="/shoes/kids" class="link link--nav nav__item__link {{ request()->is('shoes/kids') ? 'active' : '' }}">Kids</a>
+          <a href="/{{ app()->getLocale() }}/shoes/kids" class="link link--nav nav__item__link {{ request()->is('shoes/kids') ? 'active' : '' }}">{{ __('global.kids') }}</a>
         </li>
         <li class="nav__item">
-          <a href="/sale" class="link link--nav nav__item__link {{ request()->is('sale') ? 'active' : '' }}">Sale</a>
+          <a href="/{{ app()->getLocale() }}/sale" class="link link--nav nav__item__link {{ request()->is('sale') ? 'active' : '' }}">{{ __('global.sale') }}</a>
         </li>
       </ul>
     </nav>
   <div class="header__items__right">
+    <x-language-switcher />
     <a href="/search" class="link link--nav header__items__left__icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
     </a>
@@ -77,10 +79,10 @@
     </button>
   </div>
   <ul class="mobile-menu__links">
-    <li><a class="link link--nav {{ request()->is('shop') ? 'active' : '' }}" href="/shop">Shop</a></li>
-    <li><a class="link link--nav {{ request()->is('shoes/men') ? 'active' : '' }}" href="/shoes/men">Men</a></li>
-    <li><a class="link link--nav {{ request()->is('shoes/women') ? 'active' : '' }}" href="/shoes/women">Women</a></li>
-    <li><a class="link link--nav {{ request()->is('shoes/kids') ? 'active' : '' }}" href="/shoes/kids">Kids</a></li>
-    <li><a class="link link--nav {{ request()->is('sale') ? 'active' : '' }}" href="/sale">Sale</a></li>
+    <li><a class="link link--nav {{ request()->is('shop') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shop">{{ __(key: 'global.shop') }}</a></li>
+    <li><a class="link link--nav {{ request()->is('shoes/men') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shoes/men">{{ __(key: 'global.men') }}</a></li>
+    <li><a class="link link--nav {{ request()->is('shoes/women') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shoes/women">{{ __('global.women') }}</a></li>
+    <li><a class="link link--nav {{ request()->is('shoes/kids') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shoes/kids">{{ __('global.kids') }}</a></li>
+    <li><a class="link link--nav {{ request()->is('sale') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/sale">{{ __('global.sale') }}</a></li>
   </ul>
 </nav>
