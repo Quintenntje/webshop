@@ -44,10 +44,10 @@
                     @csrf
                     <x-input color="transparent" size="sm" type="text" name="discount_code" placeholder="{{ __('cart.enter_discount_code') }}" />
                     @error('discount_code')
-                    <p class="auth__error">{{ $message }}</p>
+                    <p class="auth__error">{{ str_starts_with($message, 'messages.') ? __($message) : $message }}</p>
                     @enderror
                     @session('error')
-                    <p class="auth__error">{{ session('error') }}</p>
+                    <p class="auth__error">{{ str_starts_with(session('error'), 'messages.') ? __(session('error')) : session('error') }}</p>
                     @endSession
                     <x-button type="submit" name="apply-discount" value="apply-discount" color="primary" size="sm">{{ __('cart.apply_discount') }}</x-button>
 

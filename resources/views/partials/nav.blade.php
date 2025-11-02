@@ -36,20 +36,20 @@
     <nav class="header__items__center">
       <ul class="nav__items">
         <li class="nav__item">
-          <a href="/{{ app()->getLocale() }}/shop" class="link link--nav nav__item__link {{ request()->is('shop') ? 'active' : '' }} ">{{ __('global.shop') }}</a>
+          <a href="/{{ app()->getLocale() }}/shop" class="link link--nav nav__item__link {{ request()->is('shop') || request()->is('*/shop') ? 'active' : '' }}">{{ __('global.shop') }}</a>
         </li>
         <li class="nav__item">
-          <a href="/{{ app()->getLocale() }}/shoes/men" class="link link--nav nav__item__link {{ request()->is('shoes/men') ? 'active' : '' }}">{{ __('global.men') }}</a>
+          <a href="/{{ app()->getLocale() }}/shoes/men" class="link link--nav nav__item__link {{ request()->is('shoes/men') || request()->is('*/shoes/men') ? 'active' : '' }}">{{ __('global.men') }}</a>
         </li>
         <li class="nav__item">
-          <a href="/{{ app()->getLocale() }}/shoes/women" class="link link--nav nav__item__link {{ request()->is('shoes/women') ? 'active' : '' }}">{{ __('global.women') }}</a>
+          <a href="/{{ app()->getLocale() }}/shoes/women" class="link link--nav nav__item__link {{ request()->is('shoes/women') || request()->is('*/shoes/women') ? 'active' : '' }}">{{ __('global.women') }}</a>
         </li>
        
         <li class="nav__item">
-          <a href="/{{ app()->getLocale() }}/shoes/kids" class="link link--nav nav__item__link {{ request()->is('shoes/kids') ? 'active' : '' }}">{{ __('global.kids') }}</a>
+          <a href="/{{ app()->getLocale() }}/shoes/kids" class="link link--nav nav__item__link {{ request()->is('shoes/kids') || request()->is('*/shoes/kids') ? 'active' : '' }}">{{ __('global.kids') }}</a>
         </li>
         <li class="nav__item">
-          <a href="/{{ app()->getLocale() }}/sale" class="link link--nav nav__item__link {{ request()->is('sale') ? 'active' : '' }}">{{ __('global.sale') }}</a>
+          <a href="/{{ app()->getLocale() }}/sale" class="link link--nav nav__item__link {{ request()->is('sale') || request()->is('*/sale') ? 'active' : '' }}">{{ __('global.sale') }}</a>
         </li>
       </ul>
     </nav>
@@ -79,10 +79,10 @@
     </button>
   </div>
   <ul class="mobile-menu__links">
-    <li><a class="link link--nav {{ request()->is('shop') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shop">{{ __(key: 'global.shop') }}</a></li>
-    <li><a class="link link--nav {{ request()->is('shoes/men') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shoes/men">{{ __(key: 'global.men') }}</a></li>
-    <li><a class="link link--nav {{ request()->is('shoes/women') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shoes/women">{{ __('global.women') }}</a></li>
-    <li><a class="link link--nav {{ request()->is('shoes/kids') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shoes/kids">{{ __('global.kids') }}</a></li>
-    <li><a class="link link--nav {{ request()->is('sale') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/sale">{{ __('global.sale') }}</a></li>
+    <li><a class="link link--nav {{ request()->is('shop') || request()->is('*/shop') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shop">{{ __('global.shop') }}</a></li>
+    <li><a class="link link--nav {{ request()->is('shoes/men') || request()->is('*/shoes/men') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shoes/men">{{ __('global.men') }}</a></li>
+    <li><a class="link link--nav {{ request()->is('shoes/women') || request()->is('*/shoes/women') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shoes/women">{{ __('global.women') }}</a></li>
+    <li><a class="link link--nav {{ request()->is('shoes/kids') || request()->is('*/shoes/kids') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/shoes/kids">{{ __('global.kids') }}</a></li>
+    <li><a class="link link--nav {{ request()->is('sale') || request()->is('*/sale') ? 'active' : '' }}" href="/{{ app()->getLocale() }}/sale">{{ __('global.sale') }}</a></li>
   </ul>
 </nav>

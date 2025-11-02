@@ -4,11 +4,11 @@
 		<p class="auth__subtitle center-content">Enter your email to receive reset instructions.</p>
 
         @if(session('success'))
-            <p class="auth__success">{{ session('success') }}</p>
+            <p class="auth__success">{{ str_starts_with(session('success'), 'messages.') ? __(session('success')) : session('success') }}</p>
        
         @else
 		@if(session('error'))
-		<p class="auth__error">{{ session('error') }}</p>
+		<p class="auth__error">{{ str_starts_with(session('error'), 'messages.') ? __(session('error')) : session('error') }}</p>
 	@endif
 		<form class="auth__form" action="{{ route('forgot-password.submit') }}" method="POST">
 			@csrf

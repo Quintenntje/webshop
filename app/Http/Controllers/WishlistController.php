@@ -23,8 +23,8 @@ class WishlistController extends Controller
         $request->validate([
             'product_variant_id' => 'required|exists:product_variants,id',
         ], [
-            'product_variant_id.required' => 'Please select a color and size',
-            'product_variant_id.exists' => 'Please select a color and size',
+            'product_variant_id.required' => 'messages.select_color_and_size',
+            'product_variant_id.exists' => 'messages.select_color_and_size',
         ]);
 
         $product_variant_id = $request->input('product_variant_id');
@@ -36,7 +36,7 @@ class WishlistController extends Controller
         } else {
             Wishlist::create(['customer_id' => $user->id, 'product_variant_id' => $product_variant_id]);
         }
-        return redirect()->back()->with('success', 'Product added to wishlist!');
+        return redirect()->back()->with('success', 'messages.product_added_to_wishlist');
     }
     public function remove(Request $request)
     {

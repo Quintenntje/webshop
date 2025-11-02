@@ -64,7 +64,7 @@
         <h2 class="product-colors__title">{{ __('product.colors') }}</h2>
         <div class="product-colors__list">
           @foreach ($allAvailableColors as $color)
-            <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color->id }}" class=" product-colors__item product-colors__item--{{ $color->name }} {{ $color->id == $color_id ? 'product-colors__item--active' : '' }}   ">{{ $color->name }}</a>
+            <a href="/{{ app()->getLocale() }}/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color->id }}" class=" product-colors__item product-colors__item--{{ $color->name }} {{ $color->id == $color_id ? 'product-colors__item--active' : '' }}   ">{{ $color->name }}</a>
           @endforeach
         </div>
        </div>
@@ -73,7 +73,7 @@
         <h2 class="product-sizes__title">{{ __('product.sizes') }}</h2>
         <div class="product-sizes__list">
           @foreach ($allAvailableSizes as $size)
-            <a href="/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color_id }}&size_id={{ $size->id }}" 
+            <a href="/{{ app()->getLocale() }}/shoes/{{ $product->gender->slug }}/{{ $product->id }}?color_id={{ $color_id }}&size_id={{ $size->id }}" 
                class="product-sizes__item {{ $size->isActive ? 'product-sizes__item--active' : '' }} {{ !$size->isInStock ? 'product-sizes__item--out-of-stock' : '' }}"
                @if(!$size->isInStock) title="{{ __('product.out_of_stock') }}" @endif>
               {{ $size->name }}
@@ -82,13 +82,13 @@
        </div>
 
        @error('product_variant_id')
-        <p class="auth__error">{{ $message }}</p>
+        <p class="auth__error">{{ str_starts_with($message, 'messages.') ? __($message) : $message }}</p>
        @enderror
        </div>
 
        @if(session('success'))
         <div class="product-add-to-cart">
-            <p class="auth__success">{{ session('success') }}</p>
+            <p class="auth__success">{{ str_starts_with(session('success'), 'messages.') ? __(session('success')) : session('success') }}</p>
         </div>
        @endif
        <div class="product-add-to-cart">

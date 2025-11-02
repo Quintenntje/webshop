@@ -24,11 +24,11 @@ class PasswordController extends Controller
         $passwordReset = PasswordReset::where('code', $token)->first();
 
         if (!$passwordReset) {
-            return redirect()->route('forgot-password')->with('error', 'Invalid or expired reset token please request a new reset link');
+            return redirect()->route('forgot-password')->with('error', 'messages.invalid_reset_token');
         }
 
         if ($passwordReset->expire_time < now()) {
-            return redirect()->route('forgot-password')->with('error', 'Invalid or expired reset token please request a new reset link');
+            return redirect()->route('forgot-password')->with('error', 'messages.invalid_reset_token');
         }
 
         return view('auth.reset-password', ['token' => $token]);
@@ -50,7 +50,7 @@ class PasswordController extends Controller
         Mail::to($customer->email)->send(new PasswordResetEmail($code));
 
 
-        return redirect()->route('forgot-password')->with('success', 'Reset link sent to your email');
+        return redirect()->route('forgot-password')->with('success', 'messages.reset_link_sent');
     }
 
     public function submitResetPassword(Request $request)
@@ -65,13 +65,13 @@ class PasswordController extends Controller
         $customer = Customer::where('id', $passwordReset->customer_id)->first();
 
         if (!$customer) {
-            return redirect()->route('forgot-password')->with('error', 'Invalid or expired reset token please request a new reset link');
+            return redirect()->route('forgot-password')->with('error', 'messages.invalid_reset_token');
         }
 
         $customer->password = Hash::make($request->password);
         $customer->save();
     
         $passwordReset->delete();
-        return redirect()->route('login')->with('success', 'Password reset successfully');
+        return redirect()->route('login')->with('success', 'messages.password_reset_successful');
     }
 }

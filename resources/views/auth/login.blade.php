@@ -17,7 +17,7 @@
 				<p class="auth__error">{{ $message }}</p>
 			@enderror
 			@error('error')
-				<p class="auth__error">{{ $message }}</p>
+				<p class="auth__error">{{ str_starts_with($message, 'messages.') ? __($message) : $message }}</p>
 			@enderror
 		
 			<x-button type="submit" color="primary" size="md">{{ __('auth.login_button') }}</x-button>

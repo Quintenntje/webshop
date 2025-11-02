@@ -37,7 +37,7 @@ class AuthController extends Controller
             'role_id' => 1,
         ]);
 
-        return redirect()->route('login')->with('success', 'Registration successful');
+        return redirect()->route('login')->with('success', 'messages.registration_successful');
     }
 
     public function login(Request $request)
@@ -53,7 +53,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'error' => 'Invalid credentials',
+            'error' => 'messages.invalid_credentials',
         ]);
     }
 

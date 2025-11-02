@@ -21,7 +21,7 @@ class CartController extends Controller
                 return redirect()
                     ->back()
                     ->cookie('discount_code', null, 60 * 60 * 24 * 30)
-                    ->with('error', 'Discount code expired or invalid!');
+                    ->with('error', 'messages.discount_code_expired');
             }
 
             if ($discountCode) {
@@ -42,7 +42,7 @@ class CartController extends Controller
 
             $productVariant->primaryImage = $primaryImage;
         }
-    
+
         return view('cart', compact('cart', 'products', 'total', 'discountCode', 'originalTotal'));
     }
 
@@ -52,8 +52,8 @@ class CartController extends Controller
         $request->validate([
             'product_variant_id' => 'required|exists:product_variants,id',
         ], [
-            'product_variant_id.required' => 'Please select a color and size',
-            'product_variant_id.exists' => 'Please select a color and size',
+            'product_variant_id.required' => 'messages.select_color_and_size',
+            'product_variant_id.exists' => 'messages.select_color_and_size',
         ]);
 
         $product_variant_id = $request->input('product_variant_id');
@@ -65,7 +65,7 @@ class CartController extends Controller
 
         return redirect()
             ->back()
-            ->with('success', 'Product added to cart!')
+            ->with('success', 'messages.product_added_to_cart')
             ->cookie('cart', json_encode($cart), 60 * 60 * 24 * 30);
     }
 
@@ -103,28 +103,29 @@ class CartController extends Controller
             ->back()
             ->cookie('cart', json_encode($cart), 60 * 60 * 24 * 30);
     }
-
-
     public function applyDiscount(Request $request)
     {
         $request->validate([
             'discount_code' => 'required|exists:discount_codes,code',
+        ], [
+            'discount_code.required' => 'messages.enter_discount_code',
+            'discount_code.exists' => 'messages.invalid_discount_code',
         ]);
 
         $discountCode = DiscountCode::where('code', $request->input('discount_code'))->first();
         if (!$discountCode->isValid()) {
             return redirect()
                 ->back()
-                ->with('error', 'Invalid discount code!');
+                ->with('error', 'messages.invalid_discount_code');
         }
-       
+
         $newPrice = $discountCode->calculateDiscountedPrice($this->getTotal($request));
 
         return redirect()
             ->back()
             ->cookie('total', $newPrice, 60 * 60 * 24 * 30)
             ->cookie('discount_code', $discountCode->code, 60 * 60 * 24 * 30)
-            ->with('success', 'Discount code applied!');
+            ->with('success', 'messages.discount_code_applied');
 
     }
 

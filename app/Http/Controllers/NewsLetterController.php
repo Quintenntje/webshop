@@ -16,14 +16,14 @@ class NewsLetterController extends Controller
         NewsLetter::create([
             'email' => $request->email,
         ]);
-        return redirect()->back()->with('success', 'Newsletter subscription created successfully');
+        return redirect()->back()->with('success', 'messages.newsletter_subscribed');
     }
 
 
     public function unsubscribe($email)
     {
         NewsLetter::where('email', $email)->delete();
-        return redirect()->back()->with('success', 'Newsletter unsubscribed successfully');
+        return redirect()->back()->with('success', 'messages.newsletter_unsubscribed');
     }
 
 }
