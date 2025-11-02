@@ -1,3 +1,7 @@
+@php
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+@endphp
+
 <x-layout>
     <section class="container cart__container">
         <h1 class="cart__title">{{ __('cart.shopping_cart') }}</h1>
@@ -81,9 +85,9 @@
                     <p class="cart-summary__total-price">€{{ number_format($total, 2) }}</p>
                 </div>
                 @if ($products->count() > 0)
-                <x-Link href="/{{ app()->getLocale() }}/checkout/shipping" color="primary" size="md">{{ __('cart.checkout') }}</x-Link>
+                <x-Link href="{{ LaravelLocalization::getLocalizedURL(null, '/checkout/shipping') }}" color="primary" size="md">{{ __('cart.checkout') }}</x-Link>
                 @else
-                <x-link href="/{{ app()->getLocale() }}/shop" color="primary" size="md">{{ __('cart.add_products_to_cart') }}</x-link>
+                <x-link href="{{ LaravelLocalization::getLocalizedURL(null, '/shop') }}" color="primary" size="md">{{ __('cart.add_products_to_cart') }}</x-link>
                 @endif
             </div>
             </div>

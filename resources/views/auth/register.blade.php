@@ -1,3 +1,7 @@
+@php
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+@endphp
+
 <x-layout>
 	<section class="container container--xs auth__container">
 		<h1 class="auth__title center-content">{{ __('auth.create_account') }}</h1>
@@ -33,7 +37,7 @@
 			<x-button type="submit" color="primary" size="md">{{ __('auth.create_account_button') }}</x-button>
 			<div class="auth__register">
 				<p class="auth__register__text">{{ __('auth.already_have_account') }}</p>
-				<x-link href="/{{ app()->getLocale() }}/login" color="transparent" size="md">{{ __('auth.login') }}</x-link>
+				<x-link href="{{ LaravelLocalization::getLocalizedURL(null, '/login') }}" color="transparent" size="md">{{ __('auth.login') }}</x-link>
 			</div>
 		</form>
 	</section>

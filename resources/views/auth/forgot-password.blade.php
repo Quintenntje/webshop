@@ -1,3 +1,7 @@
+@php
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+@endphp
+
 <x-layout>
 	<section class="container container--xs auth__container">
 		<h1 class="auth__title center-content">{{ __('auth.forgot_password_title') }}</h1>
@@ -19,7 +23,7 @@
 			<x-button type="submit" color="primary" size="md">{{ __('auth.send_reset_link') }}</x-button>
 			<div class="auth__register">
 				<p class="auth__register__text">{{ __('auth.remembered_password') }}</p>
-				<x-link href="/{{ app()->getLocale() }}/login" color="transparent" size="md">{{ __('auth.back_to_login') }}</x-link>
+				<x-link href="{{ LaravelLocalization::getLocalizedURL(null, '/login') }}" color="transparent" size="md">{{ __('auth.back_to_login') }}</x-link>
 			</div>
 		</form>
         @endif

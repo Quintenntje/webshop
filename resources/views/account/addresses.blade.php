@@ -1,3 +1,7 @@
+@php
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+@endphp
+
 <x-layout>
     <section class="container container--md">
         <div class="account">
@@ -14,10 +18,10 @@
             </div>
 
             <div class="account__tabs">
-                <a href="/{{ app()->getLocale() }}/account" class="account__tab">
+                <a href="{{ LaravelLocalization::getLocalizedURL(null, '/account') }}" class="account__tab">
                     {{ __('account.orders') }}
                 </a>
-                <a href="/{{ app()->getLocale() }}/account/addresses" class="account__tab account__tab--active">
+                <a href="{{ LaravelLocalization::getLocalizedURL(null, '/account/addresses') }}" class="account__tab account__tab--active">
                     {{ __('account.addresses') }}
                 </a>
             </div>

@@ -1,3 +1,7 @@
+@php
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+@endphp
+
 <footer class="footer">
     <div class="container footer__container">
         <div class="footer__content">
@@ -9,16 +13,16 @@
                 <h3 class="footer__column__title">{{ __('global.shoes') }}</h3>
                 <ul class="footer__column__list">
                     <li class="footer__column__item">
-                        <a href="/{{ app()->getLocale() }}/shop" class="footer__column__link">{{ __('global.all') }}</a>
+                        <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shop') }}" class="footer__column__link">{{ __('global.all') }}</a>
                     </li>
                     <li class="footer__column__item">
-                        <a href="/{{ app()->getLocale() }}/shoes/men" class="footer__column__link">{{ __('global.men') }}</a>
+                        <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/men') }}" class="footer__column__link">{{ __('global.men') }}</a>
                     </li>
                     <li class="footer__column__item">
-                        <a href="/{{ app()->getLocale() }}/shoes/women" class="footer__column__link">{{ __('global.women') }}</a>
+                        <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/women') }}" class="footer__column__link">{{ __('global.women') }}</a>
                     </li>
                     <li class="footer__column__item">
-                        <a href="/{{ app()->getLocale() }}/shoes/kids" class="footer__column__link">{{ __('global.kids') }}</a>
+                        <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/kids') }}" class="footer__column__link">{{ __('global.kids') }}</a>
                     </li>
                 </ul>
             </div>

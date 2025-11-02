@@ -2,6 +2,10 @@
     'product' => null,
 ])
 
+@php
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+@endphp
+
 <article class="product-card">
     <div class="product-card__image">
         <img src="{{ $product->primaryImage->filename }}" alt="{{ $product->name }}">
@@ -21,5 +25,5 @@
             @endif
         </div>
     </div>
-    <x-link href="/{{ app()->getLocale() }}/shoes/{{ $product->gender->slug }}/{{ $product->id }}" color="full" size=""><span class="sr-only">{{ __('global.view_product') }}</span></x-link>
+    <x-link href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $product->gender->slug . '/' . $product->id) }}" color="full" size=""><span class="sr-only">{{ __('global.view_product') }}</span></x-link>
 </article>

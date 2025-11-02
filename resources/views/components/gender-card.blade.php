@@ -1,6 +1,9 @@
 @props(['gender'])
+@php
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+@endphp
 
-<a href="/{{ app()->getLocale() }}/shoes/{{ $gender->slug }}" class="gender-card">
+<a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $gender->slug) }}" class="gender-card">
     <div class="gender-card__overlay"></div>
     <div class="gender-card__content">
         <h3 class="gender-card__title">{{ $gender->name }}</h3>

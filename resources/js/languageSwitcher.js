@@ -50,24 +50,9 @@ function initLanguageSwitcher() {
 
         $options.forEach(($option) => {
             $option.addEventListener("click", (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const locale = $option.dataset.locale;
-                const basePath = $dropdown.dataset.basePath;
-                const queryString = $dropdown.dataset.queryString;
-
-                if (locale) {
-                    let newPath;
-                    if (locale === "en") {
-                        newPath = basePath === "/" ? "/" : basePath;
-                    } else {
-                        const pathPart =
-                            basePath === "/" ? "" : basePath.replace(/^\//, "");
-                        newPath = `/${locale}${pathPart ? "/" + pathPart : ""}`;
-                    }
-
-                    window.location.href = newPath + queryString;
-                }
+                // Let the link handle navigation naturally
+                // The href is already set by LaravelLocalization
+                $dropdown.hidden = true;
             });
         });
     });

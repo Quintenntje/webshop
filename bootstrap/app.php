@@ -13,7 +13,15 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
-            \App\Http\Middleware\SetLocaleFromUrl::class,
+            \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+        ]);
+        
+        // Register middleware aliases for mcamara/laravel-localization
+        $middleware->alias([
+            'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+            'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+            'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
+            'localeCookieRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
