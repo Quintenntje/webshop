@@ -6,13 +6,17 @@
     'required' => false,
 ])
 
+@php
+    $isChecked = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
+@endphp
+
 <label class="radio-input">
     <input 
         type="radio" 
         name="{{ $name }}" 
         id="{{ $id }}" 
         value="{{ $value }}"
-        {{ $checked ? 'checked' : '' }}
+        {{ $isChecked ? 'checked' : '' }}
         {{ $required ? 'required' : '' }}
         {{ $attributes->merge(['class' => 'radio-input__input']) }}
     >

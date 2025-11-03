@@ -1,6 +1,7 @@
 @props([
     'type' => 'text',
     'name' => null,
+    'label' => null,
     'placeholder' => null,
     'required' => false,
     'color' => 'primary',
@@ -25,6 +26,10 @@ $classes = match($color) {
         </x-button>
     </div>
 
+    @elseif ($label)
+    <label class="input__label">{{ $label }}
+    <input type="{{ $type }}" name="{{ $name }}" placeholder="{{ $placeholder }}" {{ $required ? 'required' : '' }} {{ $attributes->merge(['class' => "$classes" ]) }}>
+</label>
     @else
     <input type="{{ $type }}" name="{{ $name }}" placeholder="{{ $placeholder }}" {{ $required ? 'required' : '' }} {{ $attributes->merge(['class' => "$classes" ]) }}>
     @endif

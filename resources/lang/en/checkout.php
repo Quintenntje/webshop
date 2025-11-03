@@ -20,5 +20,10 @@ return [
     'debit_card' => 'Debit Card',
     'paypal' => 'PayPal',
     'bank_transfer' => 'Bank Transfer',
+    'user_information' => 'User Information',
+    'address_information' => 'Address Information',
+    'select_address' => 'Select Address',
+    'use_existing_address' => 'Use Existing Address',
+    'new_address' => 'New Address',
 ];
 

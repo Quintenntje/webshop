@@ -20,5 +20,10 @@ return [
     'debit_card' => 'Debetkaart',
     'paypal' => 'PayPal',
     'bank_transfer' => 'Bankoverschrijving',
+    'user_information' => 'Gebruikersgegevens',
+    'address_information' => 'Adresgegevens',
+    'select_address' => 'Selecteer adres',
+    'use_existing_address' => 'Gebruik bestaand adres',
+    'new_address' => 'Nieuw adres',
 ];
 

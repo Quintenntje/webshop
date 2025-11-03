@@ -26,38 +26,58 @@ class CheckoutController extends Controller
         }
 
         $customer = Auth::User();
+        $addresses = collect();
+
+        if ($customer) {
+            $addresses = Address::where('customer_id', $customer->id)->get();
+        }
 
         if (!$customer) {
             $shippingInfo = session('checkout.shipping');
         }
 
-        return view('checkout.shipping', compact('products', 'cart', 'discount', 'total', 'customer', 'shippingInfo'));
+        if($customer) {
+            $shippingInfo = null;
+        }
+
+        return view('checkout.shipping', compact('products', 'cart', 'discount', 'total', 'customer', 'shippingInfo', 'addresses'));
     }
     public function shippingStore(Request $request)
     {
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'postal_code' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
-        ]);
+        $addressSelected = $request->input('address_selection') === 'existing' && $request->input('address_id');
 
-        if (Auth::check()) {
-            $customer = Auth::user();
+        if ($addressSelected) {
+            // Using existing address
+            $validated = $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|email',
+                'phone' => 'required|string|max:255',
+                'address_id' => 'required|exists:addresses,id',
+            ]);
 
-            $address = Address::where('customer_id', $customer->id)->first();
-            if ($address) {
-                $address->update([
-                    'address' => $request->address,
-                    'city' => $request->city,
-                    'postal_code' => $request->postal_code,
-                    'country' => $request->country,
-                ]);
-            } else {
+            $address = Address::findOrFail($request->address_id);
+            $validated['address'] = $address->address;
+            $validated['city'] = $address->city;
+            $validated['postal_code'] = $address->postal_code;
+            $validated['country'] = $address->country;
+        } else {
+            // New address
+            $validated = $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|email',
+                'phone' => 'required|string|max:255',
+                'address' => 'required|string|max:255',
+                'city' => 'required|string|max:255',
+                'postal_code' => 'required|string|max:255',
+                'country' => 'required|string|max:255',
+            ]);
+
+            if (Auth::check()) {
+                $customer = Auth::user();
+
+                // Save new address if user is logged in
                 $address = Address::create([
                     'customer_id' => $customer->id,
                     'address' => $request->address,
@@ -65,12 +85,10 @@ class CheckoutController extends Controller
                     'postal_code' => $request->postal_code,
                     'country' => $request->country,
                 ]);
-
             }
-            session(['checkout.shipping' => $validated]);
-        } else {
-            session(['checkout.shipping' => $validated]);
         }
+
+        session(['checkout.shipping' => $validated]);
         return redirect()->route('checkout.payment.show');
     }
 

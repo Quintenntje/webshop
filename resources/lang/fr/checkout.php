@@ -20,5 +20,10 @@ return [
     'debit_card' => 'Carte de Débit',
     'paypal' => 'PayPal',
     'bank_transfer' => 'Virement Bancaire',
+    'user_information' => 'Informations Utilisateur',
+    'address_information' => 'Informations d\'Adresse',
+    'select_address' => 'Sélectionner l\'adresse',
+    'use_existing_address' => 'Utiliser l\'adresse existante',
+    'new_address' => 'Nouvelle adresse',
 ];
 
