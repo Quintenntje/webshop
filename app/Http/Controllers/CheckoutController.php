@@ -27,7 +27,11 @@ class CheckoutController extends Controller
 
         $customer = Auth::User();
 
-        return view('checkout.shipping', compact('products', 'cart', 'discount', 'total', 'customer'));
+        if (!$customer) {
+            $shippingInfo = session('checkout.shipping');
+        }
+
+        return view('checkout.shipping', compact('products', 'cart', 'discount', 'total', 'customer', 'shippingInfo'));
     }
     public function shippingStore(Request $request)
     {
