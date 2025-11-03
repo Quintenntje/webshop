@@ -43,16 +43,16 @@
               <div>
                 <h3>{{ __('checkout.select_payment_method') }}</h3>
                 <div class="form__group radio-input-group">
-                   <x-radio-input name="payment_method" id="credit_card" value="credit_card" label="{{ __('checkout.credit_card') }}" />
+                   <x-radio-input name="payment_method" id="credit_card" value="credit_card" >{{ __('checkout.credit_card') }}</x-radio-input>
                 </div>
                 <div class="form__group radio-input-group">
-                    <x-radio-input name="payment_method" id="debit_card" value="debit_card" label="{{ __('checkout.debit_card') }}" />
+                    <x-radio-input name="payment_method" id="debit_card" value="debit_card" >{{ __('checkout.debit_card') }}</x-radio-input>
                 </div>
                 <div class="form__group radio-input-group">
-                    <x-radio-input name="payment_method" id="paypal" value="paypal" label="{{ __('checkout.paypal') }}" />
+                    <x-radio-input name="payment_method" id="paypal" value="paypal" >{{ __('checkout.paypal') }}</x-radio-input>
                 </div>
                 <div class="form__group radio-input-group">
-                    <x-radio-input name="payment_method" id="bank_transfer" value="bank_transfer" label="{{ __('checkout.bank_transfer') }}" />
+                    <x-radio-input name="payment_method" id="bank_transfer" value="bank_transfer" >{{ __('checkout.bank_transfer') }}</x-radio-input>
                 </div>
               </div>
             </div>
