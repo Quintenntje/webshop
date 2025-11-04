@@ -161,7 +161,22 @@ class CheckoutController extends Controller
             'redirectUrl' => route('checkout.payment.success', $order->id),
         ]);
 
-        $order->status = 'paid';
+        switch ($payment->status) {
+            case 'paid':
+                $order->status = 'paid';
+                $order->save();
+                return redirect()->route('checkout.payment.success', $order->id)->cookie('cart', null, -1);
+            case 'expired':
+                $order->status = 'expired';
+                return redirect()->route('checkout.payment.expired', $order->id);
+            case 'cancelled':
+                $order->status = 'cancelled';
+                return redirect()->route('checkout.payment.failed', $order->id);
+            case 'failed':
+                $order->status = 'failed';
+                return redirect()->route('checkout.payment.failed', $order->id);
+        }
+
         $order->save();
 
         return redirect($payment->getCheckoutUrl());
@@ -172,6 +187,19 @@ class CheckoutController extends Controller
         $order = Order::with(['items.productVariant.product.primaryImage', 'items.productVariant.color', 'items.productVariant.size', 'customer'])->findOrFail($id);
 
         return view('checkout.success', compact('order'));
+    }
+    public function paymentFailed(Request $request, $id)
+    {
+        $order = Order::with(['items.productVariant.product.primaryImage', 'items.productVariant.color', 'items.productVariant.size', 'customer'])->findOrFail($id);
+
+        return view('checkout.cancelled', compact('order'));
+    }
+
+    public function paymentExpired(Request $request, $id)
+    {
+        $order = Order::with(['items.productVariant.product.primaryImage', 'items.productVariant.color', 'items.productVariant.size', 'customer'])->findOrFail($id);
+
+        return view('checkout.expired', compact('order'));
     }
 
     private function getTotal(Request $request)

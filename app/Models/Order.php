@@ -14,6 +14,7 @@ class Order extends Model
         'city',
         'street',
         'postal_code',
+        'payment_id',
     ];
 
     public function customer()

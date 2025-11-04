@@ -84,6 +84,8 @@ Route::group(
             Route::get('/payment', [CheckoutController::class, 'paymentShow'])->name('checkout.payment.show');
             Route::post('/payment', [CheckoutController::class, 'paymentPost'])->name('checkout.payment.post');
             Route::get('/payment/success/{id}', [CheckoutController::class, 'paymentSuccess'])->name('checkout.payment.success');
+            Route::get('/payment/expired/{id}', [CheckoutController::class, 'paymentExpired'])->name('checkout.payment.expired');
+            Route::get('/payment/failed/{id}', [CheckoutController::class, 'paymentFailed'])->name('checkout.payment.failed');
         });
 
         // wishlist

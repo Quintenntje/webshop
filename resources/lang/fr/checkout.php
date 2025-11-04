@@ -33,5 +33,10 @@ return [
     'total' => 'Total',
     'continue_shopping' => 'Continuer les Achats',
     'view_account' => 'Voir Mon Compte',
+    'order_expired' => 'Commande Expirée',
+    'order_expired_message' => 'Votre session de paiement a expiré. Veuillez réessayer pour finaliser votre commande.',
+    'order_cancelled' => 'Commande Annulée',
+    'order_cancelled_message' => 'Votre paiement a été annulé. Vous pouvez réessayer ou retourner à votre panier.',
+    'return_to_cart' => 'Retourner au Panier',
 ];
 

@@ -33,5 +33,10 @@ return [
     'total' => 'Totaal',
     'continue_shopping' => 'Verder Winkelen',
     'view_account' => 'Bekijk Mijn Account',
+    'order_expired' => 'Bestelling Verlopen',
+    'order_expired_message' => 'Uw betalingssessie is verlopen. Probeer het opnieuw om uw bestelling te voltooien.',
+    'order_cancelled' => 'Bestelling Geannuleerd',
+    'order_cancelled_message' => 'Uw betaling is geannuleerd. U kunt het opnieuw proberen of terugkeren naar uw winkelwagen.',
+    'return_to_cart' => 'Terug naar Winkelwagen',
 ];
 

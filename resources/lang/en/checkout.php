@@ -33,5 +33,10 @@ return [
     'total' => 'Total',
     'continue_shopping' => 'Continue Shopping',
     'view_account' => 'View My Account',
+    'order_expired' => 'Order Expired',
+    'order_expired_message' => 'Your payment session has expired. Please try again to complete your order.',
+    'order_cancelled' => 'Order Cancelled',
+    'order_cancelled_message' => 'Your payment was cancelled. You can try again or return to your cart.',
+    'return_to_cart' => 'Return to Cart',
 ];
 
