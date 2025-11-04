@@ -48,6 +48,69 @@ class ProductColorsTableSeeder extends Seeder
                     'fr' => 'Vert',
                 ]),
             ],
+            [
+                'name' => json_encode([
+                    'en' => 'Orange',
+                    'nl' => 'Oranje',
+                    'fr' => 'Orange',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Purple',
+                    'nl' => 'Paars',
+                    'fr' => 'Violet',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Pink',
+                    'nl' => 'Roze',
+                    'fr' => 'Rose',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Grey',
+                    'nl' => 'Grijs',
+                    'fr' => 'Gris',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Brown',
+                    'nl' => 'Bruin',
+                    'fr' => 'Marron',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Gold',
+                    'nl' => 'Goud',
+                    'fr' => 'Or',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Silver',
+                    'nl' => 'Zilver',
+                    'fr' => 'Argent',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Tan',
+                    'nl' => 'Bruinachtig',
+                    'fr' => 'Beige',
+                ]),
+            ],
+            [
+                'name' => json_encode([
+                    'en' => 'Other',
+                    'nl' => 'Anders',
+                    'fr' => 'Autre',
+                ]),
+            ],
         ];
 
         DB::table('product_colors')->insert($colors);
