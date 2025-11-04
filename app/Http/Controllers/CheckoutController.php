@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
+use App\Models\ProductImage;
 use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DiscountCode;
@@ -22,6 +23,14 @@ class CheckoutController extends Controller
         $discount = DiscountCode::where('code', $discountCode)->first();
         $productIds = array_keys($cart);
         $products = ProductVariant::whereIn('id', $productIds)->get();
+
+        foreach ($products as $productVariant) {
+            $primaryImage = ProductImage::where('product_id', $productVariant->product_id)
+                ->where('color_id', $productVariant->color_id)
+                ->first();
+            $productVariant->primaryImage = $primaryImage;
+        }
+
         $totalProductsPrices = $this->getTotal($request);
 
         if ($discount) {
@@ -99,6 +108,14 @@ class CheckoutController extends Controller
         $cart = json_decode($request->cookie('cart', '[]'), true);
         $productIds = array_keys($cart);
         $products = ProductVariant::whereIn('id', $productIds)->get();
+
+        foreach ($products as $productVariant) {
+            $primaryImage = ProductImage::where('product_id', $productVariant->product_id)
+                ->where('color_id', $productVariant->color_id)
+                ->first();
+            $productVariant->primaryImage = $primaryImage;
+        }
+
         $discountCode = $request->cookie('discount_code');
         $discount = DiscountCode::where('code', $discountCode)->first();
 

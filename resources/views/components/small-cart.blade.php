@@ -12,7 +12,7 @@
     @foreach ($products as $product)
     <li class="cart-item">
         <div class="cart-item__image">
-            <img src="{{ $product->product->primaryImage->filename }}" alt="{{ $product->product->name }}">
+            <img src="{{ $product->primaryImage->filename ?? $product->product->primaryImage->filename ?? '' }}" alt="{{ $product->product->name }}">
         </div>
             <div class="cart-item__content">
             <h3 class="cart-item__title">{{ $product->product->name }}</h3>
