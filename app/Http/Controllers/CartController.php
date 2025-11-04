@@ -38,7 +38,7 @@ class CartController extends Controller
 
 
         foreach ($products as $productVariant) {
-            $primaryImage = ProductImage::where('product_id', $productVariant->product_id)->first();
+            $primaryImage = ProductImage::where('product_id', $productVariant->product_id)->where('color_id', $productVariant->color_id)->first();
 
             $productVariant->primaryImage = $primaryImage;
         }
