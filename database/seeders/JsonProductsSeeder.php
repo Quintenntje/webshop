@@ -24,7 +24,14 @@ class JsonProductsSeeder extends Seeder
         $allProducts = array_merge($products, $kicks);
 
         // Get lookup data
-        $brands = DB::table('brands')->pluck('id', 'slug');
+        // Build brands lookup by both slug and normalized name
+        $brandsBySlug = DB::table('brands')->pluck('id', 'slug')->toArray();
+        $brandsByName = DB::table('brands')->get()->mapWithKeys(function ($brand) {
+            $normalizedName = $this->normalizeBrandSlug($brand->name);
+            return [$normalizedName => $brand->id];
+        })->toArray();
+        $brands = array_merge($brandsBySlug, $brandsByName);
+        
         $genders = DB::table('genders')->pluck('id', 'slug');
         $categories = DB::table('categories')->pluck('id', 'name');
         $colors = DB::table('product_colors')->get()->mapWithKeys(function ($color) {
@@ -42,22 +49,37 @@ class JsonProductsSeeder extends Seeder
                 continue;
             }
 
-            // Get brand ID
-            $brandSlug = strtolower($productData['brand']);
-            $brandId = $brands->get($brandSlug);
+            // Get brand ID - normalize to match existing slugs
+            $brandName = $productData['brand'];
+            $brandSlug = $this->normalizeBrandSlug($brandName);
+            $brandId = $brands[$brandSlug] ?? null;
 
             if (!$brandId) {
-                // Create brand if it doesn't exist
-                $brandId = DB::table('brands')->insertGetId([
-                    'name' => ucfirst($productData['brand']),
-                    'slug' => $brandSlug,
-                    'image' => null,
-                ]);
-                $brands->put($brandSlug, $brandId);
+                // Check if brand exists by name (case-insensitive)
+                $existingBrand = DB::table('brands')
+                    ->whereRaw('LOWER(name) = ?', [strtolower($brandName)])
+                    ->first();
+                
+                if ($existingBrand) {
+                    $brandId = $existingBrand->id;
+                    $brands[$brandSlug] = $brandId;
+                } else {
+                    // Create brand if it doesn't exist
+                    // Use a placeholder image URL since image is required
+                    $brandId = DB::table('brands')->insertGetId([
+                        'name' => ucfirst($brandName),
+                        'slug' => $brandSlug,
+                        'image' => 'https://via.placeholder.com/200x200?text=' . urlencode(ucfirst($brandName)),
+                    ]);
+                    $brands[$brandSlug] = $brandId;
+                }
             }
 
-            // Get gender ID
+            // Get gender ID - normalize "woman" to "women"
             $genderSlug = strtolower($productData['gender'] ?? 'unisex');
+            if ($genderSlug === 'woman') {
+                $genderSlug = 'women';
+            }
             $genderId = $genders->get($genderSlug, $genders->get('unisex'));
 
             // Get price from first color variant
@@ -204,15 +226,30 @@ class JsonProductsSeeder extends Seeder
         }
     }
 
+    private function normalizeBrandSlug(string $brandName): string
+    {
+        $slug = strtolower(trim($brandName));
+        
+        // Replace spaces with hyphens to match existing slugs
+        $slug = str_replace(' ', '-', $slug);
+        
+        // Handle known brand variations
+        $normalizations = [
+            'new-balance' => 'new-balance', // Already correct
+        ];
+        
+        return $normalizations[$slug] ?? $slug;
+    }
+    
     private function normalizeColorKey(string $key): string
     {
         $key = strtolower(trim($key));
-
+        
         // Handle variations
         $normalizations = [
             'gray' => 'grey',
         ];
-
+        
         return $normalizations[$key] ?? $key;
     }
 
