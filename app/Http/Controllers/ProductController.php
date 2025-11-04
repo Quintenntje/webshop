@@ -24,7 +24,7 @@ class ProductController extends Controller
         $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
         $gender = $genderSlug ? Gender::where('slug', $genderSlug)->first() : null;
 
-        $products = $this->buildProductQuery($request, $gender, $brand)->paginate(10);
+        $products = $this->buildProductQuery($request, $gender, $brand)->paginate(25);
 
         return view('products.list', [
             'products' => $products,
@@ -48,7 +48,7 @@ class ProductController extends Controller
         $brand = $brandSlug ? Brand::where('slug', $brandSlug)->first() : null;
 
 
-        $products = $this->buildProductQuery($request, $gender, $brand)->paginate(10);
+        $products = $this->buildProductQuery($request, $gender, $brand)->paginate(25);
 
         SEOTools::setTitle('Shop ' . $gender->name . ' products');
         SEOTools::setDescription('Shop for all ' . $gender->name . ' products');
@@ -75,7 +75,7 @@ class ProductController extends Controller
         $genderSlug = $request->query('gender');
         $gender = $genderSlug ? Gender::where('slug', $genderSlug)->first() : null;
 
-        $products = $this->buildProductQuery($request, $gender, $brand)->paginate(10);
+        $products = $this->buildProductQuery($request, $gender, $brand)->paginate(25);
 
         SEOTools::setTitle('Shop ' . $brand->name . ' products');
         SEOTools::setDescription('Shop for all ' . $brand->name . ' products');
@@ -162,7 +162,7 @@ class ProductController extends Controller
 
         $this->applySort($query, $request);
 
-        $products = $query->paginate(10);
+        $products = $query->paginate(25);
 
         return view('products.list', [
             'products' => $products,
