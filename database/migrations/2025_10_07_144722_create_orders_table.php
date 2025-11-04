@@ -13,7 +13,10 @@ return new class extends Migration {
 
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignId('customer_id')
+                ->nullable()
+                ->constrained('customers')
+                ->nullOnDelete();
             $table->enum('status', ['pending', 'paid', 'expired', 'canceled']);
             $table->decimal('total_price', 10, 2);
             $table->string('country');

@@ -130,7 +130,7 @@ class CheckoutController extends Controller
         ]);
 
         $order = Order::create([
-            'customer_id' => Auth::user()->id ?? 1,
+            'customer_id' => Auth::check() ? Auth::user()->id : null,  
             'total_price' => $request->total,
             'country' => $request->country,
             'city' => $request->city,
@@ -195,7 +195,7 @@ class CheckoutController extends Controller
         }
 
         if ($payment->isFailed() || $payment->isCanceled()) {
-            $order->status = 'cancelled';
+            $order->status = 'canceled';
             $order->save();
             return redirect()->route('checkout.payment.failed', $order->id);
         }
