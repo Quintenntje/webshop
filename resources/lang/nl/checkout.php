@@ -25,5 +25,13 @@ return [
     'select_address' => 'Selecteer adres',
     'use_existing_address' => 'Gebruik bestaand adres',
     'new_address' => 'Nieuw adres',
+    'order_success' => 'Bestelling Bevestigd!',
+    'order_success_message' => 'Bedankt voor uw aankoop. Uw bestelling is succesvol geplaatst.',
+    'order_number' => 'Bestelnummer',
+    'order_details' => 'Bestelgegevens',
+    'shipping_address' => 'Verzendadres',
+    'total' => 'Totaal',
+    'continue_shopping' => 'Verder Winkelen',
+    'view_account' => 'Bekijk Mijn Account',
 ];
 

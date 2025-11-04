@@ -7,6 +7,9 @@ use App\Models\ProductVariant;
 use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DiscountCode;
+use Mollie\Api\MollieApiClient;
+use App\Models\Order;
+use App\Models\OrderItem;
 
 class CheckoutController extends Controller
 {
@@ -36,7 +39,7 @@ class CheckoutController extends Controller
             $shippingInfo = session('checkout.shipping');
         }
 
-        if($customer) {
+        if ($customer) {
             $shippingInfo = null;
         }
 
@@ -115,6 +118,60 @@ class CheckoutController extends Controller
         }
 
         return view('checkout.payment', compact('shippingInfo', 'products', 'cart', 'total'));
+    }
+
+    public function paymentPost(Request $request)
+    {
+        $mollie = new MollieApiClient();
+        $mollie->setApiKey(config('services.mollie.key'));
+
+        $cart = json_decode($request->cookie('cart', '[]'), true);
+        $request->validate([
+            'payment_method' => 'required|in:credit_card,debit_card,paypal,bank_transfer',
+        ]);
+
+        $order = Order::create([
+            'customer_id' => Auth::user()->id ?? 1,
+            'total_price' => $request->total,
+            'country' => $request->country,
+            'city' => $request->city,
+            'street' => $request->address,
+            'postal_code' => $request->postal_code,
+            'status' => 'pending',
+        ]);
+        $order->save();
+
+        foreach ($cart as $productVariantId => $quantity) {
+            $productVariant = ProductVariant::find($productVariantId);
+            $orderItem = OrderItem::create([
+                'order_id' => $order->id,
+                'product_variant_id' => $productVariant->id,
+                'quantity' => $quantity,
+                'price' => $productVariant->product->price,
+            ]);
+        }
+        $orderItem->save();
+
+        $payment = $mollie->payments->create([
+            'amount' => [
+                'currency' => 'EUR',
+                'value' => $request->total,
+            ],
+            'description' => 'Order #' . $order->id,
+            'redirectUrl' => route('checkout.payment.success', $order->id),
+        ]);
+
+        $order->status = 'paid';
+        $order->save();
+
+        return redirect($payment->getCheckoutUrl());
+    }
+
+    public function paymentSuccess(Request $request, $id)
+    {
+        $order = Order::with(['items.productVariant.product.primaryImage', 'items.productVariant.color', 'items.productVariant.size', 'customer'])->findOrFail($id);
+
+        return view('checkout.success', compact('order'));
     }
 
     private function getTotal(Request $request)

@@ -82,6 +82,8 @@ Route::group(
             Route::get('/shipping', [CheckoutController::class, 'shipping'])->name('checkout.shipping');
             Route::post('/shipping', [CheckoutController::class, 'shippingStore'])->name('checkout.shipping.store');
             Route::get('/payment', [CheckoutController::class, 'paymentShow'])->name('checkout.payment.show');
+            Route::post('/payment', [CheckoutController::class, 'paymentPost'])->name('checkout.payment.post');
+            Route::get('/payment/success/{id}', [CheckoutController::class, 'paymentSuccess'])->name('checkout.payment.success');
         });
 
         // wishlist

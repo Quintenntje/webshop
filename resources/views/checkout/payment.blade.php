@@ -42,6 +42,18 @@
   
               <div>
                 <h3>{{ __('checkout.select_payment_method') }}</h3>
+                <form action="{{ route('checkout.payment.post') }}" method="post">
+                  @csrf
+                  <input type="hidden" name="cart" value="{{ json_encode($cart) }}">
+                  <input type="hidden" name="total" value="{{ $total }}">
+                  <input type="hidden" name="address" value="{{ $shippingInfo['address'] }}">
+                  <input type="hidden" name="city" value="{{ $shippingInfo['city'] }}">
+                  <input type="hidden" name="postal_code" value="{{ $shippingInfo['postal_code'] }}">
+                  <input type="hidden" name="country" value="{{ $shippingInfo['country'] }}"> 
+                  <input type="hidden" name="first_name" value="{{ $shippingInfo['first_name'] }}">
+                  <input type="hidden" name="last_name" value="{{ $shippingInfo['last_name'] }}">
+                  <input type="hidden" name="email" value="{{ $shippingInfo['email'] }}">
+                  <input type="hidden" name="phone" value="{{ $shippingInfo['phone'] }}">
                 <div class="form__group radio-input-group">
                    <x-radio-input name="payment_method" id="credit_card" value="credit_card" >{{ __('checkout.credit_card') }}</x-radio-input>
                 </div>
@@ -54,6 +66,9 @@
                 <div class="form__group radio-input-group">
                     <x-radio-input name="payment_method" id="bank_transfer" value="bank_transfer" >{{ __('checkout.bank_transfer') }}</x-radio-input>
                 </div>
+
+                <x-button type="submit" color="primary" size="md">{{ __('checkout.continue_to_payment') }}</x-button>
+                </form>
               </div>
             </div>
           </div>

@@ -13,9 +13,8 @@ return new class extends Migration {
 
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('ordered_at');
             $table->foreignId('customer_id')->constrained('customers');
-            $table->enum('status', ['pending', 'paid', 'shipped', 'cancelled']);
+            $table->enum('status', ['pending', 'paid', 'expired', 'cancelled']);
             $table->decimal('total_price', 10, 2);
             $table->string('country');
             $table->string('city');

@@ -25,5 +25,13 @@ return [
     'select_address' => 'Select Address',
     'use_existing_address' => 'Use Existing Address',
     'new_address' => 'New Address',
+    'order_success' => 'Order Confirmed!',
+    'order_success_message' => 'Thank you for your purchase. Your order has been successfully placed.',
+    'order_number' => 'Order Number',
+    'order_details' => 'Order Details',
+    'shipping_address' => 'Shipping Address',
+    'total' => 'Total',
+    'continue_shopping' => 'Continue Shopping',
+    'view_account' => 'View My Account',
 ];
 
