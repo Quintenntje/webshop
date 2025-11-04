@@ -14,6 +14,9 @@ use Spatie\Sitemap\SitemapGenerator;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+// Non-localized fallback for Mollie redirect (in case locale is missing)
+Route::get('/checkout/payment/status/{orderId}', [CheckoutController::class, 'status']);
+
 Route::get('/sitemap.xml', function () {
     SitemapGenerator::create(config('app.url'))
         ->writeToFile(public_path('sitemap.xml'));
@@ -83,6 +86,7 @@ Route::group(
             Route::post('/shipping', [CheckoutController::class, 'shippingStore'])->name('checkout.shipping.store');
             Route::get('/payment', [CheckoutController::class, 'paymentShow'])->name('checkout.payment.show');
             Route::post('/payment', [CheckoutController::class, 'paymentPost'])->name('checkout.payment.post');
+            Route::get('/payment/status/{orderId}', [CheckoutController::class, 'status'])->name('checkout.payment.status');
             Route::get('/payment/success/{id}', [CheckoutController::class, 'paymentSuccess'])->name('checkout.payment.success');
             Route::get('/payment/expired/{id}', [CheckoutController::class, 'paymentExpired'])->name('checkout.payment.expired');
             Route::get('/payment/failed/{id}', [CheckoutController::class, 'paymentFailed'])->name('checkout.payment.failed');

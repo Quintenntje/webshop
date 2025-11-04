@@ -152,35 +152,58 @@ class CheckoutController extends Controller
         }
         $orderItem->save();
 
+        $amount = number_format((float) $request->total, 2, '.', '');
+
         $payment = $mollie->payments->create([
             'amount' => [
                 'currency' => 'EUR',
-                'value' => $request->total,
+                'value' => $amount,
             ],
             'description' => 'Order #' . $order->id,
-            'redirectUrl' => route('checkout.payment.success', $order->id),
+            'redirectUrl' => route('checkout.payment.status', $order->id),
         ]);
 
-        switch ($payment->status) {
-            case 'paid':
-                $order->status = 'paid';
-                $order->save();
-                return redirect()->route('checkout.payment.success', $order->id)->cookie('cart', null, -1);
-            case 'expired':
-                $order->status = 'expired';
-                return redirect()->route('checkout.payment.expired', $order->id);
-            case 'cancelled':
-                $order->status = 'cancelled';
-                return redirect()->route('checkout.payment.failed', $order->id);
-            case 'failed':
-                $order->status = 'failed';
-                return redirect()->route('checkout.payment.failed', $order->id);
-        }
-
+        $order->payment_id = $payment->id;
         $order->save();
 
         return redirect($payment->getCheckoutUrl());
     }
+
+    public function status(Request $request, $orderId)
+    {
+        $cart = json_decode($request->cookie('cart', '[]'), true);
+        $mollie = new MollieApiClient();
+        $mollie->setApiKey(config('services.mollie.key'));
+
+        $order = Order::findOrFail($orderId);
+        $payment = $mollie->payments->get($order->payment_id);
+
+        if ($payment->isPaid()) {
+            $order->status = 'paid';
+            $order->save();
+            $products = ProductVariant::whereIn('id', array_keys($cart))->get();
+            foreach ($products as $productVariant) {
+                $productVariant->stock -= $cart[$productVariant->id];
+                $productVariant->save();
+            }
+            return redirect()->route('checkout.payment.success', $order->id)->cookie('cart', null, -1);
+        }
+
+        if ($payment->isExpired()) {
+            $order->status = 'expired';
+            $order->save();
+            return redirect()->route('checkout.payment.expired', $order->id);
+        }
+
+        if ($payment->isFailed() || $payment->isCanceled()) {
+            $order->status = 'cancelled';
+            $order->save();
+            return redirect()->route('checkout.payment.failed', $order->id);
+        }
+
+        return redirect()->route('checkout.payment.show');
+    }
+
 
     public function paymentSuccess(Request $request, $id)
     {

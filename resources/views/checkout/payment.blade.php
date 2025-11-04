@@ -41,8 +41,8 @@
               </h2>
   
               <div>
-                <h3>{{ __('checkout.select_payment_method') }}</h3>
-                <form action="{{ route('checkout.payment.post') }}" method="post">
+                <h3 class="checkout-payment__title">{{ __('checkout.select_payment_method') }}</h3>
+                <form action="{{ route('checkout.payment.post') }}" method="post" id="payment-form">
                   @csrf
                   <input type="hidden" name="cart" value="{{ json_encode($cart) }}">
                   <input type="hidden" name="total" value="{{ $total }}">
@@ -54,20 +54,29 @@
                   <input type="hidden" name="last_name" value="{{ $shippingInfo['last_name'] }}">
                   <input type="hidden" name="email" value="{{ $shippingInfo['email'] }}">
                   <input type="hidden" name="phone" value="{{ $shippingInfo['phone'] }}">
-                <div class="form__group radio-input-group">
-                   <x-radio-input name="payment_method" id="credit_card" value="credit_card" >{{ __('checkout.credit_card') }}</x-radio-input>
-                </div>
-                <div class="form__group radio-input-group">
-                    <x-radio-input name="payment_method" id="debit_card" value="debit_card" >{{ __('checkout.debit_card') }}</x-radio-input>
-                </div>
-                <div class="form__group radio-input-group">
-                    <x-radio-input name="payment_method" id="paypal" value="paypal" >{{ __('checkout.paypal') }}</x-radio-input>
-                </div>
-                <div class="form__group radio-input-group">
-                    <x-radio-input name="payment_method" id="bank_transfer" value="bank_transfer" >{{ __('checkout.bank_transfer') }}</x-radio-input>
-                </div>
+                  
+                  <div class="checkout-payment__methods">
+                    <div class="form__group radio-input-group">
+                      <x-radio-input name="payment_method" id="credit_card" value="credit_card" checked="true" required>{{ __('checkout.credit_card') }}</x-radio-input>
+                    </div>
+                    <div class="form__group radio-input-group">
+                      <x-radio-input name="payment_method" id="debit_card" value="debit_card" required>{{ __('checkout.debit_card') }}</x-radio-input>
+                    </div>
+                    <div class="form__group radio-input-group">
+                      <x-radio-input name="payment_method" id="paypal" value="paypal" required>{{ __('checkout.paypal') }}</x-radio-input>
+                    </div>
+                    <div class="form__group radio-input-group">
+                      <x-radio-input name="payment_method" id="bank_transfer" value="bank_transfer" required>{{ __('checkout.bank_transfer') }}</x-radio-input>
+                    </div>
+                  </div>
 
-                <x-button type="submit" color="primary" size="md">{{ __('checkout.continue_to_payment') }}</x-button>
+                  @error('payment_method')
+                    <p class="checkout-payment__error">{{ $message }}</p>
+                  @enderror
+
+                  <div class="checkout-payment__actions">
+                    <x-button type="submit" color="primary" size="md">{{ __('checkout.continue_to_payment') }}</x-button>
+                  </div>
                 </form>
               </div>
             </div>

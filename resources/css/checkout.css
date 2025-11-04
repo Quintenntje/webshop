@@ -71,6 +71,33 @@
     margin-bottom: var(--spacing-sm);
 }
 
+/* Payment Page Styles */
+.checkout-payment__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--foreground);
+    margin-bottom: var(--spacing-lg);
+}
+
+.checkout-payment__methods {
+    margin-bottom: var(--spacing-lg);
+}
+
+.checkout-payment__error {
+    color: var(--destructive);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background-color: oklch(from var(--destructive) l c h / 0.1);
+    border-radius: var(--radius-md);
+}
+
+.checkout-payment__actions {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border);
+}
+
 /* Checkout Success Page */
 .checkout-success {
     display: flex;

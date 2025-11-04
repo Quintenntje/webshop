@@ -14,12 +14,13 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
-            $table->enum('status', ['pending', 'paid', 'expired', 'cancelled']);
+            $table->enum('status', ['pending', 'paid', 'expired', 'canceled']);
             $table->decimal('total_price', 10, 2);
             $table->string('country');
             $table->string('city');
             $table->string('street');
             $table->string('postal_code', 20);
+            $table->string('payment_id')->nullable();
             $table->timestamps();
         });
 
