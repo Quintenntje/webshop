@@ -50,7 +50,6 @@ class CheckoutController extends Controller
         $addressSelected = $request->input('address_selection') === 'existing' && $request->input('address_id');
 
         if ($addressSelected) {
-            // Using existing address
             $validated = $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
@@ -186,7 +185,7 @@ class CheckoutController extends Controller
                 $productVariant->stock -= $cart[$productVariant->id];
                 $productVariant->save();
             }
-            return redirect()->route('checkout.payment.success', $order->id)->cookie('cart', null, -1);
+            return redirect()->route('checkout.payment.success', $order->id)->cookie('cart', null, -1)->cookie('discount_code', null, -1);
         }
 
         if ($payment->isExpired()) {
