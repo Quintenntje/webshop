@@ -11,7 +11,7 @@ class Product extends Model implements Sitemapable
 {
     use HasTranslations;
 
-    protected $fillable = ['name', 'description', 'price', 'gender_id', 'brand_id', 'category_id'];
+    protected $fillable = ['name', 'slug', 'description', 'price', 'gender_id', 'brand_id', 'category_id'];
 
     public $translatable = [ 'description'];
 

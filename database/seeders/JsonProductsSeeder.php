@@ -104,6 +104,9 @@ class JsonProductsSeeder extends Seeder
             // Get description and ensure it has all translations
             $description = $this->ensureDescriptionTranslations($firstColorData['description'] ?? '');
 
+            // Generate slug from product name
+            $slug = $this->generateSlug($productData['title']);
+
             // Check if product already exists
             $productId = DB::table('products')
                 ->where('name', $productData['title'])
@@ -111,9 +114,13 @@ class JsonProductsSeeder extends Seeder
                 ->value('id');
 
             if (!$productId) {
+                // Ensure slug is unique
+                $uniqueSlug = $this->ensureUniqueSlug($slug);
+
                 // Create product
                 $productId = DB::table('products')->insertGetId([
                     'name' => $productData['title'],
+                    'slug' => $uniqueSlug,
                     'price' => $price,
                     'description' => json_encode($description, JSON_UNESCAPED_UNICODE),
                     'gender_id' => $genderId,
@@ -132,6 +139,17 @@ class JsonProductsSeeder extends Seeder
                         ->where('id', $productId)
                         ->update([
                             'description' => json_encode($description, JSON_UNESCAPED_UNICODE),
+                            'updated_at' => now(),
+                        ]);
+                }
+
+                // Update slug if it's missing or empty
+                if (empty($existingProduct->slug)) {
+                    $uniqueSlug = $this->ensureUniqueSlug($slug, $productId);
+                    DB::table('products')
+                        ->where('id', $productId)
+                        ->update([
+                            'slug' => $uniqueSlug,
                             'updated_at' => now(),
                         ]);
                 }
@@ -286,6 +304,56 @@ class JsonProductsSeeder extends Seeder
         ];
 
         return $translations[$colorKey] ?? ['en' => ucfirst($colorKey), 'nl' => ucfirst($colorKey), 'fr' => ucfirst($colorKey)];
+    }
+
+    private function generateSlug(string $name): string
+    {
+        // Convert to lowercase
+        $slug = strtolower($name);
+        
+        // Remove special characters, keep alphanumeric, spaces, and hyphens
+        $slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
+        
+        // Replace multiple spaces/hyphens with single hyphen
+        $slug = preg_replace('/[\s-]+/', '-', $slug);
+        
+        // Remove leading/trailing hyphens
+        $slug = trim($slug, '-');
+        
+        // Limit length to 255 characters (database limit)
+        $slug = substr($slug, 0, 255);
+        
+        return $slug;
+    }
+
+    private function ensureUniqueSlug(string $slug, ?int $excludeId = null): string
+    {
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (true) {
+            $query = DB::table('products')->where('slug', $slug);
+            
+            if ($excludeId) {
+                $query->where('id', '!=', $excludeId);
+            }
+            
+            $exists = $query->exists();
+            
+            if (!$exists) {
+                return $slug;
+            }
+            
+            // Append counter to make it unique
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+            
+            // Safety limit to prevent infinite loop
+            if ($counter > 1000) {
+                // Fallback to timestamp if too many collisions
+                return $originalSlug . '-' . time();
+            }
+        }
     }
 }
 

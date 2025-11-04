@@ -25,5 +25,5 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
             @endif
         </div>
     </div>
-    <x-link href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $product->gender->slug . '/' . $product->id) }}" color="full" size=""><span class="sr-only">{{ __('global.view_product') }}</span></x-link>
+    <x-link href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $product->gender->slug . '/' . $product->slug) }}" color="full" size=""><span class="sr-only">{{ __('global.view_product') }}</span></x-link>
 </article>

@@ -68,7 +68,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
         <h2 class="product-colors__title">{{ __('product.colors') }}</h2>
         <div class="product-colors__list">
           @foreach ($allAvailableColors as $color)
-            <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $product->gender->slug . '/' . $product->id . '?color_id=' . $color->id) }}" class=" product-colors__item product-colors__item--{{ $color->name }} {{ $color->id == $color_id ? 'product-colors__item--active' : '' }}   ">{{ $color->name }}</a>
+            <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $product->gender->slug . '/' . $product->slug . '?color_id=' . $color->id) }}" class=" product-colors__item product-colors__item--{{ $color->name }} {{ $color->id == $color_id ? 'product-colors__item--active' : '' }}   ">{{ $color->name }}</a>
           @endforeach
         </div>
        </div>
@@ -77,7 +77,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
         <h2 class="product-sizes__title">{{ __('product.sizes') }}</h2>
         <div class="product-sizes__list">
           @foreach ($allAvailableSizes as $size)
-            <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $product->gender->slug . '/' . $product->id . '?color_id=' . $color_id . '&size_id=' . $size->id) }}" 
+            <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $product->gender->slug . '/' . $product->slug . '?color_id=' . $color_id . '&size_id=' . $size->id) }}" 
                class="product-sizes__item {{ $size->isActive ? 'product-sizes__item--active' : '' }} {{ !$size->isInStock ? 'product-sizes__item--out-of-stock' : '' }}"
                @if(!$size->isInStock) title="{{ __('product.out_of_stock') }}" @endif>
              EU {{ $size->name }}

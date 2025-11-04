@@ -90,7 +90,7 @@ class ProductController extends Controller
     {
         $gender = Gender::where('slug', $gender)->first();
         $product = Product::with(['variants', 'images', 'gender', 'brand', 'primaryImage'])
-            ->where('id', $product)
+            ->where('slug', $product)
             ->first();
 
         if (!$product || !$gender) {
