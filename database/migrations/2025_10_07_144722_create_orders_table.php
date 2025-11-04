@@ -18,6 +18,7 @@ return new class extends Migration {
                 ->constrained('customers')
                 ->nullOnDelete();
             $table->enum('status', ['pending', 'paid', 'expired', 'canceled']);
+            $table->string('payment_method')->default('unknown');
             $table->decimal('total_price', 10, 2);
             $table->string('country');
             $table->string('city');

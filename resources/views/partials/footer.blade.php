@@ -22,6 +22,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                         <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/women') }}" class="footer__column__link">{{ __('global.women') }}</a>
                     </li>
                     <li class="footer__column__item">
+                        <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/unisex') }}" class="footer__column__link">{{ __('global.unisex') }}</a>
+                    </li>
+                    <li class="footer__column__item">
                         <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/kids') }}" class="footer__column__link">{{ __('global.kids') }}</a>
                     </li>
                 </ul>

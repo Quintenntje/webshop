@@ -101,14 +101,14 @@ class ProductController extends Controller
         $size_id = $request->query('size_id');
 
         $allAvailableColors = $product->getAvailableColors();
-        
+
         $allAvailableSizes = $product->getAvailableSizesForColor($color_id)
             ->map(function ($size) use ($product, $color_id, $size_id) {
                 $size->isInStock = $product->isSizeInStockForColor($color_id, $size->id);
                 $size->isActive = $size->id == $size_id;
                 return $size;
             });
-            
+
         $productVariant = $product->getVariantByColorAndSize($color_id, $size_id);
 
         SEOTools::setTitle($product->name);

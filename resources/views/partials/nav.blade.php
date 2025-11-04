@@ -48,7 +48,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
         <li class="nav__item">
           <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/women') }}" class="link link--nav nav__item__link {{ request()->is('shoes/women') || request()->is('*/shoes/women') ? 'active' : '' }}">{{ __('global.women') }}</a>
         </li>
-       
+        <li class="nav__item">
+          <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/unisex') }}" class="link link--nav nav__item__link {{ request()->is('shoes/unisex') || request()->is('*/shoes/unisex') ? 'active' : '' }}">{{ __('global.unisex') }}</a>
+        </li>
         <li class="nav__item">
           <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/kids') }}" class="link link--nav nav__item__link {{ request()->is('shoes/kids') || request()->is('*/shoes/kids') ? 'active' : '' }}">{{ __('global.kids') }}</a>
         </li>
@@ -86,6 +88,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
     <li><a class="link link--nav {{ request()->is('shop') || request()->is('*/shop') ? 'active' : '' }}" href="{{ LaravelLocalization::getLocalizedURL(null, '/shop') }}">{{ __('global.shop') }}</a></li>
     <li><a class="link link--nav {{ request()->is('shoes/men') || request()->is('*/shoes/men') ? 'active' : '' }}" href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/men') }}">{{ __('global.men') }}</a></li>
     <li><a class="link link--nav {{ request()->is('shoes/women') || request()->is('*/shoes/women') ? 'active' : '' }}" href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/women') }}">{{ __('global.women') }}</a></li>
+    <li><a class="link link--nav {{ request()->is('shoes/unisex') || request()->is('*/shoes/unisex') ? 'active' : '' }}" href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/unisex') }}">{{ __('global.unisex') }}</a></li>
     <li><a class="link link--nav {{ request()->is('shoes/kids') || request()->is('*/shoes/kids') ? 'active' : '' }}" href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/kids') }}">{{ __('global.kids') }}</a></li>
     <li><a class="link link--nav {{ request()->is('sale') || request()->is('*/sale') ? 'active' : '' }}" href="{{ LaravelLocalization::getLocalizedURL(null, '/sale') }}">{{ __('global.sale') }}</a></li>
   </ul>

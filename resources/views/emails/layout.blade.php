@@ -74,6 +74,18 @@
         font-weight: var(--font-weight-semibold);
       }
       .divider { height: 1px; background: #e6e6e6; background: var(--border); }
+      
+      /* Order email specific styles */
+      .order-item { display:table; width:100%; margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid #e6e6e6; }
+      .order-item-image { display:table-cell; width:80px; vertical-align:top; padding-right:12px; }
+      .order-item-image img { width:80px; height:80px; object-fit:cover; border-radius:6px; display:block; }
+      .order-item-content { display:table-cell; vertical-align:top; }
+      .order-item-title { margin:0 0 6px 0; font-size:16px; line-height:1.4; font-weight:600; }
+      .order-item-meta { margin:0 0 4px 0; font-size:14px; line-height:1.5; color:#6b6b6b; }
+      .order-item-price { margin:0; font-size:16px; line-height:1.5; font-weight:600; }
+      .order-total { display:table; width:100%; margin-top:16px; padding-top:16px; border-top:2px solid #e6e6e6; }
+      .order-section { background:#f6f6f6; border-radius:8px; padding:20px; margin-bottom:24px; }
+      .order-section-title { margin:0 0 16px 0; font-size:18px; line-height:1.3; font-weight:600; }
     </style>
   </head>
   <body>

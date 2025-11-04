@@ -203,25 +203,103 @@
     color: oklch(0.4 0.15 200);
 }
 
-.order-card__status--cancelled {
+.order-card__status--cancelled,
+.order-card__status--canceled {
     background-color: oklch(0.9 0.05 20);
     color: oklch(0.5 0.15 20);
+}
+
+.order-card__status--expired {
+    background-color: oklch(0.9 0.05 30);
+    color: oklch(0.5 0.15 30);
 }
 
 .order-card__body {
     display: flex;
     flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.order-card__items {
+    display: flex;
+    flex-direction: column;
     gap: var(--spacing-sm);
+}
+
+.order-card__item {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.order-card__item-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.order-card__item-image--placeholder {
+    background-color: var(--muted);
+    border: 1px solid var(--border);
+}
+
+.order-card__item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.order-card__item-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--foreground);
+    margin: 0 0 var(--spacing-xs) 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.order-card__item-meta {
+    font-size: var(--font-size-sm);
+    color: var(--muted-foreground);
+    margin: 0;
+}
+
+.order-card__more-items {
+    font-size: var(--font-size-sm);
+    color: var(--muted-foreground);
+    margin: var(--spacing-xs) 0 0 0;
+    padding-left: calc(60px + var(--spacing-md));
+}
+
+.order-card__footer {
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border);
+}
+
+.order-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
 }
 
 .order-card__info p {
     font-size: var(--font-size-base);
     color: var(--foreground);
-    margin: 0 0 var(--spacing-xs) 0;
+    margin: 0;
 }
 
 .order-card__info strong {
     font-weight: var(--font-weight-semibold);
+}
+
+.order-card__address {
+    font-size: var(--font-size-sm);
+    color: var(--muted-foreground);
+    margin: 0;
+    line-height: 1.5;
 }
 
 .addresses-list {

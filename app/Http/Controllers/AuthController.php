@@ -66,9 +66,10 @@ class AuthController extends Controller
     public function viewAccount()
     {
         $user = Auth::user();
-        
+
         $orders = Order::where('customer_id', $user->id)
-            ->orderBy('ordered_at', 'desc')
+            ->with(['items.productVariant.product.primaryImage', 'items.productVariant.color', 'items.productVariant.size'])
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('account.index', compact('user', 'orders'));

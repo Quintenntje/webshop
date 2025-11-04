@@ -29,6 +29,58 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
             <div class="account__content account__content--active">
                 @if($orders->count() > 0)
                     <div class="orders-list">
+                        @foreach($orders as $order)
+                            <div class="order-card">
+                                <div class="order-card__header">
+                                    <div>
+                                        <h3 class="order-card__title">Order #{{ $order->id }}</h3>
+                                        <p class="order-card__date">{{ $order->created_at->format('F d, Y') }}</p>
+                                    </div>
+                                    <span class="order-card__status order-card__status--{{ $order->status }}">
+                                        {{ ucfirst($order->status) }}
+                                    </span>
+                                </div>
+
+                                <div class="order-card__body">
+                                    @if($order->items->count() > 0)
+                                        <div class="order-card__items">
+                                            @foreach($order->items as $item)
+                                                <div class="order-card__item">
+                                                    @if($item->productVariant->product->primaryImage)
+                                                        <img 
+                                                            src="{{ $item->productVariant->product->primaryImage->filename }}" 
+                                                            alt="{{ $item->productVariant->product->name }}"
+                                                            class="order-card__item-image"
+                                                        >
+                                                    @else
+                                                        <div class="order-card__item-image order-card__item-image--placeholder"></div>
+                                                    @endif
+                                                    <div class="order-card__item-info">
+                                                        <p class="order-card__item-name">{{ $item->productVariant->product->name }}</p>
+                                                        <p class="order-card__item-meta">
+                                                            {{ $item->productVariant->color->name }} • 
+                                                            {{ $item->productVariant->size->name }} • 
+                                                            Qty: {{ $item->quantity }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
+
+                                    <div class="order-card__footer">
+                                        <div class="order-card__info">
+                                            <p><strong>Payment method:</strong> {{ $order->payment_method ?? 'Unknown'  }}</p>
+                                            <p><strong>Total:</strong> €{{ number_format($order->total_price, 2) }}</p>
+                                            <p class="order-card__address">
+                                                <strong>Shipping address:</strong> 
+                                                {{ $order->street }}, {{ $order->postal_code }} {{ $order->city }}, {{ $order->country }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 @else
                     <div class="empty-state">

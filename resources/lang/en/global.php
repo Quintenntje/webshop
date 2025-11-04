@@ -5,6 +5,7 @@ return [
     'men' => 'Men',
     'women' => 'Women',
     'kids' => 'Kids',
+    'unisex' => 'Unisex',
     'sale' => 'Sale',
     'all' => 'All',
     'new' => 'New',

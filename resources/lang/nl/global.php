@@ -5,6 +5,7 @@ return [
     'men' => 'Mannen',
     'women' => 'Vrouwen',
     'kids' => 'Kinderen',
+    'unisex' => 'Unisex',
     'sale' => 'Korting',
     'all' => 'Alles',
     'new' => 'Nieuw',

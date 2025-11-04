@@ -21,9 +21,6 @@
                     <div class="form__group">
                         <x-input label="{{ __('checkout.email') }}" color="transparent" type="email" name="email" placeholder="{{ __('checkout.email') }}" required value="{{ $customer->email ?? $shippingInfo['email'] ?? '' }}" />
                     </div>
-                    <div class="form__group">
-                        <x-input label="{{ __('checkout.phone') }}" color="transparent" type="tel" name="phone" placeholder="{{ __('checkout.phone') }}" required value="{{ $customer->phone_number ?? $shippingInfo['phone'] ?? '' }}" />
-                    </div>
                 </div>
 
                 <div class="shipping-form__section">

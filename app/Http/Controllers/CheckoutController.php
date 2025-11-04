@@ -10,6 +10,8 @@ use App\Models\DiscountCode;
 use Mollie\Api\MollieApiClient;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderConfirmed;
 
 class CheckoutController extends Controller
 {
@@ -54,7 +56,6 @@ class CheckoutController extends Controller
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|email',
-                'phone' => 'required|string|max:255',
                 'address_id' => 'required|exists:addresses,id',
             ]);
 
@@ -64,12 +65,10 @@ class CheckoutController extends Controller
             $validated['postal_code'] = $address->postal_code;
             $validated['country'] = $address->country;
         } else {
-            // New address
             $validated = $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|email',
-                'phone' => 'required|string|max:255',
                 'address' => 'required|string|max:255',
                 'city' => 'required|string|max:255',
                 'postal_code' => 'required|string|max:255',
@@ -130,7 +129,7 @@ class CheckoutController extends Controller
         ]);
 
         $order = Order::create([
-            'customer_id' => Auth::check() ? Auth::user()->id : null,  
+            'customer_id' => Auth::check() ? Auth::user()->id : null,
             'total_price' => $request->total,
             'country' => $request->country,
             'city' => $request->city,
@@ -171,15 +170,20 @@ class CheckoutController extends Controller
     public function status(Request $request, $orderId)
     {
         $cart = json_decode($request->cookie('cart', '[]'), true);
+        $shippingInfo = session('checkout.shipping');
+        $email = $shippingInfo['email'];
         $mollie = new MollieApiClient();
         $mollie->setApiKey(config('services.mollie.key'));
+
 
         $order = Order::findOrFail($orderId);
         $payment = $mollie->payments->get($order->payment_id);
 
         if ($payment->isPaid()) {
             $order->status = 'paid';
+            $order->payment_method = $payment->method;
             $order->save();
+            Mail::to($email)->send(new OrderConfirmed($order));
             $products = ProductVariant::whereIn('id', array_keys($cart))->get();
             foreach ($products as $productVariant) {
                 $productVariant->stock -= $cart[$productVariant->id];
@@ -190,12 +194,14 @@ class CheckoutController extends Controller
 
         if ($payment->isExpired()) {
             $order->status = 'expired';
+            $order->payment_method = $payment->method;
             $order->save();
             return redirect()->route('checkout.payment.expired', $order->id);
         }
 
         if ($payment->isFailed() || $payment->isCanceled()) {
             $order->status = 'canceled';
+            $order->payment_method = $payment->method;
             $order->save();
             return redirect()->route('checkout.payment.failed', $order->id);
         }

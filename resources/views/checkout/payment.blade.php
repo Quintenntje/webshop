@@ -17,7 +17,6 @@
   
               <div class="checkout-steps__step-row">
                 <p><strong>{{ __('checkout.email') }}:</strong> {{ $shippingInfo['email'] }}</p>
-                <p><strong>{{ __('checkout.phone') }}:</strong> {{ $shippingInfo['phone'] }}</p>
               </div>
   
               <div class="checkout-steps__step-row">
@@ -53,7 +52,6 @@
                   <input type="hidden" name="first_name" value="{{ $shippingInfo['first_name'] }}">
                   <input type="hidden" name="last_name" value="{{ $shippingInfo['last_name'] }}">
                   <input type="hidden" name="email" value="{{ $shippingInfo['email'] }}">
-                  <input type="hidden" name="phone" value="{{ $shippingInfo['phone'] }}">
                   
                   <div class="checkout-payment__methods">
                     <div class="form__group radio-input-group">
