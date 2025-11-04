@@ -28,13 +28,13 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  
        <div class="product-detail__images">
          <div class="product-detail__primary-image">
-           <img ,
-             src="{{ $product->primaryImage->filename }}" 
+           <img 
+             src="{{ $primaryImage->filename ?? $product->primaryImage->filename }}" 
              alt="{{ $product->name }}"
            >
          </div>
         <div class="product-detail__secondary-images">
-          @foreach ($product->images as $image)
+          @foreach ($productImages as $image)
             <img 
               src="{{ $image->filename }}" 
               alt="{{ $product->name }}"
@@ -80,7 +80,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
             <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $product->gender->slug . '/' . $product->id . '?color_id=' . $color_id . '&size_id=' . $size->id) }}" 
                class="product-sizes__item {{ $size->isActive ? 'product-sizes__item--active' : '' }} {{ !$size->isInStock ? 'product-sizes__item--out-of-stock' : '' }}"
                @if(!$size->isInStock) title="{{ __('product.out_of_stock') }}" @endif>
-              {{ $size->name }}
+             EU {{ $size->name }}
             </a>
           @endforeach
        </div>

@@ -12,13 +12,13 @@ class ProductSizesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('product_sizes')->insert([
-            ['name' => 'XS'],
-            ['name' => 'S'],
-            ['name' => 'M'],
-            ['name' => 'L'],
-            ['name' => 'XL'],
-        ]);
+        // EU shoe sizes from 35 to 47
+        $sizes = [];
+        for ($size = 35; $size <= 47; $size++) {
+            $sizes[] = ['name' => (string)$size];
+        }
+
+        DB::table('product_sizes')->insert($sizes);
     }
 }
 

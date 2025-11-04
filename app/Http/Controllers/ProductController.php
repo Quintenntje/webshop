@@ -111,6 +111,13 @@ class ProductController extends Controller
 
         $productVariant = $product->getVariantByColorAndSize($color_id, $size_id);
 
+
+        $productImages = $product->images()->where('color_id', $color_id)->get();
+
+        $primaryImage = $productImages->where('is_primary', true)->first()
+            ?? $productImages->first()
+            ?? $product->primaryImage;
+
         SEOTools::setTitle($product->name);
         SEOTools::setDescription($product->description);
         SEOTools::opengraph()->setUrl(url()->current());
@@ -123,6 +130,8 @@ class ProductController extends Controller
             'allAvailableColors',
             'allAvailableSizes',
             'productVariant',
+            'productImages',
+            'primaryImage',
             'color_id',
             'size_id'
         ));

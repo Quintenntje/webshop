@@ -77,13 +77,16 @@
 .product-sizes,
 .product-colors {
     margin-top: var(--spacing-xl);
-
-    .product-sizes__list,
     .product-colors__list {
         display: flex;
         flex-wrap: wrap;
         gap: var(--spacing-sm);
     }
+}
+.product-sizes__list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-sm);
 }
 
 .product-sizes__item {
