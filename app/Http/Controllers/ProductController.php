@@ -139,6 +139,14 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
+
+        SEOTools::setTitle('Search for products');
+        SEOTools::setDescription('Search for products');
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription('Search for products');
+
+
         $searchQuery = $request->input('search');
         $products = Product::where('name', 'like', '%' . $searchQuery . '%')->get();
         return view('search', compact('products'));
