@@ -2,6 +2,8 @@
 
 return [
     'wishlist' => 'Liste de Souhaits',
-    'empty_message' => 'Ici vous pouvez voir les produits que vous avez ajoutés à votre liste de souhaits',
+    'empty_title' => 'Votre liste de souhaits est vide',
+    'empty_message' => 'Commencez à ajouter des produits à votre liste de souhaits et ils apparaîtront ici.',
+    'continue_shopping' => 'Continuer les achats',
 ];
 

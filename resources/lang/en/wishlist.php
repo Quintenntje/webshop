@@ -2,6 +2,8 @@
 
 return [
     'wishlist' => 'Wishlist',
-    'empty_message' => 'Here you can see products you added to your wishlist',
+    'empty_title' => 'Your wishlist is empty',
+    'empty_message' => 'Start adding products to your wishlist and they will appear here.',
+    'continue_shopping' => 'Continue shopping',
 ];
 

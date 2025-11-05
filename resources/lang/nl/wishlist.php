@@ -2,6 +2,8 @@
 
 return [
     'wishlist' => 'Verlanglijst',
-    'empty_message' => 'Hier kun je producten zien die je aan je verlanglijst hebt toegevoegd',
+    'empty_title' => 'Je verlanglijst is leeg',
+    'empty_message' => 'Begin met het toevoegen van producten aan je verlanglijst en ze verschijnen hier.',
+    'continue_shopping' => 'Verder winkelen',
 ];
 
