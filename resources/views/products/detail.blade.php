@@ -77,11 +77,16 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
         <h2 class="product-sizes__title">{{ __('product.sizes') }}</h2>
         <div class="product-sizes__list">
           @foreach ($allAvailableSizes as $size)
-            <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $product->gender->slug . '/' . $product->slug . '?color_id=' . $color_id . '&size_id=' . $size->id) }}" 
-               class="product-sizes__item {{ $size->isActive ? 'product-sizes__item--active' : '' }} {{ !$size->isInStock ? 'product-sizes__item--out-of-stock' : '' }}"
-               @if(!$size->isInStock) title="{{ __('product.out_of_stock') }}" @endif>
-             EU {{ $size->name }}
-            </a>
+            @if($size->isInStock)
+              <a href="{{ LaravelLocalization::getLocalizedURL(null, '/shoes/' . $product->gender->slug . '/' . $product->slug . '?color_id=' . $color_id . '&size_id=' . $size->id) }}" 
+                 class="product-sizes__item {{ $size->isActive ? 'product-sizes__item--active' : '' }}">
+                EU {{ $size->name }}
+              </a>
+            @else
+              <span class="product-sizes__item product-sizes__item--out-of-stock" title="{{ __('product.out_of_stock') }}">
+                EU {{ $size->name }}
+              </span>
+            @endif
           @endforeach
        </div>
 
