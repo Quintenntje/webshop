@@ -29,4 +29,24 @@ return [
         'title' => ':product_name',
         'description' => ':product_description',
     ],
+    'cart' => [
+        'title' => 'Winkelwagen',
+        'description' => 'Bekijk uw geselecteerde artikelen en ga verder naar de kassa',
+    ],
+    'wishlist' => [
+        'title' => 'Verlanglijst',
+        'description' => 'Bekijk en beheer uw favoriete producten',
+    ],
+    'account' => [
+        'title' => 'Mijn Account',
+        'description' => 'Beheer uw account, bestellingen en voorkeuren',
+    ],
+    'login' => [
+        'title' => 'Inloggen',
+        'description' => 'Log in op uw account om toegang te krijgen tot uw bestellingen en verlanglijst',
+    ],
+    'register' => [
+        'title' => 'Registreren',
+        'description' => 'Maak een nieuw account aan om te beginnen met winkelen',
+    ],
 ];

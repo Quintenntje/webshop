@@ -6,11 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ProductVariant;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class WishlistController extends Controller
 {
     public function show()
     {
+        SEOTools::setTitle(__('seo.wishlist.title'));
+        SEOTools::setDescription(__('seo.wishlist.description'));
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription(__('seo.wishlist.description'));
+
+
         $user = Auth::user();
         $wishlist = Wishlist::where('customer_id', $user->id)->get();
         $productIds = $wishlist->pluck('product_variant_id');

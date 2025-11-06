@@ -8,15 +8,28 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Address;
 use App\Models\Order;
+use Artesaos\SEOTools\Facades\SEOTools;
 class AuthController extends Controller
 {
     public function viewLogin()
     {
+        SEOTools::setTitle(__('seo.login.title'));
+        SEOTools::setDescription(__('seo.login.description'));
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription(__('seo.login.description'));
+
         return view('auth.login');
     }
 
     public function viewRegister()
     {
+        SEOTools::setTitle(__('seo.register.title'));
+        SEOTools::setDescription(__('seo.register.description'));
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription(__('seo.register.description'));
+
         return view('auth.register');
     }
 
@@ -65,6 +78,12 @@ class AuthController extends Controller
 
     public function viewAccount()
     {
+        SEOTools::setTitle(__('seo.account.title'));
+        SEOTools::setDescription(__('seo.account.description'));
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription(__('seo.account.description'));
+
         $user = Auth::user();
 
         $orders = Order::where('customer_id', $user->id)

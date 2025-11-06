@@ -29,4 +29,24 @@ return [
         'title' => ':product_name',
         'description' => ':product_description',
     ],
+    'cart' => [
+        'title' => 'Shopping Cart',
+        'description' => 'Review your selected items and proceed to checkout',
+    ],
+    'wishlist' => [
+        'title' => 'Wishlist',
+        'description' => 'View and manage your favorite products',
+    ],
+    'account' => [
+        'title' => 'My Account',
+        'description' => 'Manage your account, orders, and preferences',
+    ],
+    'login' => [
+        'title' => 'Login',
+        'description' => 'Sign in to your account to access your orders and wishlist',
+    ],
+    'register' => [
+        'title' => 'Register',
+        'description' => 'Create a new account to start shopping',
+    ],
 ];

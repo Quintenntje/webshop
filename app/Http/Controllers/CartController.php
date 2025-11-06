@@ -6,12 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use App\Models\ProductImage;
 use App\Models\DiscountCode;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 
 class CartController extends Controller
 {
     public function show(Request $request)
     {
+        SEOTools::setTitle(__('seo.cart.title'));
+        SEOTools::setDescription(__('seo.cart.description'));
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->setType('website');
+        SEOTools::opengraph()->setDescription(__('seo.cart.description'));
+
+
         $cart = json_decode($request->cookie('cart', '[]'), true);
         $discountCode = $request->cookie('discount_code');
 

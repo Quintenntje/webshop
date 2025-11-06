@@ -29,4 +29,24 @@ return [
         'title' => ':product_name',
         'description' => ':product_description',
     ],
+    'cart' => [
+        'title' => 'Panier',
+        'description' => 'Consultez vos articles sélectionnés et passez à la caisse',
+    ],
+    'wishlist' => [
+        'title' => 'Liste de souhaits',
+        'description' => 'Consultez et gérez vos produits favoris',
+    ],
+    'account' => [
+        'title' => 'Mon Compte',
+        'description' => 'Gérez votre compte, vos commandes et vos préférences',
+    ],
+    'login' => [
+        'title' => 'Connexion',
+        'description' => 'Connectez-vous à votre compte pour accéder à vos commandes et votre liste de souhaits',
+    ],
+    'register' => [
+        'title' => 'Inscription',
+        'description' => 'Créez un nouveau compte pour commencer vos achats',
+    ],
 ];
