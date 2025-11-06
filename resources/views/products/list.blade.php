@@ -1,8 +1,11 @@
 <x-layout>
     <section class="container">
-        <h1 class="page-title">{{ $gender->name ?? $brand->name ?? __('list.all') }} {{ __('list.shoes') }}</h1>
-
-        <p>{{ $products->count() }} {{ __('list.results') }}</p>
+        <div class="products-header">
+            <div class="products-header__content">
+                <h1 class="products-header__title">{{ $gender->name ?? $brand->name ?? __('list.all') }} {{ __('list.shoes') }}</h1>
+                <p class="products-header__count">{{ $products->count() }} {{ __('list.results') }}</p>
+            </div>
+        </div>
 
     <form method="GET" class="filter-container">
         @foreach(request()->except('gender', 'brand') as $key => $value)

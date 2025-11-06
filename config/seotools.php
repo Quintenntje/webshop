@@ -3,6 +3,7 @@
  * @see https://github.com/artesaos/seotools
  */
 
+
 return [
     'inertia' => env('SEO_TOOLS_INERTIA', false),
     'meta' => [

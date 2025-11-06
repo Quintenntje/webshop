@@ -14,9 +14,6 @@ use Spatie\Sitemap\SitemapGenerator;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-// Non-localized fallback for Mollie redirect (in case locale is missing)
-Route::get('/checkout/payment/status/{orderId}', [CheckoutController::class, 'status']);
-
 Route::get('/sitemap.xml', function () {
     SitemapGenerator::create(config('app.url'))
         ->writeToFile(public_path('sitemap.xml'));
@@ -38,11 +35,11 @@ Route::group(
             $genders = Gender::all();
             $brands = Brand::all();
 
-            SEOTools::setTitle('Home');
-            SEOTools::setDescription('Shop for shoes in all brands and genders based on your preferences');
+            SEOTools::setTitle(__('seo.home.title'));
+            SEOTools::setDescription(__('seo.home.description'));
             SEOTools::opengraph()->setUrl(url()->current());
             SEOTools::opengraph()->setType('website');
-            SEOTools::opengraph()->setDescription('Shop for shoes in all brands and genders based on your preferences');
+            SEOTools::opengraph()->setDescription(__('seo.home.description'));
 
             return view('index', compact('genders', 'brands'));
         });

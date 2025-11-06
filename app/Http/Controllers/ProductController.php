@@ -12,11 +12,11 @@ class ProductController extends Controller
 {
     public function list(Request $request)
     {
-        SEOTools::setTitle('Shop');
-        SEOTools::setDescription('Shop for all products');
+        SEOTools::setTitle(__('seo.shop.title'));
+        SEOTools::setDescription(__('seo.shop.description'));
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
-        SEOTools::opengraph()->setDescription('Shop for all products');
+        SEOTools::opengraph()->setDescription(__('seo.shop.description'));
 
         $brandSlug = $request->query('brand');
         $genderSlug = $request->query('gender');
@@ -50,11 +50,11 @@ class ProductController extends Controller
 
         $products = $this->buildProductQuery($request, $gender, $brand)->paginate(25);
 
-        SEOTools::setTitle('Shop ' . $gender->name . ' products');
-        SEOTools::setDescription('Shop for all ' . $gender->name . ' products');
+        SEOTools::setTitle(__('seo.shop_gender.title', ['gender' => $gender->name]));
+        SEOTools::setDescription(__('seo.shop_gender.description', ['gender' => $gender->name]));
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
-        SEOTools::opengraph()->setDescription('Shop for all ' . $gender->name . ' products');
+        SEOTools::opengraph()->setDescription(__('seo.shop_gender.description', ['gender' => $gender->name]));
 
         return view('products.list', [
             'gender' => $gender,
@@ -77,11 +77,11 @@ class ProductController extends Controller
 
         $products = $this->buildProductQuery($request, $gender, $brand)->paginate(25);
 
-        SEOTools::setTitle('Shop ' . $brand->name . ' products');
-        SEOTools::setDescription('Shop for all ' . $brand->name . ' products');
+        SEOTools::setTitle(__('seo.shop_brand.title', ['brand' => $brand->name]));
+        SEOTools::setDescription(__('seo.shop_brand.description', ['brand' => $brand->name]));
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
-        SEOTools::opengraph()->setDescription('Shop for all ' . $brand->name . ' products');
+        SEOTools::opengraph()->setDescription(__('seo.shop_brand.description', ['brand' => $brand->name]));
 
         return view('products.list', compact('brand', 'products', 'brands', 'genders'));
     }
@@ -140,11 +140,11 @@ class ProductController extends Controller
     public function search(Request $request)
     {
 
-        SEOTools::setTitle('Search for products');
-        SEOTools::setDescription('Search for products');
+        SEOTools::setTitle(__('seo.search.title'));
+        SEOTools::setDescription(__('seo.search.description'));
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
-        SEOTools::opengraph()->setDescription('Search for products');
+        SEOTools::opengraph()->setDescription(__('seo.search.description'));
 
 
         $searchQuery = $request->input('search');
@@ -154,11 +154,11 @@ class ProductController extends Controller
 
     public function sales(Request $request)
     {
-        SEOTools::setTitle('Sales - Special Offers');
-        SEOTools::setDescription('Shop discounted products and special offers');
+        SEOTools::setTitle(__('seo.sales.title'));
+        SEOTools::setDescription(__('seo.sales.description'));
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
-        SEOTools::opengraph()->setDescription('Shop discounted products and special offers');
+        SEOTools::opengraph()->setDescription(__('seo.sales.description'));
 
         $brandSlug = $request->query('brand');
         $genderSlug = $request->query('gender');
