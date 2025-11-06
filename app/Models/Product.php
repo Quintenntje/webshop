@@ -11,7 +11,7 @@ class Product extends Model implements Sitemapable
 {
     use HasTranslations;
 
-    protected $fillable = ['name', 'slug', 'description', 'price', 'gender_id', 'brand_id', 'category_id'];
+    protected $fillable = ['name', 'slug', 'description', 'price', 'gender_id', 'brand_id'];
 
     public $translatable = [ 'description'];
 
@@ -23,11 +23,6 @@ class Product extends Model implements Sitemapable
     public function brand()
     {
         return $this->belongsTo(Brand::class);
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
     }
 
     public function primaryImage()

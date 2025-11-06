@@ -14,15 +14,18 @@ class ProductVariantsTable
     {
         return $table
             ->columns([
-                TextColumn::make('product_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('color_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('size_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('product.name')
+                    ->label('Product')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('color.name')
+                    ->label('Color')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('size.name')
+                    ->label('Size')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('stock')
                     ->numeric()
                     ->sortable(),

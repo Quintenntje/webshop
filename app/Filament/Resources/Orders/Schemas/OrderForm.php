@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Orders\Schemas;
 
+use App\Models\Customer;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -12,11 +13,17 @@ class OrderForm
     {
         return $schema
             ->components([
-                TextInput::make('customer_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('customer_id')
+                    ->label('Customer')
+                    ->options(
+                        Customer::all()->mapWithKeys(function ($customer) {
+                            return [$customer->id => $customer->first_name . ' ' . $customer->last_name . ' (' . $customer->email . ')'];
+                        })
+                    )
+                    ->searchable()
+                    ->required(),
                 Select::make('status')
-                    ->options(['pending' => 'Pending', 'paid' => 'Paid', 'shipped' => 'Shipped', 'cancelled' => 'Cancelled'])
+                    ->options(['pending' => 'Pending', 'paid' => 'Paid', 'expired' => 'Expired', 'canceled' => 'Cancelled'])
                     ->required(),
                 TextInput::make('total_price')
                     ->required()

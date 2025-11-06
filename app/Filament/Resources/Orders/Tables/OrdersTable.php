@@ -15,13 +15,20 @@ class OrdersTable
     {
         return $table
             ->columns([
-                TextColumn::make('customer_id')
-                    ->numeric()
+                TextColumn::make('customer.name')
+                    ->label('Customer')
+                    ->formatStateUsing(function ($record) {
+                        if ($record->customer) {
+                            return $record->customer->first_name . ' ' . $record->customer->last_name . ' (' . $record->customer->email . ')';
+                        }
+                        return 'Guest Order';
+                    })
+                    ->searchable(['customer.first_name', 'customer.last_name', 'customer.email'])
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
                 TextColumn::make('total_price')
-                    ->numeric()
+                    ->money('EUR')
                     ->sortable(),
                 TextColumn::make('country')
                     ->searchable(),

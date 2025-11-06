@@ -15,17 +15,30 @@ class OrderItemsTable
     {
         return $table
             ->columns([
-                TextColumn::make('order_id')
-                    ->numeric()
+                TextColumn::make('order.id')
+                    ->label('Order')
+                    ->formatStateUsing(function ($record) {
+                        return 'Order #' . $record->order->id;
+                    })
                     ->sortable(),
-                TextColumn::make('product_variant_id')
-                    ->numeric()
+                TextColumn::make('productVariant.product.name')
+                    ->label('Product')
+                    ->formatStateUsing(function ($record) {
+                        $variant = $record->productVariant;
+                        if ($variant && $variant->product) {
+                            $color = $variant->color ? $variant->color->name : 'N/A';
+                            $size = $variant->size ? $variant->size->name : 'N/A';
+                            return $variant->product->name . ' - ' . $color . ' / ' . $size;
+                        }
+                        return 'N/A';
+                    })
+                    ->searchable(['productVariant.product.name'])
                     ->sortable(),
                 TextColumn::make('quantity')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('price')
-                    ->money()
+                    ->money('EUR')
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()

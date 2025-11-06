@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Wishlists\Schemas;
 
-use Filament\Forms\Components\TextInput;
+use App\Models\Customer;
+use App\Models\ProductVariant;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
 
 class WishlistForm
@@ -11,12 +13,24 @@ class WishlistForm
     {
         return $schema
             ->components([
-                TextInput::make('customer_id')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('product_variant_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('customer_id')
+                    ->label('Customer')
+                    ->options(
+                        Customer::all()->mapWithKeys(function ($customer) {
+                            return [$customer->id => $customer->first_name . ' ' . $customer->last_name . ' (' . $customer->email . ')'];
+                        })
+                    )
+                    ->searchable()
+                    ->required(),
+                Select::make('product_variant_id')
+                    ->label('Product Variant')
+                    ->options(
+                        ProductVariant::with(['product', 'color', 'size'])->get()->mapWithKeys(function ($variant) {
+                            return [$variant->id => $variant->product->name . ' - ' . $variant->color->name . ' / ' . $variant->size->name];
+                        })
+                    )
+                    ->searchable()
+                    ->required(),
             ]);
     }
 }

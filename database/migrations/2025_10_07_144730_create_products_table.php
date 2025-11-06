@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->decimal('price', 10, 2);
             $table->foreignId('gender_id')->constrained('genders');
             $table->foreignId('brand_id')->constrained('brands');
-            $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
         });
 

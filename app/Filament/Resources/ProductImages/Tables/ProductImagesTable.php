@@ -17,12 +17,14 @@ class ProductImagesTable
             ->columns([
                 TextColumn::make('filename')
                     ->searchable(),
-                TextColumn::make('product_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('color_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('product.name')
+                    ->label('Product')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('color.name')
+                    ->label('Color')
+                    ->sortable()
+                    ->searchable(),
                 IconColumn::make('is_primary')
                     ->boolean(),
                 TextColumn::make('created_at')

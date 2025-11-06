@@ -19,15 +19,14 @@ class ProductsTable
                 TextColumn::make('price')
                     ->money()
                     ->sortable(),
-                TextColumn::make('gender_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('brand_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('category_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('gender.name')
+                    ->label('Gender')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('brand.name')
+                    ->label('Brand')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

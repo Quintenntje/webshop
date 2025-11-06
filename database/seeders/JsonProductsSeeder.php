@@ -33,15 +33,11 @@ class JsonProductsSeeder extends Seeder
         $brands = array_merge($brandsBySlug, $brandsByName);
         
         $genders = DB::table('genders')->pluck('id', 'slug');
-        $categories = DB::table('categories')->pluck('id', 'name');
         $colors = DB::table('product_colors')->get()->mapWithKeys(function ($color) {
             $nameData = json_decode($color->name, true);
             return [strtolower($nameData['en']) => (int) $color->id];
         })->toArray();
         $sizes = DB::table('product_sizes')->pluck('id');
-
-        // Get category ID (default to 'Shoes')
-        $categoryId = $categories->get('Shoes', $categories->first());
 
         foreach ($allProducts as $productData) {
             // Skip if missing required fields
@@ -125,7 +121,6 @@ class JsonProductsSeeder extends Seeder
                     'description' => json_encode($description, JSON_UNESCAPED_UNICODE),
                     'gender_id' => $genderId,
                     'brand_id' => $brandId,
-                    'category_id' => $categoryId,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

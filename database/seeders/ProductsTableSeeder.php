@@ -13,7 +13,6 @@ class ProductsTableSeeder extends Seeder
     public function run(): void
     {
         $brandIds = DB::table('brands')->pluck('id');
-        $categoryIds = DB::table('categories')->pluck('id');
         $genderIds = DB::table('genders')->pluck('id');
 
         $products = [
@@ -46,7 +45,6 @@ class ProductsTableSeeder extends Seeder
                 'description' => json_encode($product['description']),
                 'gender_id' => $genderIds->random(),
                 'brand_id' => $brandIds->random(),
-                'category_id' => $categoryIds->random(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

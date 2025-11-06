@@ -14,11 +14,28 @@ class WishlistsTable
     {
         return $table
             ->columns([
-                TextColumn::make('customer_id')
-                    ->numeric()
+                TextColumn::make('customer.name')
+                    ->label('Customer')
+                    ->formatStateUsing(function ($record) {
+                        if ($record->customer) {
+                            return $record->customer->first_name . ' ' . $record->customer->last_name . ' (' . $record->customer->email . ')';
+                        }
+                        return 'N/A';
+                    })
+                    ->searchable(['customer.first_name', 'customer.last_name', 'customer.email'])
                     ->sortable(),
-                TextColumn::make('product_variant_id')
-                    ->numeric()
+                TextColumn::make('productVariant.product.name')
+                    ->label('Product')
+                    ->formatStateUsing(function ($record) {
+                        $variant = $record->productVariant;
+                        if ($variant && $variant->product) {
+                            $color = $variant->color ? $variant->color->name : 'N/A';
+                            $size = $variant->size ? $variant->size->name : 'N/A';
+                            return $variant->product->name . ' - ' . $color . ' / ' . $size;
+                        }
+                        return 'N/A';
+                    })
+                    ->searchable(['productVariant.product.name'])
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()

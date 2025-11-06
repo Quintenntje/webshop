@@ -14,9 +14,8 @@ class NikeExtraProductsSeeder extends Seeder
     {
         $brandId = DB::table('brands')->where('slug', 'nike')->value('id');
         $genderId = DB::table('genders')->where('slug', 'men')->value('id');
-        $categoryId = DB::table('categories')->where('name', 'Shoes')->value('id');
 
-        if (!$brandId || !$genderId || !$categoryId) {
+        if (!$brandId || !$genderId) {
             return; // prerequisites missing
         }
 
@@ -110,7 +109,6 @@ class NikeExtraProductsSeeder extends Seeder
                     ], JSON_UNESCAPED_UNICODE),
                     'gender_id' => $genderId,
                     'brand_id' => $brandId,
-                    'category_id' => $categoryId,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
