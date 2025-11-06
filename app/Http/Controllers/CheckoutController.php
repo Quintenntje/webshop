@@ -13,6 +13,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderConfirmed;
+use App\Mail\OrderConfirmedAdmin;
 
 class CheckoutController extends Controller
 {
@@ -201,6 +202,7 @@ class CheckoutController extends Controller
             $order->payment_method = $payment->method;
             $order->save();
             Mail::to($email)->send(new OrderConfirmed($order));
+            Mail::to('admin@admin.com')->send(new OrderConfirmedAdmin($order));
             $products = ProductVariant::whereIn('id', array_keys($cart))->get();
             foreach ($products as $productVariant) {
                 $productVariant->stock -= $cart[$productVariant->id];
