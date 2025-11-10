@@ -146,8 +146,10 @@ class CheckoutController extends Controller
             'payment_method' => 'required|in:credit_card,debit_card,paypal,bank_transfer',
         ]);
 
+        $customer = Auth::User();
+
         $order = Order::create([
-            'customer_id' => Auth::check() ? Auth::user()->id : null,
+            'customer_id' => $customer ? $customer->id : null,
             'total_price' => $request->total,
             'country' => $request->country,
             'city' => $request->city,

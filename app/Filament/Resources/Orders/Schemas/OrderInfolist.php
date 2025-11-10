@@ -11,7 +11,7 @@ class OrderInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('customer.name')
+                TextEntry::make('customer_id')
                     ->label('Customer')
                     ->formatStateUsing(function ($record) {
                         if ($record->customer) {

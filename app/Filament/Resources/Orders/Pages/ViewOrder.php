@@ -16,4 +16,11 @@ class ViewOrder extends ViewRecord
             EditAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        // Ensure customer relationship is loaded
+        $this->record->load('customer');
+        return $data;
+    }
 }

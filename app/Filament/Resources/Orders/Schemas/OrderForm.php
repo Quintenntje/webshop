@@ -21,7 +21,8 @@ class OrderForm
                         })
                     )
                     ->searchable()
-                    ->required(),
+                    ->nullable()
+                    ->placeholder('Guest Order'),
                 Select::make('status')
                     ->options(['pending' => 'Pending', 'paid' => 'Paid', 'expired' => 'Expired', 'canceled' => 'Cancelled'])
                     ->required(),

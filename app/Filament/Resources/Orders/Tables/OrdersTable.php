@@ -14,8 +14,9 @@ class OrdersTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->with('customer'))
             ->columns([
-                TextColumn::make('customer.name')
+                TextColumn::make('customer_id')
                     ->label('Customer')
                     ->formatStateUsing(function ($record) {
                         if ($record->customer) {
@@ -23,7 +24,13 @@ class OrdersTable
                         }
                         return 'Guest Order';
                     })
-                    ->searchable(['customer.first_name', 'customer.last_name', 'customer.email'])
+                    ->searchable(query: function ($query, $search) {
+                        return $query->whereHas('customer', function ($q) use ($search) {
+                            $q->where('first_name', 'like', "%{$search}%")
+                              ->orWhere('last_name', 'like', "%{$search}%")
+                              ->orWhere('email', 'like', "%{$search}%");
+                        });
+                    })
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
