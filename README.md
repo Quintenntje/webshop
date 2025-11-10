@@ -1,61 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Webshop - E-commerce Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-featured e-commerce webshop application built with Laravel, designed for selling shoes with comprehensive product management, shopping cart functionality, and payment processing.
 
-## About Laravel
+## 🚀 Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Customer Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   **Product Catalog**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    -   Browse products by gender, brand, or category
+    -   Product detail pages with multiple images
+    -   Product variants (colors and sizes)
+    -   Stock management and availability checking
+    -   Product search functionality
+    -   Sales page with discounted products
 
-## Learning Laravel
+-   **Shopping Experience**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    -   Shopping cart with add, remove, and update functionality
+    -   Wishlist to save favorite products
+    -   Discount code system for cart-wide discounts
+    -   Product-level discounts with expiration dates
+    -   Real-time price calculations
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   **User Account**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    -   User registration and authentication
+    -   Password reset functionality
+    -   Account dashboard
+    -   Address management (save multiple shipping addresses)
+    -   Order history
 
-## Laravel Sponsors
+-   **Checkout & Payment**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    -   Multi-step checkout process (shipping → payment)
+    -   Guest checkout support
+    -   Mollie payment integration (credit card, debit card, PayPal, bank transfer)
+    -   Order confirmation emails
+    -   Order status tracking (pending, paid, expired, canceled)
 
-### Premium Partners
+-   **Additional Features**
+    -   Newsletter subscription with unsubscribe functionality
+    -   Multi-language support (i18n)
+    -   SEO optimization with meta tags and sitemap generation
+    -   Responsive design with Tailwind CSS
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Admin Features
 
-## Contributing
+-   **Admin Panel** (Filament)
+    -   Product management (create, edit, delete)
+    -   Product variant management (colors, sizes, stock)
+    -   Product image management
+    -   Brand and gender management
+    -   Order management and tracking
+    -   Customer management
+    -   Discount code management
+    -   Wishlist overview
+    -   User and role management
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛠️ Tech Stack
 
-## Code of Conduct
+-   **Backend:** Laravel 12
+-   **Frontend:** Blade templates, Tailwind CSS, Vite
+-   **Database:** SQLite (development)
+-   **Payment:** Mollie API
+-   **Admin Panel:** Filament
+-   **Localization:** Laravel Localization
+-   **SEO:** SEO Tools, Sitemap Generator
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 📋 Prerequisites
 
-## Security Vulnerabilities
+-   Docker Desktop installed and running
+-   DDEV installed
+-   Node.js and npm installed
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🏃 Getting Started
 
-## License
+1. **Start Docker Desktop** - Ensure Docker Desktop is running on your machine.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. **Start DDEV** - In the project root directory, run:
+
+    ```bash
+    ddev start
+    ```
+
+3. **Start the development server** - In a new terminal, run:
+
+    ```bash
+    npm run dev
+    ```
+
+4. **Access the application** - Open your browser and navigate to the URL provided by DDEV (typically `https://webshop-quintenntje.ddev.site`).
+
+### Admin Access
+
+-   **Email:** `admin@admin.com`
+-   **Password:** `admin`
+
+Access the admin panel at `/admin` after logging in with admin credentials.
+
+## 🗄️ Database Setup
+
+### Running Migrations
+
+To create the database tables, run the migrations:
+
+```bash
+ddev artisan migrate
+```
+
+### Running Seeders
+
+To populate the database with initial data (roles, genders, brands, products, customers, discount codes, and admin user):
+
+```bash
+ddev artisan db:seed
+```
+
+**Note:** The seeder will create the admin user (`admin@admin.com` / `admin`) automatically.
+
+### Fresh Migration with Seeding
+
+To reset the database and run all migrations and seeders from scratch:
+
+```bash
+ddev artisan migrate:fresh --seed
+```
+
+**Warning:** This will drop all existing tables and data, then recreate them with fresh seed data.
+
+## 📁 Project Structure
+
+```text
+app/
+├── Filament/Resources/    # Admin panel resources
+├── Http/Controllers/     # Application controllers
+├── Mail/                 # Email templates
+└── Models/               # Eloquent models
+
+resources/
+├── views/                # Blade templates
+├── css/                  # Stylesheets
+└── lang/                 # Translation files
+
+routes/
+└── web.php               # Application routes
+```
+
+## 🔑 Key Functionality
+
+-   **Product Variants:** Products can have multiple variants based on color and size combinations
+-   **Stock Management:** Real-time stock tracking per variant
+-   **Discount System:** Both product-level discounts and cart-wide discount codes
+-   **Payment Processing:** Integrated with Mollie for secure payment handling
+-   **Email Notifications:** Order confirmations sent to customers and admins
+-   **Multi-language:** Support for multiple languages with Laravel Localization
+
+## 📝 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
