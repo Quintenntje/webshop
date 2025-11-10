@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Address;
 use App\Models\Order;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\JsonLd;
 class AuthController extends Controller
 {
     public function viewLogin()
@@ -18,6 +19,14 @@ class AuthController extends Controller
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.login.description'));
+
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => __('seo.login.title'),
+            'description' => __('seo.login.description'),
+            'url' => url()->current(),
+        ]);
 
         return view('auth.login');
     }
@@ -29,6 +38,14 @@ class AuthController extends Controller
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.register.description'));
+
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => __('seo.register.title'),
+            'description' => __('seo.register.description'),
+            'url' => url()->current(),
+        ]);
 
         return view('auth.register');
     }
@@ -83,6 +100,14 @@ class AuthController extends Controller
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.account.description'));
+
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => __('seo.account.title'),
+            'description' => __('seo.account.description'),
+            'url' => url()->current(),
+        ]);
 
         $user = Auth::user();
 

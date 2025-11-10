@@ -7,6 +7,7 @@ use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ProductVariant;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\JsonLd;
 
 class WishlistController extends Controller
 {
@@ -18,6 +19,13 @@ class WishlistController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.wishlist.description'));
 
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => __('seo.wishlist.title'),
+            'description' => __('seo.wishlist.description'),
+            'url' => url()->current(),
+        ]);
 
         $user = Auth::user();
         $wishlist = Wishlist::where('customer_id', $user->id)->get();

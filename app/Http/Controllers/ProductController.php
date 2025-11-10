@@ -19,6 +19,14 @@ class ProductController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.shop.description'));
 
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => __('seo.shop.title'),
+            'description' => __('seo.shop.description'),
+            'url' => url()->current(),
+        ]);
+
         $brandSlug = $request->query('brand');
         $genderSlug = $request->query('gender');
 
@@ -57,6 +65,14 @@ class ProductController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.shop_gender.description', ['gender' => $gender->name]));
 
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => __('seo.shop_gender.title', ['gender' => $gender->name]),
+            'description' => __('seo.shop_gender.description', ['gender' => $gender->name]),
+            'url' => url()->current(),
+        ]);
+
         return view('products.list', [
             'gender' => $gender,
             'products' => $products,
@@ -83,6 +99,14 @@ class ProductController extends Controller
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.shop_brand.description', ['brand' => $brand->name]));
+
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => __('seo.shop_brand.title', ['brand' => $brand->name]),
+            'description' => __('seo.shop_brand.description', ['brand' => $brand->name]),
+            'url' => url()->current(),
+        ]);
 
         return view('products.list', compact('brand', 'products', 'brands', 'genders'));
     }
@@ -169,6 +193,13 @@ class ProductController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.search.description'));
 
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => __('seo.search.title'),
+            'description' => __('seo.search.description'),
+            'url' => url()->current(),
+        ]);
 
         $searchQuery = $request->input('search');
         $products = Product::where('name', 'like', '%' . $searchQuery . '%')->get();
@@ -182,6 +213,14 @@ class ProductController extends Controller
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.sales.description'));
+
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => __('seo.sales.title'),
+            'description' => __('seo.sales.description'),
+            'url' => url()->current(),
+        ]);
 
         $brandSlug = $request->query('brand');
         $genderSlug = $request->query('gender');

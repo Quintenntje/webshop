@@ -7,6 +7,7 @@ use App\Models\ProductVariant;
 use App\Models\ProductImage;
 use App\Models\DiscountCode;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\JsonLd;
 
 
 class CartController extends Controller
@@ -19,6 +20,13 @@ class CartController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.cart.description'));
 
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => __('seo.cart.title'),
+            'description' => __('seo.cart.description'),
+            'url' => url()->current(),
+        ]);
 
         $cart = json_decode($request->cookie('cart', '[]'), true);
         $discountCode = $request->cookie('discount_code');

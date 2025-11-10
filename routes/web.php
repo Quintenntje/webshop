@@ -42,10 +42,13 @@ Route::group(
             SEOTools::opengraph()->setType('website');
             SEOTools::opengraph()->setDescription(__('seo.home.description'));
 
-            JsonLd::setType('Organization')
-                ->setName('Webshop')
-                ->setUrl(config('app.url'))
-                ->setDescription(__('seo.home.description'));
+            JsonLd::addValue([
+                '@context' => 'https://schema.org',
+                '@type' => 'Organization',
+                'name' => 'Webshop',
+                'url' => config('app.url'),
+                'description' => __('seo.home.description'),
+            ]);
 
             return view('index', compact('genders', 'brands'));
         });
