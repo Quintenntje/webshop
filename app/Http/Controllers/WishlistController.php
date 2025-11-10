@@ -19,13 +19,10 @@ class WishlistController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.wishlist.description'));
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            'name' => __('seo.wishlist.title'),
-            'description' => __('seo.wishlist.description'),
-            'url' => url()->current(),
-        ]);
+        JsonLd::setType('WebPage')
+            ->setTitle(__('seo.wishlist.title'))
+            ->setDescription(__('seo.wishlist.description'))
+            ->setUrl(url()->current());
 
         $user = Auth::user();
         $wishlist = Wishlist::where('customer_id', $user->id)->get();

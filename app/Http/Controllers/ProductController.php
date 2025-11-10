@@ -19,13 +19,10 @@ class ProductController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.shop.description'));
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            'name' => __('seo.shop.title'),
-            'description' => __('seo.shop.description'),
-            'url' => url()->current(),
-        ]);
+        JsonLd::setType('WebPage')
+            ->setTitle(__('seo.shop.title'))
+            ->setDescription(__('seo.shop.description'))
+            ->setUrl(url()->current());
 
         $brandSlug = $request->query('brand');
         $genderSlug = $request->query('gender');
@@ -65,13 +62,10 @@ class ProductController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.shop_gender.description', ['gender' => $gender->name]));
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            'name' => __('seo.shop_gender.title', ['gender' => $gender->name]),
-            'description' => __('seo.shop_gender.description', ['gender' => $gender->name]),
-            'url' => url()->current(),
-        ]);
+        JsonLd::setType('WebPage')
+            ->setTitle(__('seo.shop_gender.title', ['gender' => $gender->name]))
+            ->setDescription(__('seo.shop_gender.description', ['gender' => $gender->name]))
+            ->setUrl(url()->current());
 
         return view('products.list', [
             'gender' => $gender,
@@ -100,13 +94,10 @@ class ProductController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.shop_brand.description', ['brand' => $brand->name]));
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            'name' => __('seo.shop_brand.title', ['brand' => $brand->name]),
-            'description' => __('seo.shop_brand.description', ['brand' => $brand->name]),
-            'url' => url()->current(),
-        ]);
+        JsonLd::setType('WebPage')
+            ->setTitle(__('seo.shop_brand.title', ['brand' => $brand->name]))
+            ->setDescription(__('seo.shop_brand.description', ['brand' => $brand->name]))
+            ->setUrl(url()->current());
 
         return view('products.list', compact('brand', 'products', 'brands', 'genders'));
     }
@@ -153,23 +144,21 @@ class ProductController extends Controller
         $productPrice = $product->hasActiveDiscount() ? $product->final_price : $product->price;
         $isInStock = $productVariant && $productVariant->inStock();
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'Product',
-            'name' => $product->name,
-            'description' => $product->description,
-            'image' => $primaryImage ? asset($primaryImage->filename) : null,
-            'brand' => [
+        JsonLd::setType('Product')
+            ->setTitle($product->name)
+            ->setDescription($product->description)
+            ->setUrl(url()->current())
+            ->addImage($primaryImage ? asset($primaryImage->filename) : null)
+            ->addValue('brand', [
                 '@type' => 'Brand',
                 'name' => $product->brand->name,
-            ],
-            'offers' => [
+            ])
+            ->addValue('offers', [
                 '@type' => 'Offer',
                 'price' => $productPrice,
                 'priceCurrency' => 'EUR',
                 'availability' => $isInStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-            ],
-        ]);
+            ]);
 
         return view('products.detail', compact(
             'gender',
@@ -193,13 +182,10 @@ class ProductController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.search.description'));
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            'name' => __('seo.search.title'),
-            'description' => __('seo.search.description'),
-            'url' => url()->current(),
-        ]);
+        JsonLd::setType('WebPage')
+            ->setTitle(__('seo.search.title'))
+            ->setDescription(__('seo.search.description'))
+            ->setUrl(url()->current());
 
         $searchQuery = $request->input('search');
         $products = Product::where('name', 'like', '%' . $searchQuery . '%')->get();
@@ -214,13 +200,10 @@ class ProductController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.sales.description'));
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            'name' => __('seo.sales.title'),
-            'description' => __('seo.sales.description'),
-            'url' => url()->current(),
-        ]);
+        JsonLd::setType('WebPage')
+            ->setTitle(__('seo.sales.title'))
+            ->setDescription(__('seo.sales.description'))
+            ->setUrl(url()->current());
 
         $brandSlug = $request->query('brand');
         $genderSlug = $request->query('gender');

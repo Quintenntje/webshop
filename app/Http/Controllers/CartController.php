@@ -20,13 +20,10 @@ class CartController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.cart.description'));
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            'name' => __('seo.cart.title'),
-            'description' => __('seo.cart.description'),
-            'url' => url()->current(),
-        ]);
+        JsonLd::setType('WebPage')
+            ->setTitle(__('seo.cart.title'))
+            ->setDescription(__('seo.cart.description'))
+            ->setUrl(url()->current());
 
         $cart = json_decode($request->cookie('cart', '[]'), true);
         $discountCode = $request->cookie('discount_code');

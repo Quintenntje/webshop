@@ -20,13 +20,10 @@ class AuthController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.login.description'));
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            'name' => __('seo.login.title'),
-            'description' => __('seo.login.description'),
-            'url' => url()->current(),
-        ]);
+        JsonLd::setType('WebPage')
+            ->setTitle(__('seo.login.title'))
+            ->setDescription(__('seo.login.description'))
+            ->setUrl(url()->current());
 
         return view('auth.login');
     }
@@ -39,13 +36,10 @@ class AuthController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.register.description'));
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            'name' => __('seo.register.title'),
-            'description' => __('seo.register.description'),
-            'url' => url()->current(),
-        ]);
+        JsonLd::setType('WebPage')
+            ->setTitle(__('seo.register.title'))
+            ->setDescription(__('seo.register.description'))
+            ->setUrl(url()->current());
 
         return view('auth.register');
     }
@@ -101,13 +95,10 @@ class AuthController extends Controller
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription(__('seo.account.description'));
 
-        JsonLd::addValue([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            'name' => __('seo.account.title'),
-            'description' => __('seo.account.description'),
-            'url' => url()->current(),
-        ]);
+        JsonLd::setType('WebPage')
+            ->setTitle(__('seo.account.title'))
+            ->setDescription(__('seo.account.description'))
+            ->setUrl(url()->current());
 
         $user = Auth::user();
 
