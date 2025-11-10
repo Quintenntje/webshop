@@ -12,6 +12,7 @@ use App\Models\Gender;
 use App\Models\Brand;
 use Spatie\Sitemap\SitemapGenerator;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\JsonLd;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('/sitemap.xml', function () {
@@ -40,6 +41,11 @@ Route::group(
             SEOTools::opengraph()->setUrl(url()->current());
             SEOTools::opengraph()->setType('website');
             SEOTools::opengraph()->setDescription(__('seo.home.description'));
+
+            JsonLd::setType('Organization')
+                ->setName('Webshop')
+                ->setUrl(config('app.url'))
+                ->setDescription(__('seo.home.description'));
 
             return view('index', compact('genders', 'brands'));
         });

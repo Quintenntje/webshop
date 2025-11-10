@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Gender;
 use App\Models\Brand;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\JsonLd;
 
 class ProductController extends Controller
 {
@@ -123,6 +124,28 @@ class ProductController extends Controller
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->setType('website');
         SEOTools::opengraph()->setDescription($product->description);
+
+        // Schema.org Product
+        $productPrice = $product->hasActiveDiscount() ? $product->final_price : $product->price;
+        $isInStock = $productVariant && $productVariant->inStock();
+
+        JsonLd::addValue([
+            '@context' => 'https://schema.org',
+            '@type' => 'Product',
+            'name' => $product->name,
+            'description' => $product->description,
+            'image' => $primaryImage ? asset($primaryImage->filename) : null,
+            'brand' => [
+                '@type' => 'Brand',
+                'name' => $product->brand->name,
+            ],
+            'offers' => [
+                '@type' => 'Offer',
+                'price' => $productPrice,
+                'priceCurrency' => 'EUR',
+                'availability' => $isInStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            ],
+        ]);
 
         return view('products.detail', compact(
             'gender',
