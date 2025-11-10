@@ -84,13 +84,19 @@ A full-featured e-commerce webshop application built with Laravel, designed for 
     ddev start
     ```
 
-3. **Start the development server** - In a new terminal, run:
+3. **Install dependencies** - Install Node.js dependencies:
+
+    ```bash
+    npm install
+    ```
+
+4. **Start the development server** - In a new terminal, run:
 
     ```bash
     npm run dev
     ```
 
-4. **Access the application** - Open your browser and navigate to the URL provided by DDEV (typically `https://webshop-quintenntje.ddev.site`).
+5. **Access the application** - Open your browser and navigate to the URL provided by DDEV (typically `https://webshop-quintenntje.ddev.site`).
 
 ### Admin Access
 
