@@ -161,14 +161,17 @@ class CheckoutController extends Controller
 
         foreach ($cart as $productVariantId => $quantity) {
             $productVariant = ProductVariant::find($productVariantId);
+
+
+            $itemPrice = $this->getItemPrice($productVariant);
+
             $orderItem = OrderItem::create([
                 'order_id' => $order->id,
                 'product_variant_id' => $productVariant->id,
                 'quantity' => $quantity,
-                'price' => $productVariant->product->price,
+                'price' => $itemPrice,
             ]);
         }
-        $orderItem->save();
 
         $amount = number_format((float) $request->total, 2, '.', '');
 
@@ -257,13 +260,17 @@ class CheckoutController extends Controller
         $total = 0;
         foreach ($cart as $productVariantId => $quantity) {
             $productVariant = ProductVariant::find($productVariantId);
-
-            if ($productVariant->product->hasActiveDiscount()) {
-                $total += $productVariant->product->final_price * $quantity;
-            } else {
-                $total += $productVariant->product->price * $quantity;
-            }
+            $itemPrice = $this->getItemPrice($productVariant);
+            $total += $itemPrice * $quantity;
         }
         return $total;
+    }
+
+    private function getItemPrice(ProductVariant $productVariant): float
+    {
+        if ($productVariant->product->hasActiveDiscount()) {
+            return $productVariant->product->final_price;
+        }
+        return $productVariant->product->price;
     }
 }
