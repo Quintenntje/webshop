@@ -5,6 +5,32 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
 
+$isProduction = env('APP_ENV', 'production') === 'production';
+$defaultLogChannel = env('LOG_CHANNEL', $isProduction ? 'daily' : 'stack');
+$configuredLogLevel = env('LOG_LEVEL', $isProduction ? 'warning' : 'debug');
+$defaultLogLevel = $isProduction && $configuredLogLevel === 'debug'
+    ? 'warning'
+    : $configuredLogLevel;
+$stackChannels = array_filter(array_map(
+    'trim',
+    explode(',', (string) env('LOG_STACK', $isProduction ? 'daily' : 'single')),
+));
+
+if ($isProduction && $defaultLogChannel === 'single') {
+    $defaultLogChannel = 'daily';
+}
+
+if ($isProduction) {
+    $stackChannels = array_values(array_filter(
+        $stackChannels,
+        fn (string $channel): bool => trim($channel) !== 'single',
+    ));
+
+    if ($stackChannels === []) {
+        $stackChannels = ['daily'];
+    }
+}
+
 return [
 
     /*
@@ -18,7 +44,7 @@ return [
     |
     */
 
-    'default' => env('LOG_CHANNEL', 'stack'),
+    'default' => $defaultLogChannel,
 
     /*
     |--------------------------------------------------------------------------
@@ -54,21 +80,22 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', (string) env('LOG_STACK', 'single')),
+            'channels' => $stackChannels,
             'ignore_exceptions' => false,
         ],
 
         'single' => [
-            'driver' => 'single',
+            'driver' => $isProduction ? 'daily' : 'single',
             'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => $defaultLogLevel,
+            'days' => env('LOG_DAILY_DAYS', 14),
             'replace_placeholders' => true,
         ],
 
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => $defaultLogLevel,
             'days' => env('LOG_DAILY_DAYS', 14),
             'replace_placeholders' => true,
         ],
@@ -84,7 +111,7 @@ return [
 
         'papertrail' => [
             'driver' => 'monolog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => $defaultLogLevel,
             'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class),
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
@@ -96,7 +123,7 @@ return [
 
         'stderr' => [
             'driver' => 'monolog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => $defaultLogLevel,
             'handler' => StreamHandler::class,
             'handler_with' => [
                 'stream' => 'php://stderr',
@@ -107,14 +134,14 @@ return [
 
         'syslog' => [
             'driver' => 'syslog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => $defaultLogLevel,
             'facility' => env('LOG_SYSLOG_FACILITY', LOG_USER),
             'replace_placeholders' => true,
         ],
 
         'errorlog' => [
             'driver' => 'errorlog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => $defaultLogLevel,
             'replace_placeholders' => true,
         ],
 
